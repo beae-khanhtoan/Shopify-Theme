@@ -8,5 +8,66 @@
  * ------------------------------------------------------------
  */
 {
-  "current": {}
+  "current": {
+    "color_schemes": {
+      "scheme-1": {
+        "settings": {
+          "background": "#FFFFFF",
+          "background_gradient": "",
+          "text": "#171717",
+          "button": "#171717",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#171717",
+          "shadow": "#171717"
+        }
+      }
+    },
+    "enable_gradients": true,
+    "page_width": "100rem",
+    "page_margin": 24,
+    "section_spacing": 64,
+    "type_primary_font": "work_sans_n4",
+    "type_heading_font": "work_sans_n4",
+    "body_font_size": 16,
+    "heading_case": "none",
+    "enable_motion": true,
+    "reduce_motion": false,
+    "radius_small": 4,
+    "radius_medium": 8,
+    "radius_large": 16,
+    "button_style": "solid",
+    "button_height": 48,
+    "button_uppercase": false,
+    "input_style": "outline",
+    "input_shadows": false,
+    "product_card_style": "plain",
+    "product_show_vendor": false,
+    "product_show_rating": true,
+    "variant_picker_style": "buttons",
+    "show_unavailable_variants": true,
+    "enable_swatches": true,
+    "swatch_size": 32,
+    "badge_position": "top_left",
+    "show_sale_badge": true,
+    "show_currency_code": false,
+    "icon_style": "outline",
+    "overlay_opacity": 40
+  },
+  "presets": {
+    "Shopify Theme Base": {
+      "color_schemes": {
+        "scheme-1": {
+          "settings": {
+            "background": "#FFFFFF",
+            "background_gradient": "",
+            "text": "#171717",
+            "button": "#171717",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#171717",
+            "shadow": "#171717"
+          }
+        }
+      }
+    }
+  }
 }
