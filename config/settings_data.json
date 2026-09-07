@@ -12,7 +12,7 @@
     "enable_gradients": true,
     "logo_width": 160,
     "logo_width_mobile": 120,
-    "page_width": 1600,
+    "page_width": "1600",
     "page_margin_min": 16,
     "page_margin_desktop": 48,
     "page_margin_tablet": 30,
