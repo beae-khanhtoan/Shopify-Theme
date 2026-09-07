@@ -31,7 +31,7 @@ input,
 textarea,
 select {
   font: inherit;
-  border-radius: var(--style-border-radius-inputs);
+  border-radius: var(--input-radius);
 }
 
 select {
@@ -188,36 +188,47 @@ a {
 
 button,
 input[type='submit'],
-.button {
+.button,
+.btn,
+.btn--primary {
   min-height: var(--button-height);
   border: var(--button-border-width) solid var(--color-button);
-  border-radius: var(--style-border-radius-medium);
+  border-radius: var(--button-radius);
   background: var(--color-button);
   color: var(--color-button-label);
   cursor: pointer;
-  font-family: var(--font-body-family);
-  font-size: var(--font-button-size);
-  line-height: var(--font-button-line-height);
-  letter-spacing: var(--font-button-letter-spacing);
+  font-family: var(--button-primary-font-family);
+  font-size: var(--button-font-size);
+  line-height: var(--font-body-line-height);
+  letter-spacing: var(--button-letter-spacing);
   padding-inline: var(--button-padding-inline);
-  text-transform: var(--font-button-text-transform);
+  text-transform: var(--button-primary-text-transform);
 }
 
 .btn--secondary {
+  border-width: var(--button-secondary-border-width);
   border-color: var(--color-secondary-button);
   background: var(--color-secondary-button);
   color: var(--color-secondary-button-label);
+  font-family: var(--button-secondary-font-family);
+  text-transform: var(--button-secondary-text-transform);
 }
 
 .btn--tertiary {
+  border-width: 0;
   border-color: var(--color-tertiary-button-border);
   background: transparent;
   color: var(--color-tertiary-button-label);
+  font-family: var(--button-tertiary-font-family);
+  text-transform: var(--button-tertiary-text-transform);
+  text-decoration: var(--button-tertiary-text-decoration);
+  text-underline-offset: var(--button-tertiary-underline-offset);
 }
 
 button:hover,
 input[type='submit']:hover,
-.button:hover {
+.button:hover,
+.btn:hover {
   background: var(--color-button-hover);
 }
 
@@ -245,6 +256,22 @@ select {
   min-height: var(--input-height);
   background: var(--input-background);
   box-shadow: var(--input-shadow);
+  font-family: var(--input-font-family);
+}
+
+.form__label,
+label { font-family: var(--input-label-font-family); }
+.form__helper,
+.form__help { font-family: var(--input-helper-font-family); }
+.form__error,
+[aria-invalid='true'] + .form__error { font-family: var(--input-error-font-family); }
+
+button:disabled,
+input[type='submit']:disabled,
+.button[aria-disabled='true'],
+.btn[aria-disabled='true'] {
+  opacity: var(--button-disabled-opacity);
+  cursor: not-allowed;
 }
 
 textarea,
@@ -297,6 +324,52 @@ input:not([type='submit']):not([type='checkbox']):not([type='radio']) {
   text-transform: var(--font-badge-text-transform);
 }
 
+.product-card {
+  border-radius: var(--style-border-radius-medium);
+}
+
+.product-card--card {
+  border: var(--border-width) solid var(--border-color);
+  padding: var(--pcard-content-spacing);
+}
+
+.product-card__content {
+  display: grid;
+  gap: var(--pcard-info-gap);
+}
+
+.product-card__title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--pcard-title-lines);
+}
+
+.variant-option {
+  display: grid;
+  gap: var(--variant-label-spacing);
+}
+
+.variant-option__control,
+.variant-option__button-label {
+  min-height: var(--variant-height);
+  border-radius: var(--variant-radius);
+  margin-inline-end: var(--variant-gap);
+}
+
+.variant-option__control[aria-selected='true'],
+.variant-option__button-label[aria-selected='true'] {
+  background: var(--variant-selected-background);
+  color: var(--variant-selected-color);
+}
+
+.variant-option__control[aria-disabled='true'],
+.variant-option__button-label[aria-disabled='true'] {
+  display: var(--variant-unavailable-display);
+  opacity: var(--variant-unavailable-opacity);
+  text-decoration: line-through;
+}
+
 .overlay__backdrop {
   background: rgb(0 0 0 / var(--overlay-opacity));
   backdrop-filter: var(--overlay-backdrop-blur);
@@ -333,8 +406,10 @@ input:not([type='submit']):not([type='checkbox']):not([type='radio']) {
 
   button,
   input[type='submit'],
-  .button {
+  .button,
+  .btn {
     min-height: var(--button-height-mobile);
+    padding-inline: var(--button-padding-inline-mobile);
   }
 
   input,
@@ -343,9 +418,22 @@ input:not([type='submit']):not([type='checkbox']):not([type='radio']) {
     min-height: var(--input-height-mobile);
   }
 
+  .variant-option__control,
+  .variant-option__button-label {
+    min-height: var(--variant-height-mobile);
+  }
+
   .spacing-padding-block {
     padding-block: clamp(1.5rem, 6vw, var(--section-spacing));
   }
+}
+
+@media (max-width: 1199px) and (min-width: 750px) {
+  :root { --page-margin: max(var(--page-margin-min), var(--page-margin-tablet)); }
+}
+
+@media (max-width: 749px) {
+  :root { --page-margin: max(var(--page-margin-min), var(--page-margin-mobile)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
