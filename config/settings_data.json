@@ -14,11 +14,26 @@
         "settings": {
           "background": "#FFFFFF",
           "background_gradient": "",
+          "heading": "#171717",
+          "heading_highlight": "#171717",
           "text": "#171717",
+          "accent": "#555555",
+          "border": "#D6D6D6",
+          "shadow": "#171717",
+          "sale_price": "#B42318",
           "button": "#171717",
           "button_label": "#FFFFFF",
+          "button_hover": "#333333",
+          "secondary_button": "#F4F4F4",
           "secondary_button_label": "#171717",
-          "shadow": "#171717"
+          "secondary_button_hover": "#E7E7E7",
+          "tertiary_button_label": "#171717",
+          "tertiary_button_border": "#171717",
+          "tertiary_button_hover": "#F4F4F4",
+          "success": "#067647",
+          "warning": "#B54708",
+          "error": "#B42318",
+          "sold_out": "#667085"
         }
       }
     },
@@ -60,11 +75,26 @@
           "settings": {
             "background": "#FFFFFF",
             "background_gradient": "",
+            "heading": "#171717",
+            "heading_highlight": "#171717",
             "text": "#171717",
+            "accent": "#555555",
+            "border": "#D6D6D6",
+            "shadow": "#171717",
+            "sale_price": "#B42318",
             "button": "#171717",
             "button_label": "#FFFFFF",
+            "button_hover": "#333333",
+            "secondary_button": "#F4F4F4",
             "secondary_button_label": "#171717",
-            "shadow": "#171717"
+            "secondary_button_hover": "#E7E7E7",
+            "tertiary_button_label": "#171717",
+            "tertiary_button_border": "#171717",
+            "tertiary_button_hover": "#F4F4F4",
+            "success": "#067647",
+            "warning": "#B54708",
+            "error": "#B42318",
+            "sold_out": "#667085"
           }
         }
       }
