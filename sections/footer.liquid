@@ -11,6 +11,8 @@
     {% endfor %}
   </div>
 
+  {% render 'social-links' %}
+
   <div class="footer__payment">
     {% if section.settings.show_payment_icons %}
       {% for type in shop.enabled_payment_types %}
