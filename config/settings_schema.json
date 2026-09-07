@@ -134,7 +134,7 @@
     "settings": [
       { "type": "select", "id": "product_card_style", "label": "Product card style", "options": [{ "value": "standard", "label": "Standard" }, { "value": "card", "label": "Card" }], "default": "standard" },
       { "type": "select", "id": "product_card_image_ratio", "label": "Product image ratio", "options": [{ "value": "adapt", "label": "Adapt" }, { "value": "square", "label": "Square" }, { "value": "portrait", "label": "Portrait" }], "default": "adapt" },
-      { "type": "range", "id": "product_title_lines", "min": 1, "max": 4, "step": 1, "unit": "lines", "label": "Product title lines", "default": 2 },
+      { "type": "range", "id": "product_title_lines", "min": 1, "max": 4, "step": 1, "unit": "ln", "label": "Product title lines", "default": 2 },
       { "type": "checkbox", "id": "product_show_vendor", "label": "Show vendor", "default": false },
       { "type": "checkbox", "id": "product_show_rating", "label": "Show rating", "default": true },
       { "type": "checkbox", "id": "product_show_second_image", "label": "Show second image on hover", "default": true },
