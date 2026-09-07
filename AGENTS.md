@@ -12,6 +12,8 @@
 - Git `dev` maps to the development theme used for preview and Theme Editor work.
 - Git `main` maps to the stable theme after `dev` has passed checks and preview QA.
 - Store: `layouthub-khanhnguyen.myshopify.com`.
+- Stable theme (`main`): `theme/main` — theme ID `164351607026`.
+- Development/draft theme (`dev`): `theme/dev` — theme ID `165655281906`.
 
 ## Development workflow
 
