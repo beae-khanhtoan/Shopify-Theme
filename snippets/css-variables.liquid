@@ -9,6 +9,7 @@
   {{ settings.type_accent_font | font_face: font_display: 'swap' }}
 
   {% assign color_scheme = settings.color_schemes.first %}
+  {% assign overlay_scheme = settings.color_schemes[settings.overlay_color_scheme] %}
 
   :root {
     --font-primary--family: {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
@@ -88,17 +89,25 @@
     --section-spacing: 64px;
     --content-gap: 24px;
     --content-gap-mobile: 16px;
-    --radius-0: 0px;
-    --radius-xs: {{ settings.radius_xs }}px;
-    --radius-sm: {{ settings.radius_sm }}px;
-    --radius-md: {{ settings.radius_md }}px;
-    --radius-lg: {{ settings.radius_lg }}px;
+    --radius-square: 0px;
+    --radius-slight: 4px;
+    --radius-rounded: 8px;
+    --radius-extra: 16px;
     --radius-pill: 999px;
-    --style-border-radius-small: var(--radius-sm);
-    --style-border-radius-medium: var(--radius-md);
-    --style-border-radius-large: var(--radius-lg);
-    --style-border-radius-inputs: var(--radius-sm);
-    --border-width: {{ settings.border_width }}px;
+    --radius-buttons-inputs: {% case settings.radius_buttons_inputs %}{% when 'slightly_rounded' %}var(--radius-slight){% when 'rounded' %}var(--radius-rounded){% when 'pill' %}var(--radius-pill){% else %}var(--radius-square){% endcase %};
+    --radius-badges-subheadings: {% case settings.radius_badges_subheadings %}{% when 'slightly_rounded' %}var(--radius-slight){% when 'rounded' %}var(--radius-rounded){% when 'pill' %}var(--radius-pill){% else %}var(--radius-square){% endcase %};
+    --radius-variant-pickers: {% case settings.radius_variant_pickers %}{% when 'slightly_rounded' %}var(--radius-slight){% when 'rounded' %}var(--radius-rounded){% when 'pill' %}var(--radius-pill){% else %}var(--radius-square){% endcase %};
+    --radius-swatches: {% case settings.radius_swatches %}{% when 'slightly_rounded' %}var(--radius-slight){% when 'rounded' %}var(--radius-rounded){% when 'pill' %}var(--radius-pill){% else %}var(--radius-square){% endcase %};
+    --radius-navigation: {% case settings.radius_navigation %}{% when 'slightly_rounded' %}var(--radius-slight){% when 'rounded' %}var(--radius-rounded){% when 'pill' %}var(--radius-pill){% else %}var(--radius-square){% endcase %};
+    --radius-media-containers: {% case settings.radius_media_containers %}{% when 'slightly_rounded' %}var(--radius-slight){% when 'rounded' %}var(--radius-rounded){% when 'extra_rounded' %}var(--radius-extra){% else %}var(--radius-square){% endcase %};
+    --radius-tags: {% case settings.radius_tags %}{% when 'slightly_rounded' %}var(--radius-slight){% when 'rounded' %}var(--radius-rounded){% when 'pill' %}var(--radius-pill){% else %}var(--radius-square){% endcase %};
+    --radius-drawers: {% case settings.radius_drawers %}{% when 'slightly_rounded' %}var(--radius-slight){% when 'rounded' %}var(--radius-rounded){% when 'extra_rounded' %}var(--radius-extra){% else %}var(--radius-square){% endcase %};
+    --radius-bottom-sheets: {% case settings.radius_bottom_sheets %}{% when 'slightly_rounded' %}var(--radius-slight){% when 'rounded' %}var(--radius-rounded){% when 'extra_rounded' %}var(--radius-extra){% else %}var(--radius-square){% endcase %};
+    --style-border-radius-small: var(--radius-slight);
+    --style-border-radius-medium: var(--radius-media-containers);
+    --style-border-radius-large: var(--radius-extra);
+    --style-border-radius-inputs: var(--radius-buttons-inputs);
+    --border-width: 1px;
     --button-height: {{ settings.button_height_desktop }}px;
     --button-height-mobile: {{ settings.button_height_mobile }}px;
     --button-padding-inline-desktop: {{ settings.button_padding_inline_desktop }}px;
@@ -114,7 +123,7 @@
     --button-secondary-text-transform: {% if settings.button_secondary_text_case == 'uppercase' %}uppercase{% else %}none{% endif %};
     --button-tertiary-text-transform: {% if settings.button_tertiary_text_case == 'uppercase' %}uppercase{% else %}none{% endif %};
     --button-tertiary-text-decoration: {% if settings.button_tertiary_show_underline %}underline{% else %}none{% endif %};
-    --button-radius: {% case settings.button_radius_style %}{% when 'rounded' %}var(--radius-md){% when 'pill' %}var(--radius-pill){% else %}0px{% endcase %};
+    --button-radius: var(--radius-buttons-inputs);
     --button-primary-border-width: {{ settings.button_primary_border_width }}px;
     --button-secondary-border-width: {{ settings.button_secondary_border_width }}px;
     --button-border-width: var(--button-primary-border-width);
@@ -123,12 +132,12 @@
     --swatch-size-mobile: {{ settings.swatch_size_mobile }}px;
     --input-height: {{ settings.input_height_desktop }}px;
     --input-height-mobile: {{ settings.input_height_mobile }}px;
-    --input-radius: {{ settings.input_radius }}px;
+    --input-radius: var(--radius-buttons-inputs);
     --input-border-width: {{ settings.input_border_width }}px;
     --input-background-color: {{ settings.input_background_color }};
     --variant-height: {{ settings.variant_height_desktop }}px;
     --variant-height-mobile: {{ settings.variant_height_mobile }}px;
-    --variant-radius: var(--input-radius);
+    --variant-radius: var(--radius-variant-pickers);
     --variant-border-width: var(--input-border-width);
     --variant-group-gap: {{ settings.variant_group_gap }}px;
     --variant-label-spacing: {{ settings.variant_label_spacing }}px;
@@ -140,13 +149,22 @@
     --variant-unavailable-display: inline-flex;
     --variant-sold-out-display: inline-flex;
     --variant-focus-shadow: none;
-    --overlay-opacity: {{ settings.overlay_opacity | divided_by: 100.0 }};
-    --overlay-padding: {{ settings.overlay_padding }}px;
-    --overlay-radius: {% case settings.overlay_radius %}{% when 'sm' %}var(--radius-sm){% when 'md' %}var(--radius-md){% else %}var(--radius-lg){% endcase %};
-    --overlay-backdrop-blur: {% case settings.overlay_blur %}{% when 'strong' %}blur(12px){% when 'light' %}blur(4px){% else %}none{% endcase %};
-    --icon-stroke-width: {{ settings.icon_stroke_width }};
-    --motion-duration: {% if settings.enable_motion and settings.motion_mode != 'none' %}{% case settings.motion_duration_scale %}{% when 'instant' %}0ms{% when 'fast' %}120ms{% when 'slow' %}320ms{% else %}180ms{% endcase %}{% else %}0ms{% endif %};
-    --motion-ease: {% if settings.motion_easing == 'emphasized' %}cubic-bezier(0.2, 0.8, 0.2, 1){% else %}cubic-bezier(0.2, 0, 0, 1){% endif %};
+    --overlay-opacity: 0.4;
+    --overlay-backdrop-blur: blur({{ settings.overlay_backdrop_blur }}px);
+    --overlay-border-width: {{ settings.overlay_border_width }}px;
+    --overlay-radius: var(--radius-drawers);
+    --bottom-sheet-radius: var(--radius-bottom-sheets);
+    --overlay-shadow: {% case settings.overlay_shadow %}{% when 'extra_small' %}0 1px 2px rgb(0 0 0 / 0.08){% when 'small' %}0 2px 8px rgb(0 0 0 / 0.1){% when 'medium' %}0 4px 16px rgb(0 0 0 / 0.12){% when 'large' %}0 8px 24px rgb(0 0 0 / 0.16){% else %}none{% endcase %};
+    --drawer-padding-desktop: {% if settings.drawer_padding_desktop %}24px{% else %}0px{% endif %};
+    --drawer-padding-mobile: {% if settings.drawer_padding_mobile %}16px{% else %}0px{% endif %};
+    --overlay-title-size: {% case settings.overlay_title_size %}{% when 'heading_3' %}var(--font-heading-lg){% when 'heading_5' %}var(--font-heading-sm){% when 'heading_6' %}var(--font-heading-xs){% else %}var(--font-heading-md){% endcase %};
+    --overlay-background: {{ overlay_scheme.settings.background | default: color_scheme.settings.background }};
+    --overlay-foreground: {{ overlay_scheme.settings.text | default: color_scheme.settings.text }};
+    --icon-thickness: {{ settings.icon_thickness | divided_by: 100.0 }};
+    --icon-stroke-width: calc(1.5 * var(--icon-thickness));
+    --motion-duration: {% if settings.enable_block_animations %}180ms{% else %}0ms{% endif %};
+    --motion-ease: cubic-bezier(0.2, 0, 0, 1);
+    --motion-image-zoom: {% if settings.enable_image_zoom_on_hover %}1.04{% else %}1{% endif %};
     --input-background: {% if settings.input_style == 'solid' %}var(--input-background-color){% else %}transparent{% endif %};
     --input-shadow: none;
     --input-label-font-family: {% if settings.input_label_font_role == 'heading' %}var(--font-heading-family){% elsif settings.input_label_font_role == 'accent' %}var(--font-accent-family){% else %}var(--font-body-family){% endif %};

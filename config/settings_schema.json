@@ -281,36 +281,46 @@
   {
     "name": "Motion & Reduced Motion",
     "settings": [
-      { "type": "select", "id": "motion_mode", "label": "Animation mode", "options": [{ "value": "none", "label": "None" }, { "value": "essential", "label": "Essential" }, { "value": "full", "label": "Full" }], "default": "essential" },
-      { "type": "select", "id": "motion_duration_scale", "label": "Duration scale", "options": [{ "value": "instant", "label": "Instant" }, { "value": "fast", "label": "Fast" }, { "value": "standard", "label": "Standard" }, { "value": "slow", "label": "Slow" }], "default": "standard" },
-      { "type": "select", "id": "motion_easing", "label": "Easing", "options": [{ "value": "standard", "label": "Standard" }, { "value": "emphasized", "label": "Emphasized" }], "default": "standard" },
-      { "type": "checkbox", "id": "enable_motion", "label": "Enable motion", "default": true }
+      { "type": "checkbox", "id": "enable_image_zoom_on_hover", "label": "Enable image zoom on hover", "default": true },
+      { "type": "checkbox", "id": "enable_block_animations", "label": "Enable block animations", "default": true },
+      { "type": "paragraph", "content": "Motion is reduced automatically when the visitor prefers reduced motion." }
     ]
   },
   {
     "name": "Radius & Shape",
     "settings": [
-      { "type": "select", "id": "shape_scale", "label": "Radius scale", "options": [{ "value": "square", "label": "Square" }, { "value": "soft", "label": "Soft" }, { "value": "rounded", "label": "Rounded" }, { "value": "pill", "label": "Pill" }], "default": "soft" },
-      { "type": "range", "id": "radius_xs", "min": 0, "max": 8, "step": 1, "unit": "px", "label": "Radius XS", "default": 2 },
-      { "type": "range", "id": "radius_sm", "min": 0, "max": 16, "step": 1, "unit": "px", "label": "Radius SM", "default": 4 },
-      { "type": "range", "id": "radius_md", "min": 0, "max": 24, "step": 1, "unit": "px", "label": "Radius MD", "default": 8 },
-      { "type": "range", "id": "radius_lg", "min": 0, "max": 48, "step": 1, "unit": "px", "label": "Radius LG", "default": 16 },
-      { "type": "range", "id": "border_width", "min": 0, "max": 3, "step": 1, "unit": "px", "label": "Border width", "default": 1 }
+      { "type": "select", "id": "radius_buttons_inputs", "label": "Buttons and inputs", "options": [{ "value": "square", "label": "Square" }, { "value": "slightly_rounded", "label": "Slightly rounded" }, { "value": "rounded", "label": "Rounded" }, { "value": "pill", "label": "Pill" }], "default": "square" },
+      { "type": "select", "id": "radius_badges_subheadings", "label": "Badges and subheadings", "options": [{ "value": "square", "label": "Square" }, { "value": "slightly_rounded", "label": "Slightly rounded" }, { "value": "rounded", "label": "Rounded" }, { "value": "pill", "label": "Pill" }], "default": "square" },
+      { "type": "select", "id": "radius_variant_pickers", "label": "Variant pickers", "options": [{ "value": "square", "label": "Square" }, { "value": "slightly_rounded", "label": "Slightly rounded" }, { "value": "rounded", "label": "Rounded" }, { "value": "pill", "label": "Pill" }], "default": "square" },
+      { "type": "select", "id": "radius_swatches", "label": "Swatches", "options": [{ "value": "square", "label": "Square" }, { "value": "slightly_rounded", "label": "Slightly rounded" }, { "value": "rounded", "label": "Rounded" }, { "value": "pill", "label": "Pill" }], "default": "square" },
+      { "type": "select", "id": "radius_navigation", "label": "Navigation", "options": [{ "value": "square", "label": "Square" }, { "value": "slightly_rounded", "label": "Slightly rounded" }, { "value": "rounded", "label": "Rounded" }, { "value": "pill", "label": "Pill" }], "default": "pill" },
+      { "type": "select", "id": "radius_media_containers", "label": "Media and containers", "options": [{ "value": "square", "label": "Square" }, { "value": "slightly_rounded", "label": "Slightly rounded" }, { "value": "rounded", "label": "Rounded" }, { "value": "extra_rounded", "label": "Extra rounded" }], "default": "square" },
+      { "type": "paragraph", "content": "Used for media, product cards, pop-ups, popovers, and blocks." },
+      { "type": "select", "id": "radius_tags", "label": "Tags", "options": [{ "value": "square", "label": "Square" }, { "value": "slightly_rounded", "label": "Slightly rounded" }, { "value": "rounded", "label": "Rounded" }, { "value": "pill", "label": "Pill" }], "default": "square" },
+      { "type": "paragraph", "content": "Used for applied filters, discount codes, and search suggestions." },
+      { "type": "header", "content": "Overlay" },
+      { "type": "select", "id": "radius_drawers", "label": "Drawers", "options": [{ "value": "square", "label": "Square" }, { "value": "slightly_rounded", "label": "Slightly rounded" }, { "value": "rounded", "label": "Rounded" }, { "value": "extra_rounded", "label": "Extra rounded" }], "default": "square" },
+      { "type": "select", "id": "radius_bottom_sheets", "label": "Bottom sheets", "options": [{ "value": "square", "label": "Square" }, { "value": "slightly_rounded", "label": "Slightly rounded" }, { "value": "rounded", "label": "Rounded" }, { "value": "extra_rounded", "label": "Extra rounded" }], "default": "slightly_rounded" }
     ]
   },
   {
     "name": "Icons",
     "settings": [
-      { "type": "select", "id": "icon_stroke_width", "label": "Icon stroke", "options": [{ "value": "1", "label": "Light" }, { "value": "1.5", "label": "Regular" }, { "value": "2", "label": "Strong" }], "default": "1.5" }
+      { "type": "range", "id": "icon_thickness", "min": 50, "max": 200, "step": 5, "unit": "%", "label": "Icon thickness", "default": 120 }
     ]
   },
   {
     "name": "Overlay & Layering",
     "settings": [
-      { "type": "select", "id": "overlay_blur", "label": "Overlay backdrop blur", "options": [{ "value": "none", "label": "None" }, { "value": "light", "label": "Light" }, { "value": "strong", "label": "Strong" }], "default": "light" },
-      { "type": "range", "id": "overlay_opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Overlay backdrop opacity", "default": 40 },
-      { "type": "range", "id": "overlay_padding", "min": 16, "max": 64, "step": 4, "unit": "px", "label": "Overlay padding", "default": 24 },
-      { "type": "select", "id": "overlay_radius", "label": "Overlay radius", "options": [{ "value": "sm", "label": "Small" }, { "value": "md", "label": "Medium" }, { "value": "lg", "label": "Large" }], "default": "lg" }
+      { "type": "color_scheme", "id": "overlay_color_scheme", "label": "Color scheme", "default": "scheme-1" },
+      { "type": "select", "id": "overlay_title_size", "label": "Title size", "options": [{ "value": "heading_3", "label": "Heading 3" }, { "value": "heading_4", "label": "Heading 4" }, { "value": "heading_5", "label": "Heading 5" }, { "value": "heading_6", "label": "Heading 6" }], "default": "heading_4" },
+      { "type": "range", "id": "overlay_backdrop_blur", "min": 0, "max": 40, "step": 2, "unit": "px", "label": "Backdrop blur", "default": 20 },
+      { "type": "header", "content": "Popovers" },
+      { "type": "range", "id": "overlay_border_width", "min": 0, "max": 4, "step": 1, "unit": "px", "label": "Border thickness", "default": 0 },
+      { "type": "select", "id": "overlay_shadow", "label": "Shadow", "options": [{ "value": "none", "label": "None" }, { "value": "extra_small", "label": "Extra small" }, { "value": "small", "label": "Small" }, { "value": "medium", "label": "Medium" }, { "value": "large", "label": "Large" }], "default": "medium" },
+      { "type": "header", "content": "Drawer" },
+      { "type": "checkbox", "id": "drawer_padding_desktop", "label": "Enable padding on desktop", "default": true },
+      { "type": "checkbox", "id": "drawer_padding_mobile", "label": "Enable padding on mobile", "default": false }
     ]
   }
 ]
