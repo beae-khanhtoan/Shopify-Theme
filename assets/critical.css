@@ -98,31 +98,43 @@ h6 {
 h1,
 .heading-display {
   font-size: var(--font-heading-display);
+  line-height: var(--font-heading-display-line-height);
+  text-transform: var(--font-heading-display-case);
 }
 
 h2,
 .heading-xl {
   font-size: var(--font-heading-xl);
+  line-height: var(--font-heading-xl-line-height);
+  text-transform: var(--font-heading-xl-case);
 }
 
 h3,
 .heading-lg {
   font-size: var(--font-heading-lg);
+  line-height: var(--font-heading-lg-line-height);
+  text-transform: var(--font-heading-lg-case);
 }
 
 h4,
 .heading-md {
   font-size: var(--font-heading-md);
+  line-height: var(--font-heading-md-line-height);
+  text-transform: var(--font-heading-md-case);
 }
 
 h5,
 .heading-sm {
   font-size: var(--font-heading-sm);
+  line-height: var(--font-heading-sm-line-height);
+  text-transform: var(--font-heading-sm-case);
 }
 
 h6,
 .heading-xs {
   font-size: var(--font-heading-xs);
+  line-height: var(--font-heading-xs-line-height);
+  text-transform: var(--font-heading-xs-case);
 }
 
 .heading-text {
