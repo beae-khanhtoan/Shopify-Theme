@@ -9,44 +9,16 @@
  */
 {
   "current": {
-    "color_schemes": {
-      "scheme-1": {
-        "settings": {
-          "background": "#FFFFFF",
-          "background_gradient": "",
-          "heading": "#171717",
-          "heading_highlight": "#171717",
-          "text": "#171717",
-          "accent": "#555555",
-          "border": "#D6D6D6",
-          "shadow": "#171717",
-          "sale_price": "#B42318",
-          "button": "#171717",
-          "button_label": "#FFFFFF",
-          "button_hover": "#333333",
-          "secondary_button": "#F4F4F4",
-          "secondary_button_label": "#171717",
-          "secondary_button_hover": "#E7E7E7",
-          "tertiary_button_label": "#171717",
-          "tertiary_button_border": "#171717",
-          "tertiary_button_hover": "#F4F4F4",
-          "success": "#067647",
-          "warning": "#B54708",
-          "error": "#B42318",
-          "sold_out": "#667085"
-        }
-      }
-    },
     "enable_gradients": true,
     "logo_width": 160,
     "logo_width_mobile": 120,
-    "page_width": "1600",
+    "page_width": 1600,
     "page_margin_min": 16,
     "page_margin_desktop": 48,
     "page_margin_tablet": 30,
     "page_margin_mobile": 16,
-    "type_primary_font": "work_sans_n4",
     "type_heading_font": "work_sans_n4",
+    "type_primary_font": "work_sans_n4",
     "type_accent_font": "work_sans_n4",
     "body_font_size": 14,
     "body_line_height": "loose",
@@ -112,6 +84,13 @@
     "product_title_lines": 2,
     "product_content_spacing": 16,
     "product_info_gap": 8,
+    "product_swatch_position": "below_price",
+    "product_swatch_style": "inherit",
+    "product_swatch_limit": 4,
+    "product_swatch_gap": 8,
+    "product_swatch_size_desktop": 32,
+    "product_swatch_size_mobile": 40,
+    "product_swatch_selected_style": "inherit",
     "product_show_vendor": false,
     "product_show_type": false,
     "product_show_rating": true,
@@ -132,6 +111,7 @@
     "show_unavailable_variants": true,
     "variant_unavailable_style": "disabled",
     "variant_selected_style": "fill",
+    "variant_focus_style": "outline",
     "variant_show_sold_out": true,
     "show_variant_media": true,
     "swatch_style": "color",
@@ -164,7 +144,35 @@
     "overlay_blur": "light",
     "overlay_opacity": 40,
     "overlay_padding": 24,
-    "overlay_radius": "lg"
+    "overlay_radius": "lg",
+    "color_schemes": {
+      "scheme-1": {
+        "settings": {
+          "background": "#FFFFFF",
+          "background_gradient": "",
+          "heading": "#171717",
+          "heading_highlight": "#171717",
+          "text": "#171717",
+          "accent": "#555555",
+          "border": "#D6D6D6",
+          "shadow": "#171717",
+          "sale_price": "#B42318",
+          "button": "#171717",
+          "button_label": "#FFFFFF",
+          "button_hover": "#333333",
+          "secondary_button": "#F4F4F4",
+          "secondary_button_label": "#171717",
+          "secondary_button_hover": "#E7E7E7",
+          "tertiary_button_label": "#171717",
+          "tertiary_button_border": "#171717",
+          "tertiary_button_hover": "#F4F4F4",
+          "success": "#067647",
+          "warning": "#B54708",
+          "error": "#B42318",
+          "sold_out": "#667085"
+        }
+      }
+    }
   },
   "presets": {
     "Shopify Theme Base": {

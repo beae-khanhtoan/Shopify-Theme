@@ -172,6 +172,14 @@
       { "type": "range", "id": "product_title_lines", "min": 1, "max": 4, "step": 1, "unit": "ln", "label": "Product title lines", "default": 2 },
       { "type": "range", "id": "product_content_spacing", "min": 0, "max": 48, "step": 4, "unit": "px", "label": "Content spacing", "default": 16 },
       { "type": "range", "id": "product_info_gap", "min": 4, "max": 32, "step": 4, "unit": "px", "label": "Information group gap", "default": 8 },
+      { "type": "header", "content": "Swatches" },
+      { "type": "select", "id": "product_swatch_position", "label": "Swatch position", "options": [{ "value": "below_title", "label": "Below title" }, { "value": "below_price", "label": "Below price" }], "default": "below_price" },
+      { "type": "select", "id": "product_swatch_style", "label": "Swatch style", "options": [{ "value": "inherit", "label": "Use Swatches settings" }, { "value": "color", "label": "Color" }, { "value": "image", "label": "Variant image" }, { "value": "button", "label": "Button" }], "default": "inherit" },
+      { "type": "range", "id": "product_swatch_limit", "min": 0, "max": 12, "step": 1, "unit": "it", "label": "Visible swatch limit", "default": 4 },
+      { "type": "range", "id": "product_swatch_gap", "min": 0, "max": 16, "step": 2, "unit": "px", "label": "Swatch gap", "default": 8 },
+      { "type": "range", "id": "product_swatch_size_desktop", "min": 24, "max": 48, "step": 2, "unit": "px", "label": "Swatch size desktop", "default": 32 },
+      { "type": "range", "id": "product_swatch_size_mobile", "min": 32, "max": 56, "step": 2, "unit": "px", "label": "Swatch size mobile", "default": 40 },
+      { "type": "select", "id": "product_swatch_selected_style", "label": "Swatch selected style", "options": [{ "value": "inherit", "label": "Use Swatches settings" }, { "value": "ring", "label": "Ring" }, { "value": "border", "label": "Border" }, { "value": "fill", "label": "Fill" }], "default": "inherit" },
       { "type": "checkbox", "id": "product_show_vendor", "label": "Show vendor", "default": false },
       { "type": "checkbox", "id": "product_show_type", "label": "Show product type", "default": false },
       { "type": "checkbox", "id": "product_show_rating", "label": "Show rating", "default": true },
@@ -197,6 +205,7 @@
       { "type": "checkbox", "id": "show_unavailable_variants", "label": "Show unavailable variants", "default": true },
       { "type": "select", "id": "variant_unavailable_style", "label": "Unavailable style", "options": [{ "value": "disabled", "label": "Disabled" }, { "value": "hidden", "label": "Hidden" }], "default": "disabled" },
       { "type": "select", "id": "variant_selected_style", "label": "Selected style", "options": [{ "value": "fill", "label": "Fill" }, { "value": "outline", "label": "Outline" }], "default": "fill" },
+      { "type": "select", "id": "variant_focus_style", "label": "Focus style", "options": [{ "value": "outline", "label": "Outline" }, { "value": "ring", "label": "Ring" }], "default": "outline" },
       { "type": "checkbox", "id": "variant_show_sold_out", "label": "Show sold-out state", "default": true },
       { "type": "checkbox", "id": "show_variant_media", "label": "Show selected variant media", "default": true }
     ]

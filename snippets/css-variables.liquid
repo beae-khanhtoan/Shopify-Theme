@@ -135,7 +135,9 @@
     --variant-selected-background: {% if settings.variant_selected_style == 'outline' %}transparent{% else %}var(--color-button){% endif %};
     --variant-selected-color: {% if settings.variant_selected_style == 'outline' %}var(--color-foreground){% else %}var(--color-button-label){% endif %};
     --variant-unavailable-opacity: {% if settings.variant_unavailable_style == 'disabled' %}0.5{% else %}1{% endif %};
-    --variant-unavailable-display: {% if settings.variant_unavailable_style == 'hidden' %}none{% else %}inline-flex{% endif %};
+    --variant-unavailable-display: {% if settings.show_unavailable_variants == false or settings.variant_unavailable_style == 'hidden' %}none{% else %}inline-flex{% endif %};
+    --variant-sold-out-display: {% if settings.variant_show_sold_out %}inline-flex{% else %}none{% endif %};
+    --variant-focus-shadow: {% if settings.variant_focus_style == 'ring' %}0 0 0 3px color-mix(in srgb, var(--accent-color) 35%, transparent){% else %}none{% endif %};
     --overlay-opacity: {{ settings.overlay_opacity | divided_by: 100.0 }};
     --overlay-padding: {{ settings.overlay_padding }}px;
     --overlay-radius: {% case settings.overlay_radius %}{% when 'sm' %}var(--radius-sm){% when 'md' %}var(--radius-md){% else %}var(--radius-lg){% endcase %};
@@ -149,9 +151,22 @@
     --input-font-family: {% if settings.input_font_role == 'heading' %}var(--font-heading-family){% elsif settings.input_font_role == 'accent' %}var(--font-accent-family){% else %}var(--font-body-family){% endif %};
     --input-helper-font-family: {% if settings.input_helper_font_role == 'heading' %}var(--font-heading-family){% elsif settings.input_helper_font_role == 'accent' %}var(--font-accent-family){% else %}var(--font-body-family){% endif %};
     --input-error-font-family: {% if settings.input_error_font_role == 'heading' %}var(--font-heading-family){% elsif settings.input_error_font_role == 'accent' %}var(--font-accent-family){% else %}var(--font-body-family){% endif %};
+    --swatch-style: {% case settings.swatch_style %}{% when 'image' %}image{% when 'button' %}button{% else %}color{% endcase %};
+    --swatch-selected-style: {% case settings.swatch_selected_style %}{% when 'border' %}border{% when 'fill' %}fill{% else %}ring{% endcase %};
     --pcard-content-spacing: {{ settings.product_content_spacing }}px;
     --pcard-info-gap: {{ settings.product_info_gap }}px;
     --pcard-title-lines: {{ settings.product_title_lines }};
+    --pcard-swatch-position: {% if settings.product_swatch_position == 'below_title' %}below-title{% else %}below-price{% endif %};
+    --pcard-swatch-limit: {{ settings.product_swatch_limit }};
+    --pcard-swatch-gap: {{ settings.product_swatch_gap }}px;
+    --pcard-swatch-size: {{ settings.product_swatch_size_desktop }}px;
+    --pcard-swatch-size-mobile: {{ settings.product_swatch_size_mobile }}px;
+    --pcard-swatch-style: {% if settings.product_swatch_style == 'inherit' %}var(--swatch-style){% else %}{{ settings.product_swatch_style }}{% endif %};
+    --pcard-swatch-selected-style: {% if settings.product_swatch_selected_style == 'inherit' %}var(--swatch-selected-style){% else %}{{ settings.product_swatch_selected_style }}{% endif %};
+    --pcard-quick-add-display: {% if settings.product_enable_quick_add %}inline-flex{% else %}none{% endif %};
+    --pcard-quick-view-display: {% if settings.product_enable_quick_view %}inline-flex{% else %}none{% endif %};
+    --pcard-sale-badge-display: {% if settings.product_show_sale_badge %}inline-flex{% else %}none{% endif %};
+    --pcard-sold-out-badge-display: {% if settings.product_show_sold_out_badge %}inline-flex{% else %}none{% endif %};
 
     {% if color_scheme %}
       --color-background: {{ color_scheme.settings.background }};
