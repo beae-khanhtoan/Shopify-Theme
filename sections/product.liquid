@@ -12,12 +12,12 @@
 </div>
 
   <div class="product-info">
-    <h1>{{ product.title }}</h1>
+    <h1 class="heading-text">{{ product.title }}</h1>
     {% assign current_variant = product.selected_or_first_available_variant %}
-    <p class="product-price" aria-live="polite">
+    <p class="product-price card-price-text" aria-live="polite">
       {% render 'price', product: product, variant: current_variant %}
     </p>
-    <p>{{ product.description }}</p>
+    <p class="body-text body-md">{{ product.description }}</p>
   </div>
 
   <div class="product-form">

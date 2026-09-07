@@ -74,7 +74,7 @@ p:empty {
 /** Theme styles below */
 body {
   font-family: var(--font-primary--family);
-  font-size: var(--font-body-size);
+  font-size: var(--font-body-default-size);
   line-height: var(--font-body-line-height);
   letter-spacing: var(--font-body-letter-spacing);
   text-transform: var(--body-case);
@@ -143,6 +143,25 @@ h6,
   text-transform: var(--accent-text-case);
 }
 
+.eyebrow-text {
+  text-transform: var(--font-eyebrow-text-transform);
+}
+
+.card-title-text {
+  font-family: var(--font-card-title-family);
+  font-size: var(--font-card-title-size);
+  line-height: var(--font-card-title-line-height);
+  letter-spacing: var(--font-card-title-letter-spacing);
+  text-transform: var(--font-card-title-text-transform);
+}
+
+.card-price-text {
+  font-family: var(--font-card-price-family);
+  font-size: var(--font-card-price-size);
+  line-height: var(--font-card-price-line-height);
+  letter-spacing: var(--font-card-price-letter-spacing);
+}
+
 .body-xs { font-size: var(--font-body-xs); }
 .body-sm { font-size: var(--font-body-sm); }
 .body-md { font-size: var(--font-body-md); }
@@ -164,9 +183,12 @@ input[type='submit'],
   background: var(--color-button);
   color: var(--color-button-label);
   cursor: pointer;
-  font: inherit;
+  font-family: var(--font-body-family);
+  font-size: var(--font-button-size);
+  line-height: var(--font-button-line-height);
+  letter-spacing: var(--font-button-letter-spacing);
   padding-inline: var(--button-padding-inline);
-  text-transform: var(--button-text-transform);
+  text-transform: var(--font-button-text-transform);
 }
 
 .btn--secondary {
@@ -256,6 +278,11 @@ input:not([type='submit']):not([type='checkbox']):not([type='radio']) {
   padding: 0.25rem 0.5rem;
   background: var(--accent-color);
   color: var(--color-background);
+  font-family: var(--font-body-family);
+  font-size: var(--font-badge-size);
+  line-height: var(--font-badge-line-height);
+  letter-spacing: var(--font-badge-letter-spacing);
+  text-transform: var(--font-badge-text-transform);
 }
 
 .overlay__backdrop {

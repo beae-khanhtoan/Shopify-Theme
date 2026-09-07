@@ -20,6 +20,8 @@
     --font-body-family: var(--font-primary--family);
     --font-heading-family: var(--font-heading--family);
     --font-accent-family: var(--font-accent--family);
+    --font-card-title-family: {% if settings.card_title_font_role == 'body' %}var(--font-body-family){% elsif settings.card_title_font_role == 'accent' %}var(--font-accent-family){% else %}var(--font-heading-family){% endif %};
+    --font-card-price-family: {% if settings.card_price_font_role == 'heading' %}var(--font-heading-family){% elsif settings.card_price_font_role == 'accent' %}var(--font-accent-family){% else %}var(--font-body-family){% endif %};
     --font-body-line-height: {% case settings.body_line_height %}{% when 'loose' %}1.8{% when 'normal' %}1.5{% else %}1.65{% endcase %};
     --font-body-letter-spacing: {% case settings.body_letter_spacing %}{% when 'tight' %}-0.01em{% when 'relaxed' %}0.02em{% else %}0{% endcase %};
     --body-case: {{ settings.body_text_case }};
@@ -45,9 +47,26 @@
     --font-body-lg: calc(var(--font-body-size) * 1.143);
     --font-body-xl: calc(var(--font-body-size) * 1.286);
     --font-body-xxl: calc(var(--font-body-size) * 1.429);
+    --font-body-default-size: {% case settings.body_text_size %}{% when 'xs' %}var(--font-body-xs){% when 'sm' %}var(--font-body-sm){% when 'lg' %}var(--font-body-lg){% when 'xl' %}var(--font-body-xl){% when 'xxl' %}var(--font-body-xxl){% else %}var(--font-body-md){% endcase %};
     --font-eyebrow-size: {{ settings.eyebrow_font_size }}px;
     --font-eyebrow-line-height: {% case settings.eyebrow_line_height %}{% when 'relaxed' %}1.3{% when 'normal' %}1.2{% else %}1.05{% endcase %};
     --font-eyebrow-letter-spacing: {% case settings.eyebrow_letter_spacing %}{% when 'extra-loose' %}0.12em{% when 'loose' %}0.08em{% when 'relaxed' %}0.04em{% else %}0{% endcase %};
+    --font-eyebrow-text-transform: {% if settings.eyebrow_text_case == 'uppercase' %}uppercase{% else %}none{% endif %};
+    --font-button-size: {{ settings.button_font_size }}px;
+    --font-button-line-height: {% if settings.button_line_height == 'tight' %}1.05{% else %}1.2{% endif %};
+    --font-button-letter-spacing: {% case settings.button_letter_spacing %}{% when 'loose' %}0.08em{% when 'relaxed' %}0.04em{% else %}0{% endcase %};
+    --font-button-text-transform: {% if settings.button_text_case == 'uppercase' %}uppercase{% else %}none{% endif %};
+    --font-badge-size: {{ settings.badge_font_size }}px;
+    --font-badge-line-height: {% if settings.badge_line_height == 'tight' %}1.05{% else %}1.2{% endif %};
+    --font-badge-letter-spacing: {% case settings.badge_letter_spacing %}{% when 'loose' %}0.08em{% when 'relaxed' %}0.04em{% else %}0{% endcase %};
+    --font-badge-text-transform: {% if settings.badge_text_case == 'uppercase' %}uppercase{% else %}none{% endif %};
+    --font-card-title-size: {{ settings.card_title_font_size }}px;
+    --font-card-title-line-height: {% case settings.card_title_line_height %}{% when 'tight' %}1.05{% when 'relaxed' %}1.3{% when 'loose' %}1.8{% else %}1.2{% endcase %};
+    --font-card-title-letter-spacing: {% case settings.card_title_letter_spacing %}{% when 'tight' %}-0.02em{% when 'relaxed' %}0.02em{% when 'loose' %}0.08em{% else %}0{% endcase %};
+    --font-card-title-text-transform: {% case settings.card_title_text_case %}{% when 'uppercase' %}uppercase{% when 'capitalize' %}capitalize{% else %}none{% endcase %};
+    --font-card-price-size: {{ settings.card_price_font_size }}px;
+    --font-card-price-line-height: {% case settings.card_price_line_height %}{% when 'tight' %}1.05{% when 'relaxed' %}1.3{% else %}1.2{% endcase %};
+    --font-card-price-letter-spacing: {% case settings.card_price_letter_spacing %}{% when 'tight' %}-0.02em{% when 'relaxed' %}0.02em{% else %}0{% endcase %};
     --page-width: {{ settings.page_width }};
     --page-margin: {{ settings.page_margin }}px;
     --section-spacing: {{ settings.section_spacing }}px;
@@ -84,7 +103,6 @@
     --icon-stroke-width: {{ settings.icon_stroke_width }};
     --motion-duration: {% if settings.enable_motion and settings.motion_mode != 'none' %}{% case settings.motion_duration_scale %}{% when 'instant' %}0ms{% when 'fast' %}120ms{% when 'slow' %}320ms{% else %}180ms{% endcase %}{% else %}0ms{% endif %};
     --motion-ease: {% if settings.motion_easing == 'emphasized' %}cubic-bezier(0.2, 0.8, 0.2, 1){% else %}cubic-bezier(0.2, 0, 0, 1){% endif %};
-    --button-text-transform: {% if settings.button_uppercase %}uppercase{% else %}none{% endif %};
     --input-background: {% if settings.input_style == 'filled' %}color-mix(in srgb, var(--color-foreground) 5%, var(--color-background)){% else %}transparent{% endif %};
     --input-shadow: {% if settings.input_shadows %}0 1px 4px color-mix(in srgb, var(--color-shadow) 12%, transparent){% else %}none{% endif %};
 

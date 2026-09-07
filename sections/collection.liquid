@@ -5,7 +5,7 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
 {% endcomment %}
 
-<h1>{{ collection.title }}</h1>
+<h1 class="heading-text">{{ collection.title }}</h1>
 
 <div class="collection-products">
   {% paginate collection.products by 20 %}
@@ -22,8 +22,8 @@
           %}
         {% endif %}
         <div class="collection-product__content">
-          <p>{{ product.title | escape | link_to: product.url }}</p>
-          <p>{{ product.price | money }}</p>
+          <p class="card-title-text">{{ product.title | escape | link_to: product.url }}</p>
+          <p class="card-price-text">{{ product.price | money }}</p>
         </div>
       </div>
     {% endfor %}

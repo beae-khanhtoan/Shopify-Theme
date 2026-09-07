@@ -89,9 +89,28 @@
       { "type": "select", "id": "accent_text_case", "label": "Accent text case", "options": [{ "value": "none", "label": "Original" }, { "value": "uppercase", "label": "Uppercase" }], "default": "uppercase" },
       { "type": "range", "id": "heading_display_size", "min": 40, "max": 96, "step": 2, "unit": "px", "label": "Heading display size", "default": 64 },
       { "type": "range", "id": "heading_display_size_mobile", "min": 28, "max": 64, "step": 2, "unit": "px", "label": "Heading display size mobile", "default": 44 },
+      { "type": "select", "id": "body_text_size", "label": "Default text size", "options": [{ "value": "xs", "label": "Extra small" }, { "value": "sm", "label": "Small" }, { "value": "md", "label": "Medium" }, { "value": "lg", "label": "Large" }, { "value": "xl", "label": "Extra large" }, { "value": "xxl", "label": "Display" }], "default": "md" },
       { "type": "range", "id": "eyebrow_font_size", "min": 10, "max": 18, "step": 1, "unit": "px", "label": "Eyebrow size", "default": 12 },
       { "type": "select", "id": "eyebrow_line_height", "label": "Eyebrow line height", "options": [{ "value": "tight", "label": "Tight" }, { "value": "normal", "label": "Normal" }, { "value": "relaxed", "label": "Relaxed" }], "default": "tight" },
-      { "type": "select", "id": "eyebrow_letter_spacing", "label": "Eyebrow letter spacing", "options": [{ "value": "normal", "label": "Normal" }, { "value": "relaxed", "label": "Relaxed" }, { "value": "loose", "label": "Loose" }, { "value": "extra-loose", "label": "Extra loose" }], "default": "relaxed" }
+      { "type": "select", "id": "eyebrow_letter_spacing", "label": "Eyebrow letter spacing", "options": [{ "value": "normal", "label": "Normal" }, { "value": "relaxed", "label": "Relaxed" }, { "value": "loose", "label": "Loose" }, { "value": "extra-loose", "label": "Extra loose" }], "default": "relaxed" },
+      { "type": "select", "id": "eyebrow_text_case", "label": "Eyebrow text case", "options": [{ "value": "none", "label": "Original" }, { "value": "uppercase", "label": "Uppercase" }], "default": "uppercase" },
+      { "type": "range", "id": "button_font_size", "min": 10, "max": 18, "step": 1, "unit": "px", "label": "Button label size", "default": 14 },
+      { "type": "select", "id": "button_line_height", "label": "Button label line height", "options": [{ "value": "tight", "label": "Tight" }, { "value": "normal", "label": "Normal" }], "default": "normal" },
+      { "type": "select", "id": "button_letter_spacing", "label": "Button label letter spacing", "options": [{ "value": "normal", "label": "Normal" }, { "value": "relaxed", "label": "Relaxed" }, { "value": "loose", "label": "Loose" }], "default": "normal" },
+      { "type": "select", "id": "button_text_case", "label": "Button label text case", "options": [{ "value": "none", "label": "Original" }, { "value": "uppercase", "label": "Uppercase" }], "default": "none" },
+      { "type": "range", "id": "badge_font_size", "min": 9, "max": 16, "step": 1, "unit": "px", "label": "Badge size", "default": 12 },
+      { "type": "select", "id": "badge_line_height", "label": "Badge line height", "options": [{ "value": "tight", "label": "Tight" }, { "value": "normal", "label": "Normal" }], "default": "normal" },
+      { "type": "select", "id": "badge_letter_spacing", "label": "Badge letter spacing", "options": [{ "value": "normal", "label": "Normal" }, { "value": "relaxed", "label": "Relaxed" }, { "value": "loose", "label": "Loose" }], "default": "normal" },
+      { "type": "select", "id": "badge_text_case", "label": "Badge text case", "options": [{ "value": "none", "label": "Original" }, { "value": "uppercase", "label": "Uppercase" }], "default": "uppercase" },
+      { "type": "select", "id": "card_title_font_role", "label": "Product card title font role", "options": [{ "value": "heading", "label": "Heading" }, { "value": "body", "label": "Body" }, { "value": "accent", "label": "Accent" }], "default": "heading" },
+      { "type": "range", "id": "card_title_font_size", "min": 10, "max": 20, "step": 1, "unit": "px", "label": "Product card title size", "default": 16 },
+      { "type": "select", "id": "card_title_line_height", "label": "Product card title line height", "options": [{ "value": "tight", "label": "Tight" }, { "value": "normal", "label": "Normal" }, { "value": "relaxed", "label": "Relaxed" }, { "value": "loose", "label": "Loose" }], "default": "normal" },
+      { "type": "select", "id": "card_title_letter_spacing", "label": "Product card title letter spacing", "options": [{ "value": "tight", "label": "Tight" }, { "value": "normal", "label": "Normal" }, { "value": "relaxed", "label": "Relaxed" }, { "value": "loose", "label": "Loose" }], "default": "normal" },
+      { "type": "select", "id": "card_title_text_case", "label": "Product card title text case", "options": [{ "value": "none", "label": "Original" }, { "value": "uppercase", "label": "Uppercase" }, { "value": "capitalize", "label": "Capitalize" }], "default": "none" },
+      { "type": "select", "id": "card_price_font_role", "label": "Product card price font role", "options": [{ "value": "body", "label": "Body" }, { "value": "heading", "label": "Heading" }, { "value": "accent", "label": "Accent" }], "default": "body" },
+      { "type": "range", "id": "card_price_font_size", "min": 10, "max": 20, "step": 1, "unit": "px", "label": "Product card price size", "default": 16 },
+      { "type": "select", "id": "card_price_line_height", "label": "Product card price line height", "options": [{ "value": "tight", "label": "Tight" }, { "value": "normal", "label": "Normal" }, { "value": "relaxed", "label": "Relaxed" }], "default": "normal" },
+      { "type": "select", "id": "card_price_letter_spacing", "label": "Product card price letter spacing", "options": [{ "value": "tight", "label": "Tight" }, { "value": "normal", "label": "Normal" }, { "value": "relaxed", "label": "Relaxed" }], "default": "normal" }
     ]
   },
   {
@@ -102,8 +121,7 @@
       { "type": "range", "id": "button_height_mobile", "min": 40, "max": 56, "step": 2, "unit": "px", "label": "Button height mobile", "default": 44 },
       { "type": "range", "id": "button_padding_inline", "min": 12, "max": 32, "step": 2, "unit": "px", "label": "Button horizontal padding", "default": 20 },
       { "type": "range", "id": "button_border_width", "min": 0, "max": 3, "step": 1, "unit": "px", "label": "Button border width", "default": 1 },
-      { "type": "range", "id": "button_icon_size", "min": 12, "max": 24, "step": 1, "unit": "px", "label": "Button icon size", "default": 16 },
-      { "type": "checkbox", "id": "button_uppercase", "label": "Uppercase button labels", "default": false }
+      { "type": "range", "id": "button_icon_size", "min": 12, "max": 24, "step": 1, "unit": "px", "label": "Button icon size", "default": 16 }
     ]
   },
   {
