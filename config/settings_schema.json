@@ -238,21 +238,46 @@
   {
     "name": "Badges",
     "settings": [
-      { "type": "select", "id": "sale_badge_type", "label": "Sale badge content", "options": [{ "value": "sale", "label": "Sale" }, { "value": "percentage", "label": "Percentage" }, { "value": "amount", "label": "Amount saved" }], "default": "sale" },
-      { "type": "text", "id": "sale_badge_text", "label": "Sale badge text", "default": "Sale" },
-      { "type": "text", "id": "sold_out_badge_text", "label": "Sold out badge text", "default": "Sold out" },
-      { "type": "checkbox", "id": "show_sale_badge", "label": "Show sale badge", "default": true },
-      { "type": "checkbox", "id": "show_sold_out_badge", "label": "Show sold out badge", "default": true },
-      { "type": "select", "id": "badge_position", "label": "Badge position", "options": [{ "value": "top_left", "label": "Top left" }, { "value": "top_right", "label": "Top right" }], "default": "top_left" }
+      { "type": "select", "id": "badge_radius_style", "label": "Corner radius", "options": [{ "value": "square", "label": "Square" }, { "value": "rounded", "label": "Rounded" }, { "value": "pill", "label": "Pill" }], "default": "square" },
+      { "type": "header", "content": "Product status" },
+      { "type": "color", "id": "badge_sale_price", "label": "Sale price", "default": "#D82727" },
+      { "type": "color", "id": "badge_sale_background", "label": "Sale badge background", "default": "#D82727" },
+      { "type": "color", "id": "badge_sale_text", "label": "Sale badge text", "default": "#FFFFFF" },
+      { "type": "color", "id": "badge_sold_out_background", "label": "Sold-out badge background", "default": "#ADADAD" },
+      { "type": "color", "id": "badge_sold_out_text", "label": "Sold-out badge text", "default": "#181818" },
+      { "type": "select", "id": "badge_sale_type", "label": "Badge type", "options": [{ "value": "text", "label": "Text" }, { "value": "percentage_off", "label": "Percentage" }, { "value": "percentage_only", "label": "Percentage only" }, { "value": "amount_saved", "label": "Amount saved" }], "default": "text" },
+      { "type": "header", "content": "Collection badges" },
+      { "type": "text", "id": "badge_collection_1_label", "label": "Label", "default": "New" },
+      { "type": "collection_list", "id": "badge_collection_1_collections", "label": "Collections", "limit": 20 },
+      { "type": "text", "id": "badge_collection_2_label", "label": "Label", "default": "Bestseller" },
+      { "type": "collection_list", "id": "badge_collection_2_collections", "label": "Collections", "limit": 20 },
+      { "type": "text", "id": "badge_collection_3_label", "label": "Label", "default": "Limited" },
+      { "type": "collection_list", "id": "badge_collection_3_collections", "label": "Collections", "limit": 20 },
+      { "type": "header", "content": "Custom badge" },
+      { "type": "checkbox", "id": "badge_enable_custom", "label": "Enable custom badge", "default": false },
+      { "type": "paragraph", "content": "Learn how to set up a custom badge" },
+      { "type": "color", "id": "badge_custom_background", "label": "Background color", "default": "#5E6504" },
+      { "type": "color", "id": "badge_custom_text", "label": "Text color", "default": "#FFFFFF" },
+      { "type": "header", "content": "Custom product-card tags" },
+      { "type": "text", "id": "badge_tag_new_label", "label": "New · Label", "default": "New" },
+      { "type": "text", "id": "badge_tag_new_product_tag", "label": "New · Product tag", "default": "new" },
+      { "type": "color", "id": "badge_tag_new_background", "label": "New · Background", "default": "#5E6504" },
+      { "type": "color", "id": "badge_tag_new_text", "label": "New · Text", "default": "#FFFFFF" },
+      { "type": "range", "id": "badge_tag_new_priority", "min": 1, "max": 10, "step": 1, "unit": "#", "label": "New · Priority", "default": 1 },
+      { "type": "text", "id": "badge_tag_bestseller_label", "label": "Bestseller · Label", "default": "Bestseller" },
+      { "type": "text", "id": "badge_tag_bestseller_product_tag", "label": "Bestseller · Product tag", "default": "bestseller" },
+      { "type": "color", "id": "badge_tag_bestseller_background", "label": "Bestseller · Background", "default": "#171717" },
+      { "type": "color", "id": "badge_tag_bestseller_text", "label": "Bestseller · Text", "default": "#FFFFFF" },
+      { "type": "range", "id": "badge_tag_bestseller_priority", "min": 1, "max": 10, "step": 1, "unit": "#", "label": "Bestseller · Priority", "default": 2 }
     ]
   },
   {
     "name": "Prices",
     "settings": [
-      { "type": "checkbox", "id": "show_compare_at_first", "label": "Show compare-at price before sale price", "default": false },
-      { "type": "checkbox", "id": "show_currency_code", "label": "Show currency code", "default": false },
-      { "type": "checkbox", "id": "show_unit_price", "label": "Show unit price when available", "default": true },
-      { "type": "checkbox", "id": "show_from_price", "label": "Show From price for ranges", "default": true }
+      { "type": "checkbox", "id": "show_sale_price_first", "label": "Show sale price first", "default": false },
+      { "type": "header", "content": "Currency code" },
+      { "type": "checkbox", "id": "show_currency_code_product_cards", "label": "Product cards", "default": false },
+      { "type": "checkbox", "id": "show_currency_code_product_pages", "label": "Product pages", "default": false }
     ]
   },
   {
@@ -269,8 +294,7 @@
       { "type": "url", "id": "social_snapchat", "label": "Snapchat" },
       { "type": "url", "id": "social_pinterest", "label": "Pinterest" },
       { "type": "url", "id": "social_tumblr", "label": "Tumblr" },
-      { "type": "url", "id": "social_vimeo", "label": "Vimeo" },
-      { "type": "select", "id": "social_display", "label": "Social link display", "options": [{ "value": "icon", "label": "Icon" }, { "value": "label", "label": "Text label" }, { "value": "both", "label": "Icon and text" }], "default": "icon" }
+      { "type": "url", "id": "social_vimeo", "label": "Vimeo" }
     ]
   },
   {

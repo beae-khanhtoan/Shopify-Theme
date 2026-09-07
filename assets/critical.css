@@ -309,19 +309,29 @@ input:not([type='submit']):not([type='checkbox']):not([type='radio']) {
 
 .price--sale,
 .sale-price {
-  color: var(--sale-price-color);
+  color: var(--badge-sale-price);
 }
 
 .product-badge {
-  border-radius: var(--radius-sm);
+  border-radius: var(--badge-radius);
   padding: 0.25rem 0.5rem;
-  background: var(--accent-color);
-  color: var(--color-background);
+  background: var(--badge-custom-background);
+  color: var(--badge-custom-color);
   font-family: var(--font-body-family);
   font-size: var(--font-badge-size);
   line-height: var(--font-badge-line-height);
   letter-spacing: var(--font-badge-letter-spacing);
   text-transform: var(--font-badge-text-transform);
+}
+
+.product-badge--sale {
+  background: var(--badge-sale-background);
+  color: var(--badge-sale-color);
+}
+
+.product-badge--sold-out {
+  background: var(--badge-sold-out-background);
+  color: var(--badge-sold-out-color);
 }
 
 .product-card {

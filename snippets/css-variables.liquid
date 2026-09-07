@@ -180,6 +180,14 @@
     --pcard-quick-view-mobile-display: {% if settings.product_enable_quick_view_mobile %}inline-flex{% else %}none{% endif %};
     --pcard-sale-badge-display: {% if settings.product_show_sale_badge %}inline-flex{% else %}none{% endif %};
     --pcard-sold-out-badge-display: {% if settings.product_show_sold_out_badge %}inline-flex{% else %}none{% endif %};
+    --badge-radius: {% case settings.badge_radius_style %}{% when 'rounded' %}var(--radius-md){% when 'pill' %}var(--radius-pill){% else %}0px{% endcase %};
+    --badge-sale-price: {{ settings.badge_sale_price }};
+    --badge-sale-background: {{ settings.badge_sale_background }};
+    --badge-sale-color: {{ settings.badge_sale_text }};
+    --badge-sold-out-background: {{ settings.badge_sold_out_background }};
+    --badge-sold-out-color: {{ settings.badge_sold_out_text }};
+    --badge-custom-background: {{ settings.badge_custom_background }};
+    --badge-custom-color: {{ settings.badge_custom_text }};
 
     {% if color_scheme %}
       --color-background: {{ color_scheme.settings.background }};
