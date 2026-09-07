@@ -220,6 +220,10 @@ input:not([type='submit']):not([type='checkbox']):not([type='radio']) {
 }
 
 @media (max-width: 749px) {
+  .layout-grid {
+    gap: var(--content-gap-mobile);
+  }
+
   button,
   input[type='submit'],
   .button {

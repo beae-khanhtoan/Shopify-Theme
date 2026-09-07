@@ -41,6 +41,8 @@
     "page_width": "100rem",
     "page_margin": 24,
     "section_spacing": 64,
+    "content_gap": 24,
+    "content_gap_mobile": 16,
     "type_primary_font": "work_sans_n4",
     "type_heading_font": "work_sans_n4",
     "body_font_size": 16,
