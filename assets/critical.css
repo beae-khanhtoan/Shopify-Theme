@@ -74,8 +74,56 @@ p:empty {
 /** Theme styles below */
 body {
   font-family: var(--font-primary--family);
+  font-size: var(--font-body-size);
   background-color: var(--color-background);
   color: var(--color-foreground);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading--family);
+  text-transform: var(--heading-case);
+}
+
+a {
+  color: var(--color-foreground);
+  transition: color var(--motion-duration) ease;
+}
+
+button,
+input[type='submit'],
+.button {
+  min-height: var(--button-height);
+  border: 1px solid var(--color-button);
+  border-radius: var(--style-border-radius-medium);
+  background: var(--color-button);
+  color: var(--color-button-label);
+  cursor: pointer;
+  font: inherit;
+  padding-inline: 1.25rem;
+  text-transform: var(--button-text-transform);
+}
+
+input,
+textarea,
+select {
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 30%, transparent);
+  background: var(--input-background);
+  box-shadow: var(--input-shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
 }
 
 /** Section layout utilities */

@@ -1,83 +1,128 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Skeleton",
-    "theme_version": "0.1.0",
-    "theme_author": "Shopify",
+    "theme_name": "Shopify Theme Base",
+    "theme_version": "0.2.0",
+    "theme_author": "BEAE",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://support.shopify.com/"
   },
   {
-    "name": "t:general.typography",
+    "name": "Branding",
     "settings": [
-      {
-        "type": "header",
-        "content": "t:general.fonts"
-      },
-      {
-        "type": "font_picker",
-        "id": "type_primary_font",
-        "default": "work_sans_n4",
-        "label": "t:general.primary"
-      }
+      { "type": "image_picker", "id": "logo", "label": "Logo" },
+      { "type": "range", "id": "logo_width", "min": 80, "max": 320, "step": 4, "unit": "px", "label": "Logo width", "default": 160 },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
     ]
   },
   {
-    "name": "t:general.layout",
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color_scheme_group",
+        "id": "color_schemes",
+        "definition": [
+          { "type": "color", "id": "background", "label": "Background", "default": "#FFFFFF" },
+          { "type": "color_background", "id": "background_gradient", "label": "Background gradient" },
+          { "type": "color", "id": "text", "label": "Text", "default": "#171717" },
+          { "type": "color", "id": "button", "label": "Primary button", "default": "#171717" },
+          { "type": "color", "id": "button_label", "label": "Primary button label", "default": "#FFFFFF" },
+          { "type": "color", "id": "secondary_button_label", "label": "Secondary button label", "default": "#171717" },
+          { "type": "color", "id": "shadow", "label": "Shadow", "default": "#171717" }
+        ],
+        "role": {
+          "text": "text",
+          "background": { "solid": "background", "gradient": "background_gradient" },
+          "links": "secondary_button_label",
+          "icons": "text",
+          "primary_button": "button",
+          "on_primary_button": "button_label",
+          "primary_button_border": "button",
+          "secondary_button": "background",
+          "on_secondary_button": "secondary_button_label",
+          "secondary_button_border": "secondary_button_label"
+        }
+      },
+      { "type": "checkbox", "id": "enable_gradients", "label": "Enable background gradients", "default": true }
+    ]
+  },
+  {
+    "name": "Layout",
     "settings": [
       {
         "type": "select",
-        "id": "max_page_width",
-        "label": "t:labels.page_width",
+        "id": "page_width",
+        "label": "Page width",
         "options": [
-          {
-            "value": "90rem",
-            "label": "t:options.page_width.narrow"
-          },
-          {
-            "value": "110rem",
-            "label": "t:options.page_width.wide"
-          }
+          { "value": "80rem", "label": "Narrow" },
+          { "value": "100rem", "label": "Standard" },
+          { "value": "120rem", "label": "Wide" }
         ],
-        "default": "90rem"
+        "default": "100rem"
       },
-      {
-        "type": "range",
-        "id": "min_page_margin",
-        "min": 10,
-        "max": 100,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.page_margin",
-        "default": 20
-      }
+      { "type": "range", "id": "page_margin", "min": 12, "max": 64, "step": 2, "unit": "px", "label": "Page margin", "default": 24 },
+      { "type": "range", "id": "section_spacing", "min": 24, "max": 120, "step": 4, "unit": "px", "label": "Section spacing", "default": 64 }
     ]
   },
   {
-    "name": "t:general.colors",
+    "name": "Typography",
     "settings": [
-      {
-        "type": "color",
-        "id": "background_color",
-        "default": "#FFFFFF",
-        "label": "t:labels.background"
-      },
-      {
-        "type": "color",
-        "id": "foreground_color",
-        "default": "#333333",
-        "label": "t:labels.foreground"
-      },
-      {
-        "type": "range",
-        "id": "input_corner_radius",
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.input_corner_radius",
-        "default": 4
-      }
+      { "type": "font_picker", "id": "type_primary_font", "label": "Body font", "default": "work_sans_n4" },
+      { "type": "font_picker", "id": "type_heading_font", "label": "Heading font", "default": "work_sans_n4" },
+      { "type": "range", "id": "body_font_size", "min": 14, "max": 20, "step": 1, "unit": "px", "label": "Body font size", "default": 16 },
+      { "type": "select", "id": "heading_case", "label": "Heading case", "options": [{ "value": "none", "label": "As written" }, { "value": "uppercase", "label": "Uppercase" }], "default": "none" }
+    ]
+  },
+  {
+    "name": "Motion and shape",
+    "settings": [
+      { "type": "checkbox", "id": "enable_motion", "label": "Enable motion", "default": true },
+      { "type": "checkbox", "id": "reduce_motion", "label": "Reduce motion by default", "default": false },
+      { "type": "range", "id": "radius_small", "min": 0, "max": 24, "step": 1, "unit": "px", "label": "Small radius", "default": 4 },
+      { "type": "range", "id": "radius_medium", "min": 0, "max": 32, "step": 1, "unit": "px", "label": "Medium radius", "default": 8 },
+      { "type": "range", "id": "radius_large", "min": 0, "max": 48, "step": 1, "unit": "px", "label": "Large radius", "default": 16 }
+    ]
+  },
+  {
+    "name": "Buttons and forms",
+    "settings": [
+      { "type": "select", "id": "button_style", "label": "Button style", "options": [{ "value": "solid", "label": "Solid" }, { "value": "outline", "label": "Outline" }, { "value": "text", "label": "Text" }], "default": "solid" },
+      { "type": "range", "id": "button_height", "min": 36, "max": 64, "step": 2, "unit": "px", "label": "Button height", "default": 48 },
+      { "type": "checkbox", "id": "button_uppercase", "label": "Uppercase button labels", "default": false },
+      { "type": "select", "id": "input_style", "label": "Input style", "options": [{ "value": "outline", "label": "Outline" }, { "value": "filled", "label": "Filled" }], "default": "outline" },
+      { "type": "checkbox", "id": "input_shadows", "label": "Show input shadows", "default": false }
+    ]
+  },
+  {
+    "name": "Product cards and commerce",
+    "settings": [
+      { "type": "select", "id": "product_card_style", "label": "Product card style", "options": [{ "value": "plain", "label": "Plain" }, { "value": "card", "label": "Card" }], "default": "plain" },
+      { "type": "checkbox", "id": "product_show_vendor", "label": "Show vendor", "default": false },
+      { "type": "checkbox", "id": "product_show_rating", "label": "Show rating", "default": true },
+      { "type": "select", "id": "variant_picker_style", "label": "Variant picker style", "options": [{ "value": "dropdown", "label": "Dropdown" }, { "value": "buttons", "label": "Buttons" }], "default": "buttons" },
+      { "type": "checkbox", "id": "show_unavailable_variants", "label": "Show unavailable variants", "default": true },
+      { "type": "checkbox", "id": "enable_swatches", "label": "Enable color swatches", "default": true },
+      { "type": "range", "id": "swatch_size", "min": 20, "max": 48, "step": 2, "unit": "px", "label": "Swatch size", "default": 32 },
+      { "type": "select", "id": "badge_position", "label": "Badge position", "options": [{ "value": "top_left", "label": "Top left" }, { "value": "top_right", "label": "Top right" }], "default": "top_left" },
+      { "type": "checkbox", "id": "show_sale_badge", "label": "Show sale badge", "default": true },
+      { "type": "checkbox", "id": "show_currency_code", "label": "Show currency code", "default": false }
+    ]
+  },
+  {
+    "name": "Icons and overlay",
+    "settings": [
+      { "type": "select", "id": "icon_style", "label": "Icon style", "options": [{ "value": "outline", "label": "Outline" }, { "value": "solid", "label": "Solid" }], "default": "outline" },
+      { "type": "range", "id": "overlay_opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Overlay opacity", "default": 40 }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      { "type": "url", "id": "social_facebook", "label": "Facebook" },
+      { "type": "url", "id": "social_instagram", "label": "Instagram" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube" },
+      { "type": "url", "id": "social_pinterest", "label": "Pinterest" }
     ]
   }
 ]

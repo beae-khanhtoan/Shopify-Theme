@@ -1,6 +1,12 @@
 <header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
+  <h2 class="header__title" style="--logo-width: {{ settings.logo_width }}px">
+    <a href="{{ routes.root_url }}">
+      {% if settings.logo %}
+        {{ settings.logo | image_url: width: settings.logo_width | image_tag: alt: shop.name }}
+      {% else %}
+        {{ shop.name }}
+      {% endif %}
+    </a>
   </h2>
 
   <div class="header__menu">
@@ -40,6 +46,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .header__title {
+    font-family: var(--font-heading--family);
+    text-transform: var(--heading-case);
+  }
+  .header__title img {
+    width: var(--logo-width);
+    max-height: 3rem;
+    object-fit: contain;
   }
   header a sup {
     position: absolute;

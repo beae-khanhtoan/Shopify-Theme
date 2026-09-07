@@ -4,15 +4,46 @@
   {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
   {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
   {{ settings.type_primary_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+  {{ settings.type_heading_font | font_face: font_display: 'swap' }}
+  {{ settings.type_heading_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
+
+  {% assign color_scheme = settings.color_schemes.first %}
 
   :root {
     --font-primary--family: {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
     --font-primary--style: {{ settings.type_primary_font.style }};
     --font-primary--weight: {{ settings.type_primary_font.weight }};
-    --page-width: {{ settings.max_page_width }};
-    --page-margin: {{ settings.min_page_margin }}px;
-    --color-background: {{ settings.background_color }};
-    --color-foreground: {{ settings.foreground_color }};
-    --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+    --font-heading--family: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }};
+    --font-body-size: {{ settings.body_font_size }}px;
+    --heading-case: {{ settings.heading_case }};
+    --page-width: {{ settings.page_width }};
+    --page-margin: {{ settings.page_margin }}px;
+    --section-spacing: {{ settings.section_spacing }}px;
+    --style-border-radius-small: {{ settings.radius_small }}px;
+    --style-border-radius-medium: {{ settings.radius_medium }}px;
+    --style-border-radius-large: {{ settings.radius_large }}px;
+    --style-border-radius-inputs: var(--style-border-radius-small);
+    --button-height: {{ settings.button_height }}px;
+    --swatch-size: {{ settings.swatch_size }}px;
+    --overlay-opacity: {{ settings.overlay_opacity | divided_by: 100.0 }};
+    --motion-duration: {% if settings.enable_motion and settings.reduce_motion == false %}180ms{% else %}0ms{% endif %};
+    --button-text-transform: {% if settings.button_uppercase %}uppercase{% else %}none{% endif %};
+    --input-background: {% if settings.input_style == 'filled' %}color-mix(in srgb, var(--color-foreground) 5%, var(--color-background)){% else %}transparent{% endif %};
+    --input-shadow: {% if settings.input_shadows %}0 1px 4px color-mix(in srgb, var(--color-shadow) 12%, transparent){% else %}none{% endif %};
+
+    {% if color_scheme %}
+      --color-background: {{ color_scheme.settings.background }};
+      --color-background-gradient: {{ color_scheme.settings.background_gradient }};
+      --color-foreground: {{ color_scheme.settings.text }};
+      --color-button: {{ color_scheme.settings.button }};
+      --color-button-label: {{ color_scheme.settings.button_label }};
+      --color-shadow: {{ color_scheme.settings.shadow }};
+    {% else %}
+      --color-background: #ffffff;
+      --color-foreground: #171717;
+      --color-button: #171717;
+      --color-button-label: #ffffff;
+      --color-shadow: #171717;
+    {% endif %}
   }
 {% endstyle %}
