@@ -1,8 +1,11 @@
 <header>
-  <h2 class="header__title" style="--logo-width: {{ settings.logo_width }}px">
+  <h2 class="header__title">
     <a href="{{ routes.root_url }}">
-      {% if settings.logo %}
-        {{ settings.logo | image_url: width: settings.logo_width | image_tag: alt: shop.name }}
+      {% assign header_logo = settings.logo | default: settings.logo_transparent %}
+      {% if header_logo %}
+        <span class="site-logo" style="--logo-width: {{ settings.logo_width }}px; --logo-width-mobile: {{ settings.logo_width_mobile }}px">
+          {{ header_logo | image_url: width: settings.logo_width | image_tag: alt: shop.name, widths: '120, 160, 240, 320' }}
+        </span>
       {% else %}
         {{ shop.name }}
       {% endif %}
@@ -51,10 +54,15 @@
     font-family: var(--font-heading--family);
     text-transform: var(--heading-case);
   }
-  .header__title img {
+  .site-logo img {
     width: var(--logo-width);
     max-height: 3rem;
     object-fit: contain;
+  }
+  @media (max-width: 749px) {
+    .site-logo img {
+      width: var(--logo-width-mobile);
+    }
   }
   header a sup {
     position: absolute;

@@ -1,0 +1,39 @@
+{% doc %}
+  Renders a product variant price with sale, compare-at, unit, and currency states.
+
+  @param {product} product - Product used for range and unit-price context
+  @param {object} variant - Selected product variant
+
+  @example
+  {% render 'price', product: product, variant: product.selected_or_first_available_variant %}
+{% enddoc %}
+
+{% if product.price_varies and settings.show_from_price %}
+  <span class="price price--from">From </span>
+{% endif %}
+
+{% if variant.compare_at_price > variant.price and settings.show_compare_at_first %}
+  <s class="price price--compare">{{ variant.compare_at_price | money }}</s>
+{% endif %}
+
+<span class="price{% if variant.compare_at_price > variant.price %} price--sale{% endif %}">
+  {% if settings.show_currency_code %}
+    {{ variant.price | money_with_currency }}
+  {% else %}
+    {{ variant.price | money }}
+  {% endif %}
+</span>
+
+{% if variant.compare_at_price > variant.price and settings.show_compare_at_first == false %}
+  <s class="price price--compare">{{ variant.compare_at_price | money }}</s>
+{% endif %}
+
+{% if settings.show_unit_price and variant.unit_price_measurement %}
+  <span class="price price--unit">
+    {{ variant.unit_price | money }} /
+    {% if variant.unit_price_measurement.reference_value != 1 %}
+      {{ variant.unit_price_measurement.reference_value }}
+    {% endif %}
+    {{ variant.unit_price_measurement.reference_unit }}
+  </span>
+{% endif %}

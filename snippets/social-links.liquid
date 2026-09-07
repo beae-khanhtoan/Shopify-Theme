@@ -1,0 +1,39 @@
+{% doc %}
+  Renders configured social profile links.
+
+  @example
+  {% render 'social-links' %}
+{% enddoc %}
+
+{% assign social_links = 'facebook,instagram,youtube,tiktok,x,threads,linkedin,bluesky,snapchat,pinterest,tumblr,vimeo' | split: ',' %}
+
+<nav class="social-links" aria-label="Social media">
+  {% for network in social_links %}
+    {% assign setting_id = 'social_' | append: network %}
+    {% assign url = settings[setting_id] %}
+    {% if url != blank %}
+      <a class="social-links__link" href="{{ url }}" target="_blank" rel="noopener noreferrer">
+        <span class="social-links__label">{{ network | capitalize }}</span>
+      </a>
+    {% endif %}
+  {% endfor %}
+</nav>
+
+{% stylesheet %}
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+  }
+
+  .social-links__link {
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    color: currentColor;
+  }
+
+  .social-links__label {
+    text-transform: capitalize;
+  }
+{% endstylesheet %}

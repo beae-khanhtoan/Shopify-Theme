@@ -75,6 +75,7 @@ p:empty {
 body {
   font-family: var(--font-primary--family);
   font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
   background-color: var(--color-background);
   color: var(--color-foreground);
 }
@@ -86,34 +87,154 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading--family);
+  line-height: var(--font-heading-line-height);
+  letter-spacing: var(--font-heading-letter-spacing);
   text-transform: var(--heading-case);
+  color: var(--heading-color);
 }
 
 a {
   color: var(--color-foreground);
-  transition: color var(--motion-duration) ease;
+  transition: color var(--motion-duration) var(--motion-ease);
 }
 
 button,
 input[type='submit'],
 .button {
   min-height: var(--button-height);
-  border: 1px solid var(--color-button);
+  border: var(--button-border-width) solid var(--color-button);
   border-radius: var(--style-border-radius-medium);
   background: var(--color-button);
   color: var(--color-button-label);
   cursor: pointer;
   font: inherit;
-  padding-inline: 1.25rem;
+  padding-inline: var(--button-padding-inline);
   text-transform: var(--button-text-transform);
+}
+
+.btn--secondary {
+  border-color: var(--color-secondary-button);
+  background: var(--color-secondary-button);
+  color: var(--color-secondary-button-label);
+}
+
+.btn--tertiary {
+  border-color: var(--color-tertiary-button-border);
+  background: transparent;
+  color: var(--color-tertiary-button-label);
+}
+
+button:hover,
+input[type='submit']:hover,
+.button:hover {
+  background: var(--color-button-hover);
+}
+
+.btn--secondary:hover {
+  background: var(--color-secondary-button-hover);
+}
+
+.btn--tertiary:hover {
+  background: var(--color-tertiary-button-hover);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
 
 input,
 textarea,
 select {
-  border: 1px solid color-mix(in srgb, var(--color-foreground) 30%, transparent);
+  border-width: var(--input-border-width);
+  min-height: var(--input-height);
   background: var(--input-background);
   box-shadow: var(--input-shadow);
+}
+
+textarea,
+input:not([type='submit']):not([type='checkbox']):not([type='radio']) {
+  min-height: var(--input-height);
+}
+
+.page-width {
+  width: min(var(--page-width), calc(100% - (var(--page-margin) * 2)));
+  margin-inline: auto;
+}
+
+.page-full-width {
+  width: 100%;
+}
+
+.page-full-bleed {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}
+
+.layout-grid {
+  display: grid;
+  gap: var(--content-gap);
+}
+
+.spacing-padding-block {
+  padding-block: var(--section-spacing);
+}
+
+.eyebrow-text,
+.accent-text {
+  color: var(--accent-color);
+  font-family: var(--font-accent--family);
+  text-transform: var(--accent-text-case);
+}
+
+.price--sale,
+.sale-price {
+  color: var(--sale-price-color);
+}
+
+.product-badge {
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.5rem;
+  background: var(--accent-color);
+  color: var(--color-background);
+}
+
+.overlay__backdrop {
+  background: rgb(0 0 0 / var(--overlay-opacity));
+  backdrop-filter: var(--overlay-backdrop-blur);
+  z-index: 400;
+}
+
+.overlay,
+.modal,
+.drawer,
+.bottom-sheet,
+.popover {
+  z-index: 500;
+  border-radius: var(--overlay-radius);
+  padding: var(--overlay-padding);
+}
+
+@media (max-width: 749px) {
+  button,
+  input[type='submit'],
+  .button {
+    min-height: var(--button-height-mobile);
+  }
+
+  input,
+  textarea,
+  select {
+    min-height: var(--input-height-mobile);
+  }
+
+  .spacing-padding-block {
+    padding-block: clamp(1.5rem, 6vw, var(--section-spacing));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

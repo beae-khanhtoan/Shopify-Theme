@@ -11,14 +11,17 @@
   {% endfor %}
 </div>
 
-<div class="product-info">
-  <h1>{{ product.title }}</h1>
-  <p>{{ product.price | money }}</p>
-  <p>{{ product.description }}</p>
-</div>
+  <div class="product-info">
+    <h1>{{ product.title }}</h1>
+    {% assign current_variant = product.selected_or_first_available_variant %}
+    <p class="product-price" aria-live="polite">
+      {% render 'price', product: product, variant: current_variant %}
+    </p>
+    <p>{{ product.description }}</p>
+  </div>
 
-<div class="product-form">
-  {% form 'product', product %}
+  <div class="product-form">
+    {% form 'product', product %}
     {% assign current_variant = product.selected_or_first_available_variant %}
 
     <select name="id">
