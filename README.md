@@ -7,6 +7,53 @@
 
 A minimal, carefully structured Shopify theme designed to help you quickly get started. Designed with modularity, maintainability, and Shopify's best practices in mind.
 
+## Project workflow
+
+This repository is the theme base for the development store `layouthub-khanhnguyen.myshopify.com`.
+
+| Git branch | Shopify theme | Role |
+| --- | --- | --- |
+| `dev` | `theme/dev` (`165655281906`) | Development, Theme Editor, preview |
+| `main` | `theme/main` (`164351607026`) | Stable integration, unpublished |
+
+The live theme is not part of the development workflow. Work only on `dev`, and never publish a theme without explicit release approval.
+
+### Daily development
+
+```bash
+git switch dev
+git branch --show-current
+git status
+shopify theme check
+shopify theme dev --store layouthub-khanhnguyen.myshopify.com --theme 165655281906 --theme-editor-sync
+```
+
+Use the local preview, Theme Editor preview, and shareable preview link before committing. After review:
+
+```bash
+git add .
+git commit -m "type: describe the change"
+git push origin dev
+shopify theme push --store layouthub-khanhnguyen.myshopify.com --theme 165655281906 --strict
+```
+
+### Promote dev to main
+
+Before promotion, check that `main` has not moved. If it has, merge it into `dev`, resolve conflicts, and repeat Theme Check and preview QA. Promote only after review:
+
+```bash
+git fetch origin
+git switch dev
+git merge origin/main
+shopify theme check
+git switch main
+git merge --ff-only dev
+git push origin main
+git rev-parse dev main
+```
+
+Uploading to `theme/main` (`164351607026`) and publishing the live theme are separate release actions and require explicit approval.
+
 <p align="center">
   <a href="./LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
   <a href="./actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Shopify/skeleton-theme/actions/workflows/ci.yml/badge.svg"></a>
