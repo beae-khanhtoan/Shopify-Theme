@@ -163,14 +163,14 @@
     --pcard-title-font-family: {% if settings.product_title_font == 'body' %}var(--font-body-family){% else %}var(--font-heading-family){% endif %};
     --pcard-title-size: {{ settings.product_title_size }}px;
     --pcard-title-size-mobile: {{ settings.product_title_size_mobile }}px;
-    --pcard-title-lines: {% if settings.product_title_lines == 'no_limit' %}none{% else %}{{ settings.product_title_lines }}{% endif %};
+    --pcard-title-lines: {% if settings.product_title_line_limit == 'no_limit' %}none{% else %}{{ settings.product_title_line_limit }}{% endif %};
     --pcard-alignment: {{ settings.product_card_alignment }};
     --pcard-image-ratio: {{ settings.product_card_image_ratio }};
     --pcard-swatch-position: {{ settings.product_swatch_position }};
     --pcard-swatch-limit: {{ settings.product_swatch_limit }};
     --pcard-swatch-gap: {{ settings.product_swatch_gap }}px;
-    --pcard-swatch-size: {{ settings.product_swatch_size_desktop }}px;
-    --pcard-swatch-size-mobile: {{ settings.product_swatch_size_mobile }}px;
+    --pcard-swatch-size: {{ settings.product_swatch_width_desktop }}px;
+    --pcard-swatch-size-mobile: {{ settings.product_swatch_width_mobile }}px;
     --pcard-swatch-style: {% if settings.product_swatch_style == 'inherit' %}var(--swatch-style){% else %}{{ settings.product_swatch_style }}{% endif %};
     --pcard-swatch-selected-style: {% if settings.product_swatch_selected_style == 'inherit' %}var(--swatch-selected-style){% else %}{{ settings.product_swatch_selected_style }}{% endif %};
     --pcard-quick-add-display: {% if settings.product_enable_quick_add %}inline-flex{% else %}none{% endif %};

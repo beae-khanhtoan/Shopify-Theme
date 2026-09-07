@@ -177,7 +177,7 @@
       { "type": "range", "id": "product_title_size_mobile", "min": 12, "max": 28, "step": 1, "unit": "px", "label": "Size (mobile)", "default": 18 },
       { "type": "header", "content": "Layout" },
       { "type": "select", "id": "product_card_alignment", "label": "Alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "left" },
-      { "type": "select", "id": "product_title_lines", "label": "Title line limit", "options": [{ "value": "no_limit", "label": "No limit" }, { "value": "1", "label": "1" }, { "value": "2", "label": "2" }, { "value": "3", "label": "3" }, { "value": "4", "label": "4" }], "default": "no_limit" },
+      { "type": "select", "id": "product_title_line_limit", "label": "Title line limit", "options": [{ "value": "no_limit", "label": "No limit" }, { "value": "1", "label": "1" }, { "value": "2", "label": "2" }, { "value": "3", "label": "3" }, { "value": "4", "label": "4" }], "default": "no_limit" },
       { "type": "select", "id": "product_card_image_ratio", "label": "Image ratio", "options": [{ "value": "original", "label": "Original" }, { "value": "square", "label": "Square" }, { "value": "portrait", "label": "Portrait" }, { "value": "landscape", "label": "Landscape" }], "default": "original" },
       { "type": "header", "content": "Gap" },
       { "type": "select", "id": "product_gap_device", "label": "Device", "options": [{ "value": "desktop", "label": "Desktop" }, { "value": "mobile", "label": "Mobile" }], "default": "desktop" },
@@ -205,8 +205,8 @@
       { "type": "select", "id": "product_swatch_style", "label": "Swatch type", "options": [{ "value": "color", "label": "Color" }, { "value": "image", "label": "Variant image" }], "default": "color" },
       { "type": "range", "id": "product_swatch_limit", "min": 2, "max": 6, "step": 1, "unit": "it", "label": "Swatch limit", "default": 3 },
       { "type": "range", "id": "product_swatch_gap", "min": 0, "max": 16, "step": 1, "unit": "px", "label": "Item gap", "default": 8 },
-      { "type": "range", "id": "product_swatch_size_desktop", "min": 16, "max": 48, "step": 1, "unit": "px", "label": "Desktop width", "default": 30 },
-      { "type": "range", "id": "product_swatch_size_mobile", "min": 16, "max": 48, "step": 1, "unit": "px", "label": "Mobile width", "default": 30 },
+      { "type": "range", "id": "product_swatch_width_desktop", "min": 16, "max": 48, "step": 1, "unit": "px", "label": "Desktop width", "default": 30 },
+      { "type": "range", "id": "product_swatch_width_mobile", "min": 16, "max": 48, "step": 1, "unit": "px", "label": "Mobile width", "default": 30 },
       { "type": "select", "id": "product_swatch_height_ratio", "label": "Height ratio", "options": [{ "value": "1_1", "label": "1:1" }, { "value": "3_2", "label": "3:2" }, { "value": "2_1", "label": "2:1" }, { "value": "3_1", "label": "3:1" }], "default": "3_1" },
       { "type": "select", "id": "product_swatch_selected_style", "label": "Selected variant style", "options": [{ "value": "border", "label": "Border" }, { "value": "underline", "label": "Underline" }], "default": "underline" }
     ]
