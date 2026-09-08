@@ -1,0 +1,36 @@
+{% doc %}
+  Renders a controlled content header for Eyebrow, Heading and Text children.
+{% enddoc %}
+
+<div class="basic-header" style="--header-max-width: {% if block.settings.limit_width %}{{ block.settings.max_width }}px{% else %}none{% endif %}; --header-gap: {{ block.settings.gap_desktop }}px; --header-gap-mobile: {{ block.settings.gap_mobile }}px; --padding-top: {{ block.settings.padding_top }}px; --padding-bottom: {{ block.settings.padding_bottom }}px; --padding-left: {{ block.settings.padding_left }}px; --padding-right: {{ block.settings.padding_right }}px; --padding-top-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_top_mobile }}{% else %}{{ block.settings.padding_top }}{% endif %}px; --padding-bottom-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_bottom_mobile }}{% else %}{{ block.settings.padding_bottom }}{% endif %}px; --padding-left-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_left_mobile }}{% else %}{{ block.settings.padding_left }}{% endif %}px; --padding-right-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_right_mobile }}{% else %}{{ block.settings.padding_right }}{% endif %}px;" {{ block.shopify_attributes }}>
+  {% content_for 'blocks' %}
+</div>
+
+{% stylesheet %}
+  .basic-header { display: flex; flex-direction: column; width: 100%; max-width: var(--header-max-width); gap: var(--header-gap); padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left); }
+  @media (max-width: 767.98px) { .basic-header { gap: var(--header-gap-mobile); padding: var(--padding-top-mobile) var(--padding-right-mobile) var(--padding-bottom-mobile) var(--padding-left-mobile); } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:blocks.header.name",
+  "blocks": [{ "type": "eyebrow" }, { "type": "heading" }, { "type": "text" }],
+  "settings": [
+    { "type": "checkbox", "id": "limit_width", "label": "t:blocks.header.limit_width", "default": false },
+    { "type": "range", "id": "max_width", "label": "t:blocks.header.max_width", "min": 320, "max": 1200, "step": 10, "unit": "px", "default": 750, "visible_if": "{{ block.settings.limit_width }}" },
+    { "type": "range", "id": "gap_desktop", "label": "t:blocks.header.gap_desktop", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "gap_mobile", "label": "t:blocks.header.gap_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 8 },
+    { "type": "header", "content": "t:blocks.common.padding" },
+    { "type": "range", "id": "padding_top", "label": "t:blocks.common.padding_top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "t:blocks.common.padding_bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_left", "label": "t:blocks.common.padding_left", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_right", "label": "t:blocks.common.padding_right", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "checkbox", "id": "customize_mobile_padding", "label": "t:blocks.common.customize_mobile_padding", "default": false },
+    { "type": "range", "id": "padding_top_mobile", "label": "t:blocks.common.padding_top_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.customize_mobile_padding }}" },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "t:blocks.common.padding_bottom_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.customize_mobile_padding }}" },
+    { "type": "range", "id": "padding_left_mobile", "label": "t:blocks.common.padding_left_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.customize_mobile_padding }}" },
+    { "type": "range", "id": "padding_right_mobile", "label": "t:blocks.common.padding_right_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.customize_mobile_padding }}" }
+  ],
+  "presets": [{ "name": "t:blocks.header.name" }]
+}
+{% endschema %}

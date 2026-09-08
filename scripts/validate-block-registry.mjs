@@ -42,7 +42,7 @@ for (const block of registry.blocks) {
     } else {
       try {
         const schema = readLiquidSchema(implementationPath);
-        const actualSettings = new Set((schema.settings ?? []).map((setting) => setting.id));
+        const actualSettings = new Set((schema.settings ?? []).map((setting) => setting.id).filter(Boolean));
         const mappedSettings = new Set(Object.keys(block.schema_contract?.settings ?? {}));
         if (!block.schema_contract?.settings) errors.push(`${block.type}: missing schema_contract.settings`);
         for (const id of actualSettings) {

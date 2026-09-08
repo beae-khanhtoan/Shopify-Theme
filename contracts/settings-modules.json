@@ -8,18 +8,42 @@
         {
           "id": "width",
           "type": "select",
-          "values": ["content", "fill", "fit"],
-          "default": "content",
+          "values": ["fit", "fill"],
+          "default": "fill",
           "value_mapping": "semantic layout class or --block-width",
           "constraints": { "owner": "block", "raw_values_allowed": false }
         },
         {
           "id": "alignment",
           "type": "text_alignment",
-          "values": ["left", "center", "right"],
-          "default": "left",
+          "values": ["start", "center", "end"],
+          "default": "start",
           "value_mapping": "--block-align or text-align",
           "constraints": { "owner": "block", "responsive_override": "optional" }
+        },
+        {
+          "id": "width_mobile",
+          "type": "select",
+          "values": ["fit", "fill"],
+          "default": "fill",
+          "value_mapping": "--block-width-mobile",
+          "constraints": { "owner": "block", "responsive_override": true }
+        },
+        {
+          "id": "customize_mobile_alignment",
+          "type": "checkbox",
+          "values": [true, false],
+          "default": false,
+          "value_mapping": "mobile alignment visibility",
+          "constraints": { "owner": "block", "visible_if": "width_mobile is fill" }
+        },
+        {
+          "id": "alignment_mobile",
+          "type": "select",
+          "values": ["start", "center", "end"],
+          "default": "start",
+          "value_mapping": "--block-align-mobile",
+          "constraints": { "owner": "block", "visible_if": "customize_mobile_alignment and width_mobile is fill" }
         }
       ]
     },
@@ -70,11 +94,91 @@
         },
         {
           "id": "padding",
-          "type": "select",
-          "values": ["none", "small", "medium", "large"],
-          "default": "none",
-          "value_mapping": "spacing token from CSS Foundation",
-          "constraints": { "owner": "surface", "optional_capability": true, "raw_values_allowed": false }
+          "type": "range",
+          "values": { "min": 0, "max": 100, "step": 1, "unit": "px" },
+          "default": 0,
+          "value_mapping": "--block-padding",
+          "constraints": { "owner": "surface", "optional_capability": true }
+        },
+        {
+          "id": "padding_top",
+          "type": "range",
+          "values": { "min": 0, "max": 100, "step": 1, "unit": "px" },
+          "default": 0,
+          "value_mapping": "--padding-top",
+          "constraints": { "owner": "surface" }
+        },
+        {
+          "id": "padding_bottom",
+          "type": "range",
+          "values": { "min": 0, "max": 100, "step": 1, "unit": "px" },
+          "default": 0,
+          "value_mapping": "--padding-bottom",
+          "constraints": { "owner": "surface" }
+        },
+        {
+          "id": "padding_left",
+          "type": "range",
+          "values": { "min": 0, "max": 100, "step": 1, "unit": "px" },
+          "default": 0,
+          "value_mapping": "--padding-left",
+          "constraints": { "owner": "surface" }
+        },
+        {
+          "id": "padding_right",
+          "type": "range",
+          "values": { "min": 0, "max": 100, "step": 1, "unit": "px" },
+          "default": 0,
+          "value_mapping": "--padding-right",
+          "constraints": { "owner": "surface" }
+        },
+        {
+          "id": "customize_mobile_padding",
+          "type": "checkbox",
+          "values": [true, false],
+          "default": false,
+          "value_mapping": "mobile padding visibility",
+          "constraints": { "owner": "surface" }
+        },
+        {
+          "id": "padding_top_mobile",
+          "type": "range",
+          "values": { "min": 0, "max": 100, "step": 1, "unit": "px" },
+          "default": 0,
+          "value_mapping": "--padding-top-mobile",
+          "constraints": { "owner": "surface", "visible_if": "customize_mobile_padding" }
+        },
+        {
+          "id": "padding_bottom_mobile",
+          "type": "range",
+          "values": { "min": 0, "max": 100, "step": 1, "unit": "px" },
+          "default": 0,
+          "value_mapping": "--padding-bottom-mobile",
+          "constraints": { "owner": "surface", "visible_if": "customize_mobile_padding" }
+        },
+        {
+          "id": "padding_left_mobile",
+          "type": "range",
+          "values": { "min": 0, "max": 100, "step": 1, "unit": "px" },
+          "default": 0,
+          "value_mapping": "--padding-left-mobile",
+          "constraints": { "owner": "surface", "visible_if": "customize_mobile_padding" }
+        },
+        {
+          "id": "padding_right_mobile",
+          "type": "range",
+          "values": { "min": 0, "max": 100, "step": 1, "unit": "px" },
+          "default": 0,
+          "value_mapping": "--padding-right-mobile",
+          "constraints": { "owner": "surface", "visible_if": "customize_mobile_padding" }
+        },
+        {
+          "id": "padding_mobile",
+          "type": "range",
+          "values": { "min": 0, "max": 100, "step": 1, "unit": "px" },
+          "default": 0,
+          "value_mapping": "--padding-mobile",
+          "constraints": { "owner": "surface", "visible_if": "customize_mobile_padding" }
         }
       ]
     },
