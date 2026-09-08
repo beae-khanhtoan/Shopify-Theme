@@ -212,6 +212,14 @@
       "buy_buttons_name": "Buy Buttons",
       "pickup_availability_name": "Pickup Availability",
       "product_badges_name": "Product Badges"
+    },
+    "navigation": {
+      "link_list_name": "Link List",
+      "breadcrumbs_name": "Breadcrumbs",
+      "pagination_name": "Pagination",
+      "search_name": "Search",
+      "social_links_name": "Social Links",
+      "share_name": "Share"
     }
   },
   "options": {
