@@ -11,6 +11,7 @@
       "open_new_tab": "Open in new tab",
       "padding": "Padding",
       "padding_bottom": "Padding bottom",
+      "padding_mobile": "Mobile padding",
       "padding_bottom_mobile": "Padding bottom mobile",
       "padding_left": "Padding left",
       "padding_left_mobile": "Padding left mobile",
@@ -22,6 +23,29 @@
       "text_color": "Text color",
       "width": "Width",
       "width_mobile": "Width mobile"
+    },
+    "layout": {
+      "layout_mode": "Layout mode",
+      "width": "Width",
+      "max_width": "Maximum width",
+      "gap": "Gap",
+      "customize_mobile_gap": "Customize mobile gap",
+      "mobile_gap": "Mobile gap",
+      "horizontal_alignment": "Horizontal alignment",
+      "vertical_alignment": "Vertical alignment",
+      "text_alignment": "Text alignment",
+      "stack_on_mobile": "Stack on mobile",
+      "alignment": "Alignment",
+      "columns_desktop": "Desktop columns",
+      "columns_tablet": "Tablet columns",
+      "columns_mobile": "Mobile columns",
+      "column_gap": "Column gap",
+      "row_gap": "Row gap",
+      "item_height": "Item height",
+      "ratio": "Column ratio",
+      "custom_left_ratio": "Custom left ratio",
+      "mobile_order": "Mobile order",
+      "padding": "Padding"
     },
     "heading": {
       "name": "Heading",
@@ -92,6 +116,39 @@
       "name": "Text",
       "content": "Text content",
       "size": "Text size"
+    },
+    "group": {
+      "name": "Group"
+    },
+    "stack": {
+      "name": "Stack"
+    },
+    "grid": {
+      "name": "Grid"
+    },
+    "columns": {
+      "name": "Columns"
+    },
+    "spacer": {
+      "name": "Spacer",
+      "unit_desktop": "Desktop unit",
+      "size_desktop": "Desktop size",
+      "show_on_mobile": "Show on mobile",
+      "unit_mobile": "Mobile unit",
+      "size_mobile": "Mobile size",
+      "custom_spacing": "Custom spacing"
+    },
+    "divider": {
+      "name": "Divider",
+      "style": "Style",
+      "thickness": "Thickness",
+      "color": "Color",
+      "custom_color": "Custom color",
+      "custom_width": "Custom width",
+      "spacing_top": "Top spacing",
+      "spacing_bottom": "Bottom spacing",
+      "spacing_top_mobile": "Top spacing mobile",
+      "spacing_bottom_mobile": "Bottom spacing mobile"
     }
   },
   "404": {
