@@ -57,19 +57,28 @@
             "md_is_paragraph_base": true,
             "formula": "base * [5/7, 6/7, 1, 8/7, 9/7, 10/7]"
           }
+        },
+        {
+          "id": "custom_text_size",
+          "type": "range",
+          "default": 16,
+          "value_mapping": "text visual size in px",
+          "constraints": {
+            "owner": "typography",
+            "visible_when": "text_size == custom"
+          }
         }
       ],
       "schema_contract": {
         "settings": {
           "text": "block-specific.text",
           "text_size": "block-specific.text_size",
+          "custom_text_size": "block-specific.custom_text_size",
           "text_color": "appearance.text_color",
           "width": "layout.width",
           "customize_mobile_layout": "layout.customize_mobile_layout",
           "width_mobile": "layout.width_mobile",
           "alignment": "layout.alignment",
-          "customize_mobile_alignment": "layout.customize_mobile_alignment",
-          "alignment_mobile": "layout.alignment_mobile",
           "padding_top": "spacing.padding_top",
           "padding_bottom": "spacing.padding_bottom",
           "padding_left": "spacing.padding_left",
