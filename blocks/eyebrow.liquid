@@ -1,0 +1,18 @@
+{% doc %}
+  Renders a short accent label. Eyebrows are not intended for long-form content.
+{% enddoc %}
+
+<p class="eyebrow" style="text-align: {{ block.settings.alignment }}" {{ block.shopify_attributes }}>
+  {{ block.settings.text | escape }}
+</p>
+
+{% schema %}
+{
+  "name": "t:blocks.eyebrow.name",
+  "settings": [
+    { "type": "text", "id": "text", "label": "t:blocks.eyebrow.text", "default": "Eyebrow" },
+    { "type": "text_alignment", "id": "alignment", "label": "t:blocks.common.alignment", "default": "left" }
+  ],
+  "presets": [{ "name": "t:blocks.eyebrow.name" }]
+}
+{% endschema %}

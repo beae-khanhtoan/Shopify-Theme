@@ -14,7 +14,7 @@
 <div
   class="group {{ block.settings.layout_direction }}"
   style="
-    --padding: {{ block.settings.padding }}px;
+    --group-padding: var(--space-{{ block.settings.padding }});
     --alignment: {{ block.settings.alignment }};
   "
   {{ block.shopify_attributes }}
@@ -34,13 +34,13 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0 var(--padding);
+    padding: 0 var(--group-padding);
   }
 
   .group--vertical {
     flex-direction: column;
     align-items: var(--alignment);
-    padding: var(--padding) 0;
+    padding: var(--group-padding) 0;
   }
 {% endstylesheet %}
 
@@ -72,14 +72,16 @@
       ]
     },
     {
-      "type": "range",
+      "type": "select",
       "id": "padding",
       "label": "t:labels.padding",
-      "default": 0,
-      "min": 0,
-      "max": 200,
-      "step": 2,
-      "unit": "px"
+      "default": "none",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ]
     }
   ],
   "presets": [
@@ -89,7 +91,7 @@
       "settings": {
         "layout_direction": "group--vertical",
         "alignment": "flex-start",
-        "padding": 0
+        "padding": "none"
       }
     },
     {
@@ -97,7 +99,7 @@
       "category": "t:general.layout",
       "settings": {
         "layout_direction": "group--horizontal",
-        "padding": 0
+        "padding": "none"
       }
     }
   ]

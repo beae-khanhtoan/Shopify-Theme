@@ -1,0 +1,44 @@
+{% doc %}
+  Renders a semantic heading. The HTML tag and visual scale are independent.
+
+  @example
+  {% content_for 'block', type: 'heading', id: 'heading' %}
+{% enddoc %}
+
+{% assign visual_class = 'heading-md' %}
+{% case block.settings.visual_scale %}
+  {% when 'display' %}{% assign visual_class = 'heading-display' %}
+  {% when 'xl' %}{% assign visual_class = 'heading-xl' %}
+  {% when 'lg' %}{% assign visual_class = 'heading-lg' %}
+  {% when 'sm' %}{% assign visual_class = 'heading-sm' %}
+  {% when 'xs' %}{% assign visual_class = 'heading-xs' %}
+{% endcase %}
+
+{% capture heading_attributes %}class="heading {{ visual_class }}" style="text-align: {{ block.settings.alignment }}" {{ block.shopify_attributes }}{% endcapture %}
+{% case block.settings.heading_level %}
+  {% when 'h1' %}<h1 {{ heading_attributes }}>{{ block.settings.text | escape }}</h1>
+  {% when 'h3' %}<h3 {{ heading_attributes }}>{{ block.settings.text | escape }}</h3>
+  {% when 'h4' %}<h4 {{ heading_attributes }}>{{ block.settings.text | escape }}</h4>
+  {% when 'h5' %}<h5 {{ heading_attributes }}>{{ block.settings.text | escape }}</h5>
+  {% when 'h6' %}<h6 {{ heading_attributes }}>{{ block.settings.text | escape }}</h6>
+  {% else %}<h2 {{ heading_attributes }}>{{ block.settings.text | escape }}</h2>
+{% endcase %}
+
+{% schema %}
+{
+  "name": "t:blocks.heading.name",
+  "settings": [
+    { "type": "text", "id": "text", "label": "t:blocks.heading.text", "default": "Heading" },
+    { "type": "select", "id": "heading_level", "label": "t:blocks.heading.level", "options": [
+      { "value": "h1", "label": "H1" }, { "value": "h2", "label": "H2" }, { "value": "h3", "label": "H3" },
+      { "value": "h4", "label": "H4" }, { "value": "h5", "label": "H5" }, { "value": "h6", "label": "H6" }
+    ], "default": "h2" },
+    { "type": "select", "id": "visual_scale", "label": "t:blocks.heading.visual_scale", "options": [
+      { "value": "display", "label": "Display" }, { "value": "xl", "label": "XL" }, { "value": "lg", "label": "LG" },
+      { "value": "md", "label": "MD" }, { "value": "sm", "label": "SM" }, { "value": "xs", "label": "XS" }
+    ], "default": "md" },
+    { "type": "text_alignment", "id": "alignment", "label": "t:blocks.common.alignment", "default": "left" }
+  ],
+  "presets": [{ "name": "t:blocks.heading.name" }]
+}
+{% endschema %}

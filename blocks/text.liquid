@@ -6,7 +6,7 @@
 {% enddoc %}
 
 <div
-  class="text {{ block.settings.text_style }}"
+  class="text {{ block.settings.text_role }} {{ block.settings.text_style }}"
   style="--text-align: {{ block.settings.alignment }}"
   {{ block.shopify_attributes }}
 >
@@ -46,6 +46,18 @@
         { "value": "text--normal", "label": "t:options.text_style.normal" }
       ],
       "default": "text--title"
+    },
+    {
+      "type": "select",
+      "id": "text_role",
+      "label": "Typography role",
+      "options": [
+        { "value": "body-text", "label": "Body text" },
+        { "value": "heading-text", "label": "Heading text" },
+        { "value": "accent-text", "label": "Accent text" },
+        { "value": "eyebrow-text", "label": "Eyebrow text" }
+      ],
+      "default": "body-text"
     },
     {
       "type": "text_alignment",

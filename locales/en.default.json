@@ -1,4 +1,42 @@
 {
+  "blocks": {
+    "common": {
+      "alignment": "Alignment",
+      "link": "Link",
+      "open_new_tab": "Open in new tab",
+      "ratio": "Ratio"
+    },
+    "heading": {
+      "name": "Heading",
+      "text": "Heading text",
+      "level": "HTML heading level",
+      "visual_scale": "Visual scale"
+    },
+    "eyebrow": {
+      "name": "Eyebrow",
+      "text": "Eyebrow text"
+    },
+    "button": {
+      "name": "Button",
+      "label": "Button label",
+      "style": "Button style"
+    },
+    "image": {
+      "name": "Image",
+      "source": "Image",
+      "alt": "Alternative text"
+    },
+    "video": {
+      "name": "Video",
+      "source": "Video",
+      "autoplay": "Autoplay",
+      "loop": "Loop video"
+    },
+    "icon": {
+      "name": "Icon",
+      "source": "Icon"
+    }
+  },
   "404": {
     "title": "404",
     "not_found": "Page not found.",

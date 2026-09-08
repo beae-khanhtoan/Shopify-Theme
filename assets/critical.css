@@ -320,6 +320,15 @@ input:not([type='submit']):not([type='checkbox']):not([type='radio']) {
   padding-block: var(--section-spacing);
 }
 
+.gap-none { gap: var(--space-none); }
+.gap-small { gap: var(--space-small); }
+.gap-medium { gap: var(--space-medium); }
+.gap-large { gap: var(--space-large); }
+.spacing-padding-none { padding: var(--space-none); }
+.spacing-padding-small { padding: var(--space-small); }
+.spacing-padding-medium { padding: var(--space-medium); }
+.spacing-padding-large { padding: var(--space-large); }
+
 .eyebrow-text,
 .accent-text {
   color: var(--accent-color);

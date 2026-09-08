@@ -13,6 +13,13 @@ const knownCategories = new Set(registry.categories);
 const knownModules = new Set(Object.keys(modules.modules));
 const blocks = new Map();
 
+function readLiquidSchema(file) {
+  const source = fs.readFileSync(file, 'utf8');
+  const match = source.match(/{%\s*schema\s*%}([\s\S]*?){%\s*endschema\s*%}/);
+  if (!match) throw new Error(`missing schema tag: ${path.relative(root, file)}`);
+  return JSON.parse(match[1]);
+}
+
 for (const block of registry.blocks) {
   if (blocks.has(block.type)) errors.push(`duplicate block type: ${block.type}`);
   blocks.set(block.type, block);
@@ -27,6 +34,32 @@ for (const block of registry.blocks) {
   }
   if (!block.rendering?.root_class || !block.rendering?.path || !block.rendering?.render_mode) {
     errors.push(`${block.type}: rendering must define root_class, path and render_mode`);
+  }
+  if (block.status === 'implemented') {
+    const implementationPath = path.join(root, block.rendering.path);
+    if (!fs.existsSync(implementationPath)) {
+      errors.push(`${block.type}: implementation file does not exist: ${block.rendering.path}`);
+    } else {
+      try {
+        const schema = readLiquidSchema(implementationPath);
+        const actualSettings = new Set((schema.settings ?? []).map((setting) => setting.id));
+        const mappedSettings = new Set(Object.keys(block.schema_contract?.settings ?? {}));
+        if (!block.schema_contract?.settings) errors.push(`${block.type}: missing schema_contract.settings`);
+        for (const id of actualSettings) {
+          if (!mappedSettings.has(id)) errors.push(`${block.type}: schema setting is not mapped in Registry: ${id}`);
+        }
+        for (const id of mappedSettings) {
+          if (!actualSettings.has(id)) errors.push(`${block.type}: Registry maps missing schema setting: ${id}`);
+        }
+        const actualChildren = (schema.blocks ?? []).map((child) => child.type);
+        const allowedChildren = block.children === false ? [] : (block.children?.allowed_children ?? []);
+        if (JSON.stringify(actualChildren) !== JSON.stringify(allowedChildren)) {
+          errors.push(`${block.type}: schema children do not match Registry allow-list`);
+        }
+      } catch (error) {
+        errors.push(`${block.type}: invalid Liquid schema: ${error.message}`);
+      }
+    }
   }
   const settingIds = new Set();
   for (const setting of block.block_specific_settings ?? []) {

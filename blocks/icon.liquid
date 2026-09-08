@@ -1,0 +1,28 @@
+{% doc %}
+  Renders a theme icon asset with the global icon thickness contract.
+{% enddoc %}
+
+<span class="icon" style="text-align: {{ block.settings.alignment }}" aria-hidden="true" {{ block.shopify_attributes }}>
+  {% case block.settings.icon %}
+    {% when 'account' %}{{ 'icon-account.svg' | inline_asset_content }}
+    {% else %}{{ 'icon-cart.svg' | inline_asset_content }}
+  {% endcase %}
+</span>
+
+{% stylesheet %}
+  .icon { display: inline-flex; align-items: center; justify-content: center; }
+  .icon svg { width: 1.25em; height: 1.25em; stroke-width: var(--icon-stroke-width); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:blocks.icon.name",
+  "settings": [
+    { "type": "select", "id": "icon", "label": "t:blocks.icon.source", "options": [
+      { "value": "account", "label": "Account" }, { "value": "cart", "label": "Cart" }
+    ], "default": "cart" },
+    { "type": "text_alignment", "id": "alignment", "label": "t:blocks.common.alignment", "default": "left" }
+  ],
+  "presets": [{ "name": "t:blocks.icon.name" }]
+}
+{% endschema %}
