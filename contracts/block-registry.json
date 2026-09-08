@@ -17,17 +17,87 @@
       "category": "basic-kernel",
       "semantic_role": "text",
       "contract_version": "1.0.0",
-      "capabilities": ["layout", "typography", "appearance"],
-      "settings_modules": ["layout", "typography", "appearance"],
-      "block_specific_settings": [
-        { "id": "text", "type": "richtext", "default": "<p>Text</p>", "value_mapping": "body rich text content", "constraints": { "owner": "text", "richtext": true, "accent_for_long_form": false } },
-        { "id": "text_size", "type": "select", "values": ["xs", "sm", "md", "lg", "xl", "xxl"], "default": "md", "value_mapping": "body typography scale class", "constraints": { "owner": "typography", "md_is_paragraph_base": true, "formula": "base * [5/7, 6/7, 1, 8/7, 9/7, 10/7]" } }
+      "capabilities": [
+        "layout",
+        "typography",
+        "appearance"
       ],
-      "schema_contract": { "settings": { "text": "block-specific.text", "text_size": "block-specific.text_size", "text_color": "appearance.text_color", "width": "layout.width", "width_mobile": "layout.width_mobile", "alignment": "layout.alignment", "customize_mobile_alignment": "layout.customize_mobile_alignment", "alignment_mobile": "layout.alignment_mobile", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "padding_left": "spacing.padding_left", "padding_right": "spacing.padding_right", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile", "padding_left_mobile": "spacing.padding_left_mobile", "padding_right_mobile": "spacing.padding_right_mobile" } },
+      "settings_modules": [
+        "layout",
+        "typography",
+        "appearance"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "text",
+          "type": "richtext",
+          "default": "<p>Text</p>",
+          "value_mapping": "body rich text content",
+          "constraints": {
+            "owner": "text",
+            "richtext": true,
+            "accent_for_long_form": false
+          }
+        },
+        {
+          "id": "text_size",
+          "type": "select",
+          "values": [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "xxl"
+          ],
+          "default": "md",
+          "value_mapping": "body typography scale class",
+          "constraints": {
+            "owner": "typography",
+            "md_is_paragraph_base": true,
+            "formula": "base * [5/7, 6/7, 1, 8/7, 9/7, 10/7]"
+          }
+        }
+      ],
+      "schema_contract": {
+        "settings": {
+          "text": "block-specific.text",
+          "text_size": "block-specific.text_size",
+          "text_color": "appearance.text_color",
+          "width": "layout.width",
+          "width_mobile": "layout.width_mobile",
+          "alignment": "layout.alignment",
+          "customize_mobile_alignment": "layout.customize_mobile_alignment",
+          "alignment_mobile": "layout.alignment_mobile",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
+        }
+      },
       "children": false,
-      "owners": { "data_owner": "text", "state_owner": "none", "layout_owner": "text", "motion_owner": "theme-settings" },
-      "rendering": { "root_class": "text", "render_mode": "liquid-block", "path": "blocks/text.liquid", "editor_surface": "theme-block" },
-      "accessibility": { "semantic_html": "text role selected by Basic block contract", "focus": "not interactive", "reduced_motion": "inherited" }
+      "owners": {
+        "data_owner": "text",
+        "state_owner": "none",
+        "layout_owner": "text",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "text",
+        "render_mode": "liquid-block",
+        "path": "blocks/text.liquid",
+        "editor_surface": "theme-block"
+      },
+      "accessibility": {
+        "semantic_html": "text role selected by Basic block contract",
+        "focus": "not interactive",
+        "reduced_motion": "inherited"
+      }
     },
     {
       "type": "group",
@@ -35,71 +105,3155 @@
       "category": "layout",
       "semantic_role": "layout-surface",
       "contract_version": "1.0.0",
-      "capabilities": ["layout", "spacing"],
-      "settings_modules": ["layout", "spacing"],
-      "block_specific_settings": [
-        { "id": "layout_mode", "type": "select", "values": ["stack", "row", "grid"], "default": "stack", "value_mapping": "flow class", "constraints": { "owner": "group" } },
-        { "id": "width", "type": "select", "values": ["auto", "full", "content", "custom"], "default": "full", "value_mapping": "--group-width", "constraints": { "owner": "group" } },
-        { "id": "gap", "type": "select", "values": ["none", "small", "medium", "large"], "default": "medium", "value_mapping": "spacing token", "constraints": { "owner": "group" } }
+      "capabilities": [
+        "layout",
+        "spacing"
       ],
-      "schema_contract": { "settings": { "layout_mode": "block-specific.layout_mode", "width": "layout.width", "max_width": "layout.max_width", "gap": "spacing.gap", "horizontal_alignment": "layout.horizontal_alignment", "vertical_alignment": "layout.vertical_alignment", "text_alignment": "layout.text_alignment", "stack_on_mobile": "layout.stack_on_mobile" } },
-      "children": { "allowed_children": ["heading", "text", "eyebrow", "button", "image", "video", "icon", "header"], "static_slots": [], "repeatable": true, "limit": 50, "depth_policy": "no-recursion" },
-      "owners": { "data_owner": "parent-context", "state_owner": "none", "layout_owner": "group", "motion_owner": "theme-settings" },
-      "rendering": { "root_class": "group", "render_mode": "liquid-block", "path": "blocks/group.liquid", "editor_surface": "theme-block" },
-      "accessibility": { "semantic_html": "non-semantic wrapper", "focus": "children own focus", "reduced_motion": "inherited" }
+      "settings_modules": [
+        "layout",
+        "spacing"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "layout_mode",
+          "type": "select",
+          "values": [
+            "stack",
+            "row",
+            "grid"
+          ],
+          "default": "stack",
+          "value_mapping": "flow class",
+          "constraints": {
+            "owner": "group"
+          }
+        },
+        {
+          "id": "width",
+          "type": "select",
+          "values": [
+            "auto",
+            "full",
+            "content",
+            "custom"
+          ],
+          "default": "full",
+          "value_mapping": "--group-width",
+          "constraints": {
+            "owner": "group"
+          }
+        },
+        {
+          "id": "gap",
+          "type": "select",
+          "values": [
+            "none",
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "medium",
+          "value_mapping": "spacing token",
+          "constraints": {
+            "owner": "group"
+          }
+        }
+      ],
+      "schema_contract": {
+        "settings": {
+          "layout_mode": "block-specific.layout_mode",
+          "width": "layout.width",
+          "max_width": "layout.max_width",
+          "gap": "spacing.gap",
+          "horizontal_alignment": "layout.horizontal_alignment",
+          "vertical_alignment": "layout.vertical_alignment",
+          "text_alignment": "layout.text_alignment",
+          "stack_on_mobile": "layout.stack_on_mobile"
+        }
+      },
+      "children": {
+        "allowed_children": [
+          "heading",
+          "text",
+          "eyebrow",
+          "button",
+          "image",
+          "video",
+          "icon",
+          "header"
+        ],
+        "static_slots": [],
+        "repeatable": true,
+        "limit": 20,
+        "depth_policy": "fixed-allow-list"
+      },
+      "owners": {
+        "data_owner": "parent-context",
+        "state_owner": "none",
+        "layout_owner": "group",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "group",
+        "render_mode": "liquid-block",
+        "path": "blocks/group.liquid",
+        "editor_surface": "theme-block"
+      },
+      "accessibility": {
+        "semantic_html": "non-semantic wrapper",
+        "focus": "children own focus",
+        "reduced_motion": "inherited"
+      }
     },
-    { "type": "stack", "status": "implemented", "category": "layout", "semantic_role": "layout-surface", "contract_version": "1.0.0", "capabilities": ["layout", "spacing"], "settings_modules": ["layout", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "gap": "spacing.gap", "alignment": "layout.alignment", "width": "layout.width", "max_width": "layout.max_width" } }, "children": { "allowed_children": ["heading", "text", "eyebrow", "button", "image", "video", "icon", "header"], "static_slots": [], "repeatable": true, "limit": 50, "depth_policy": "no-recursion" }, "owners": { "data_owner": "parent-context", "state_owner": "none", "layout_owner": "stack", "motion_owner": "theme-settings" }, "rendering": { "root_class": "block-stack", "render_mode": "liquid-block", "path": "blocks/stack.liquid", "editor_surface": "theme-block" } },
-    { "type": "grid", "status": "implemented", "category": "layout", "semantic_role": "layout-surface", "contract_version": "1.0.0", "capabilities": ["layout", "spacing"], "settings_modules": ["layout", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "columns_desktop": "block-specific.columns_desktop", "columns_tablet": "block-specific.columns_tablet", "columns_mobile": "block-specific.columns_mobile", "column_gap": "spacing.gap", "row_gap": "spacing.gap", "alignment": "layout.alignment", "item_height": "block-specific.item_height" } }, "children": { "allowed_children": ["heading", "text", "eyebrow", "button", "image", "video", "icon", "header"], "static_slots": [], "repeatable": true, "limit": 50, "depth_policy": "no-recursion" }, "owners": { "data_owner": "parent-context", "state_owner": "none", "layout_owner": "grid", "motion_owner": "theme-settings" }, "rendering": { "root_class": "block-grid", "render_mode": "liquid-block", "path": "blocks/grid.liquid", "editor_surface": "theme-block" } },
-    { "type": "columns", "status": "implemented", "category": "layout", "semantic_role": "layout-surface", "contract_version": "1.0.0", "capabilities": ["layout", "spacing"], "settings_modules": ["layout", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "ratio": "block-specific.ratio", "gap": "spacing.gap", "gap_mobile": "spacing.gap", "mobile_order": "block-specific.mobile_order", "vertical_alignment": "layout.alignment" } }, "children": { "allowed_children": ["heading", "text", "eyebrow", "button", "image", "video", "icon", "header"], "static_slots": ["left", "right"], "repeatable": true, "limit": 2, "depth_policy": "fixed-slots" }, "owners": { "data_owner": "parent-context", "state_owner": "none", "layout_owner": "columns", "motion_owner": "theme-settings" }, "rendering": { "root_class": "block-columns", "render_mode": "liquid-block", "path": "blocks/columns.liquid", "editor_surface": "theme-block" } },
-    { "type": "spacer", "status": "implemented", "category": "layout", "semantic_role": "spacing-surface", "contract_version": "1.0.0", "capabilities": ["spacing"], "settings_modules": ["spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "unit_desktop": "block-specific.unit_desktop", "size_desktop": "block-specific.size_desktop", "show_on_mobile": "block-specific.show_on_mobile", "unit_mobile": "block-specific.unit_mobile", "size_mobile": "block-specific.size_mobile", "custom_spacing": "block-specific.custom_spacing" } }, "children": false, "owners": { "data_owner": "none", "state_owner": "none", "layout_owner": "spacer", "motion_owner": "theme-settings" }, "rendering": { "root_class": "block-spacer", "render_mode": "liquid-block", "path": "blocks/spacer.liquid", "editor_surface": "theme-block" } },
-    { "type": "divider", "status": "implemented", "category": "layout", "semantic_role": "separator", "contract_version": "1.0.0", "capabilities": ["layout", "appearance", "spacing"], "settings_modules": ["layout", "appearance", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "style": "block-specific.style", "thickness": "block-specific.thickness", "color": "appearance.color_scheme", "custom_color": "appearance.text_color", "width": "layout.width", "custom_width": "block-specific.custom_width", "alignment": "layout.alignment", "spacing_top": "spacing.padding_top", "spacing_bottom": "spacing.padding_bottom", "spacing_top_mobile": "spacing.padding_top_mobile", "spacing_bottom_mobile": "spacing.padding_bottom_mobile" } }, "children": false, "owners": { "data_owner": "none", "state_owner": "none", "layout_owner": "divider", "motion_owner": "theme-settings" }, "rendering": { "root_class": "block-divider", "render_mode": "liquid-block", "path": "blocks/divider.liquid", "editor_surface": "theme-block" } },
-    { "type": "heading", "status": "implemented", "category": "basic-kernel", "semantic_role": "heading", "capabilities": ["layout", "typography", "appearance", "spacing"], "settings_modules": ["layout", "typography", "appearance", "spacing"], "block_specific_settings": [{ "id": "heading", "type": "inline_richtext", "default": "Heading", "value_mapping": "heading rich text content", "constraints": { "owner": "heading", "inline_only": true } }, { "id": "heading_size", "type": "select", "values": ["xs", "sm", "md", "lg", "xl", "display"], "default": "lg", "value_mapping": "heading visual scale class", "constraints": { "owner": "typography", "html_tag_independent": true } }, { "id": "html_tag", "type": "select", "values": ["div", "h1", "h2", "h3", "h4", "h5", "h6"], "default": "h2", "value_mapping": "semantic HTML tag", "constraints": { "owner": "heading", "one_h1_per_surface": true } }], "schema_contract": { "settings": { "heading": "block-specific.heading", "heading_size": "block-specific.heading_size", "html_tag": "block-specific.html_tag", "text_color": "appearance.text_color", "width": "layout.width", "width_mobile": "layout.width_mobile", "alignment": "layout.alignment", "customize_mobile_alignment": "layout.customize_mobile_alignment", "alignment_mobile": "layout.alignment_mobile", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "padding_left": "spacing.padding_left", "padding_right": "spacing.padding_right", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile", "padding_left_mobile": "spacing.padding_left_mobile", "padding_right_mobile": "spacing.padding_right_mobile" } }, "children": false, "owners": { "data_owner": "heading", "state_owner": "none", "layout_owner": "heading", "motion_owner": "theme-settings" }, "rendering": { "root_class": "heading", "render_mode": "liquid-block", "path": "blocks/heading.liquid", "editor_surface": "theme-block" } },
-    { "type": "eyebrow", "status": "implemented", "category": "basic-kernel", "semantic_role": "eyebrow", "capabilities": ["layout", "typography", "appearance", "spacing"], "settings_modules": ["layout", "typography", "appearance", "spacing"], "block_specific_settings": [{ "id": "text", "type": "inline_richtext", "default": "Eyebrow", "value_mapping": "eyebrow rich text content", "constraints": { "owner": "eyebrow", "long_form_content": false } }], "schema_contract": { "settings": { "text": "block-specific.text", "text_color": "appearance.text_color", "show_background": "appearance.show_background", "show_icon": "appearance.show_icon", "icon": "appearance.icon", "border_thickness": "appearance.border_thickness", "corner_radius": "appearance.corner_radius", "color_scheme": "appearance.color_scheme", "width": "layout.width", "width_mobile": "layout.width_mobile", "alignment": "layout.alignment", "customize_mobile_alignment": "layout.customize_mobile_alignment", "alignment_mobile": "layout.alignment_mobile", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "padding_left": "spacing.padding_left", "padding_right": "spacing.padding_right", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile", "padding_left_mobile": "spacing.padding_left_mobile", "padding_right_mobile": "spacing.padding_right_mobile" } }, "children": false, "owners": { "data_owner": "eyebrow", "state_owner": "none", "layout_owner": "eyebrow", "motion_owner": "theme-settings" }, "rendering": { "root_class": "eyebrow", "render_mode": "liquid-block", "path": "blocks/eyebrow.liquid", "editor_surface": "theme-block" } },
-    { "type": "button", "status": "implemented", "category": "basic-kernel", "semantic_role": "action", "capabilities": ["layout", "appearance", "link", "behavior"], "settings_modules": ["layout", "appearance", "link", "behavior"], "block_specific_settings": [{ "id": "label", "type": "text", "default": "Button", "value_mapping": "accessible action label", "constraints": { "owner": "button", "required": true } }, { "id": "style", "type": "select", "values": ["primary", "secondary", "tertiary"], "default": "primary", "value_mapping": "button variant class", "constraints": { "owner": "button" } }], "schema_contract": { "settings": { "label": "block-specific.label", "link": "link.link", "style": "block-specific.style", "show_icon": "block-specific.show_icon", "icon": "block-specific.icon", "icon_position": "block-specific.icon_position", "icon_size": "block-specific.icon_size", "icon_size_custom": "block-specific.icon_size_custom", "open_in_new_tab": "behavior.open_in_new_tab" } }, "children": false, "owners": { "data_owner": "button", "state_owner": "button", "layout_owner": "button", "motion_owner": "theme-settings" }, "rendering": { "root_class": "button", "render_mode": "liquid-block", "path": "blocks/button.liquid", "editor_surface": "theme-block" } },
-    { "type": "image", "status": "implemented", "category": "basic-kernel", "semantic_role": "media", "capabilities": ["layout", "appearance", "media", "link", "spacing"], "settings_modules": ["layout", "appearance", "media", "link", "spacing"], "block_specific_settings": [{ "id": "image", "type": "image_picker", "default": null, "value_mapping": "image object", "constraints": { "owner": "image", "empty_state": "placeholder" } }, { "id": "alt", "type": "text", "default": "Image", "value_mapping": "alt attribute", "constraints": { "owner": "image", "accessibility": "replace with meaningful text when image conveys information" } }], "schema_contract": { "settings": { "image": "block-specific.image", "mobile_image": "block-specific.mobile_image", "show_image_first_on_mobile": "block-specific.show_image_first_on_mobile", "alt": "block-specific.alt", "link": "link.link", "open_in_new_tab": "behavior.open_in_new_tab", "ratio": "media.ratio", "device": "block-specific.device", "width": "layout.width", "limit_width": "block-specific.limit_width", "max_width": "block-specific.max_width", "corner_radius": "appearance.corner_radius", "padding": "spacing.padding" } }, "children": false, "owners": { "data_owner": "image", "state_owner": "none", "layout_owner": "image", "motion_owner": "theme-settings" }, "rendering": { "root_class": "image", "render_mode": "liquid-block", "path": "blocks/image.liquid", "editor_surface": "theme-block" } },
-    { "type": "video", "status": "implemented", "category": "basic-kernel", "semantic_role": "media", "capabilities": ["layout", "appearance", "media", "behavior", "spacing"], "settings_modules": ["layout", "appearance", "media", "behavior", "spacing"], "block_specific_settings": [{ "id": "video", "type": "video", "default": null, "value_mapping": "video object", "constraints": { "owner": "video", "empty_state": "hidden" } }, { "id": "autoplay", "type": "checkbox", "default": false, "value_mapping": "video autoplay attribute", "constraints": { "owner": "video", "reduced_motion": "must not autoplay when reduced motion is preferred" } }], "schema_contract": { "settings": { "source": "block-specific.source", "video": "block-specific.video", "video_url": "block-specific.video_url", "autoplay": "block-specific.autoplay", "loop": "block-specific.loop", "cover_image": "block-specific.cover_image", "aspect_ratio": "media.ratio", "show_play_button": "block-specific.show_play_button", "show_video_first_on_mobile": "block-specific.show_video_first_on_mobile", "play_button_color": "appearance.play_button_color", "background_color": "appearance.background_color", "device": "block-specific.device", "width": "layout.width", "limit_width": "block-specific.limit_width", "max_width": "block-specific.max_width", "corner_radius": "appearance.corner_radius", "padding": "spacing.padding" } }, "children": false, "owners": { "data_owner": "video", "state_owner": "media", "layout_owner": "video", "motion_owner": "theme-settings" }, "rendering": { "root_class": "video", "render_mode": "liquid-block", "path": "blocks/video.liquid", "editor_surface": "theme-block" } },
-    { "type": "icon", "status": "implemented", "category": "basic-kernel", "semantic_role": "icon", "capabilities": ["layout", "appearance", "link", "spacing"], "settings_modules": ["layout", "appearance", "link", "spacing"], "block_specific_settings": [{ "id": "icon", "type": "select", "values": ["account", "cart"], "default": "cart", "value_mapping": "inline SVG asset", "constraints": { "owner": "icon", "accessible_name": "decorative by default" } }], "schema_contract": { "settings": { "source": "block-specific.source", "icon": "block-specific.icon", "custom_icon": "block-specific.custom_icon", "link": "link.link", "open_in_new_tab": "behavior.open_in_new_tab", "icon_width": "block-specific.icon_width", "padding": "spacing.padding", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_mobile": "spacing.padding_mobile" } }, "children": false, "owners": { "data_owner": "icon", "state_owner": "none", "layout_owner": "icon", "motion_owner": "theme-settings" }, "rendering": { "root_class": "icon", "render_mode": "liquid-block", "path": "blocks/icon.liquid", "editor_surface": "theme-block" } },
-    { "type": "header", "status": "implemented", "category": "micro-composition", "semantic_role": "header", "capabilities": ["layout", "spacing"], "settings_modules": ["layout", "spacing"], "block_specific_settings": [{ "id": "limit_width", "type": "checkbox", "default": false, "value_mapping": "--header-max-width", "constraints": { "owner": "header" } }, { "id": "max_width", "type": "range", "default": 750, "value_mapping": "--header-max-width", "constraints": { "owner": "header", "visible_if": "limit_width" } }], "schema_contract": { "settings": { "limit_width": "block-specific.limit_width", "max_width": "block-specific.max_width", "gap_desktop": "block-specific.gap_desktop", "gap_mobile": "block-specific.gap_mobile", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "padding_left": "spacing.padding_left", "padding_right": "spacing.padding_right", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile", "padding_left_mobile": "spacing.padding_left_mobile", "padding_right_mobile": "spacing.padding_right_mobile" } }, "children": { "allowed_children": ["eyebrow", "heading", "text"], "static_slots": [], "repeatable": true, "limit": 3, "depth_policy": "fixed-allow-list" }, "owners": { "data_owner": "parent-context", "state_owner": "none", "layout_owner": "header", "motion_owner": "theme-settings" }, "rendering": { "root_class": "basic-header", "render_mode": "liquid-block", "path": "blocks/header.liquid", "editor_surface": "theme-block" } },
-    { "type": "buttons", "status": "planned", "category": "micro-composition", "semantic_role": "actions", "capabilities": ["layout", "spacing"], "settings_modules": ["layout", "spacing"], "block_specific_settings": [], "children": { "allowed_children": ["button"], "static_slots": [], "repeatable": true, "limit": 4, "depth_policy": "no-recursion" }, "owners": { "data_owner": "parent-context", "state_owner": "button-children", "layout_owner": "buttons", "motion_owner": "theme-settings" }, "rendering": { "root_class": "buttons", "render_mode": "liquid-block", "path": "blocks/buttons.liquid", "editor_surface": "theme-block" } },
-    { "type": "content-group", "status": "planned", "category": "flexible-composition", "semantic_role": "content", "capabilities": ["layout", "appearance"], "settings_modules": ["layout", "appearance"], "block_specific_settings": [], "children": { "allowed_children": ["heading", "eyebrow", "text", "button", "icon"], "static_slots": [], "repeatable": true, "limit": 12, "depth_policy": "no-composition-child" }, "owners": { "data_owner": "content-group", "state_owner": "none", "layout_owner": "content-group", "motion_owner": "theme-settings" }, "rendering": { "root_class": "content-group", "render_mode": "liquid-block", "path": "blocks/content-group.liquid", "editor_surface": "theme-block" } },
-    { "type": "media-with-text", "status": "planned", "category": "flexible-composition", "semantic_role": "media-content", "capabilities": ["layout", "appearance", "media"], "settings_modules": ["layout", "appearance", "media"], "block_specific_settings": [], "children": { "allowed_children": ["content-group", "image", "video"], "static_slots": ["media", "content"], "repeatable": false, "limit": 2, "depth_policy": "exception-content-group-only" }, "owners": { "data_owner": "parent-context", "state_owner": "none", "layout_owner": "media-with-text", "motion_owner": "theme-settings" }, "rendering": { "root_class": "media-with-text", "render_mode": "liquid-block", "path": "blocks/media-with-text.liquid", "editor_surface": "theme-block" } },
-    { "type": "group-layout", "status": "planned", "category": "flexible-composition", "semantic_role": "layout-surface", "capabilities": ["layout", "spacing", "appearance"], "settings_modules": ["layout", "spacing", "appearance"], "block_specific_settings": [], "children": { "allowed_children": ["heading", "eyebrow", "text", "button", "image", "video", "icon"], "static_slots": [], "repeatable": true, "limit": 20, "depth_policy": "controlled" }, "owners": { "data_owner": "parent-context", "state_owner": "none", "layout_owner": "group-layout", "motion_owner": "theme-settings" }, "rendering": { "root_class": "group-layout", "render_mode": "liquid-block", "path": "blocks/group-layout.liquid", "editor_surface": "theme-block" } },
-    { "type": "card", "status": "planned", "category": "controlled-composition", "semantic_role": "content-card", "capabilities": ["appearance", "layout"], "settings_modules": ["appearance", "layout"], "block_specific_settings": [], "children": { "allowed_children": ["image", "heading", "text", "buttons"], "static_slots": ["media", "header", "content", "actions"], "repeatable": false, "limit": 4, "depth_policy": "no-card-child" }, "owners": { "data_owner": "parent-context", "state_owner": "none", "layout_owner": "card", "motion_owner": "theme-settings" }, "rendering": { "root_class": "card", "render_mode": "liquid-block", "path": "blocks/card.liquid", "editor_surface": "theme-block" } },
-    { "type": "feature-list", "status": "planned", "category": "controlled-composition", "semantic_role": "feature-list", "capabilities": ["layout", "spacing"], "settings_modules": ["layout", "spacing"], "block_specific_settings": [], "children": { "allowed_children": ["feature-item"], "static_slots": [], "repeatable": true, "limit": 12, "depth_policy": "no-recursion" }, "owners": { "data_owner": "feature-list", "state_owner": "none", "layout_owner": "feature-list", "motion_owner": "theme-settings" }, "rendering": { "root_class": "feature-list", "render_mode": "liquid-block", "path": "blocks/feature-list.liquid", "editor_surface": "theme-block" } },
-    { "type": "feature-item", "status": "planned", "category": "controlled-composition", "semantic_role": "feature", "capabilities": ["layout", "typography", "appearance", "link"], "settings_modules": ["layout", "typography", "appearance", "link"], "block_specific_settings": [], "children": false, "owners": { "data_owner": "feature-item", "state_owner": "none", "layout_owner": "feature-list", "motion_owner": "theme-settings" }, "rendering": { "root_class": "feature-item", "render_mode": "liquid-block", "path": "blocks/feature-item.liquid", "editor_surface": "theme-block" } },
-    { "type": "testimonial", "status": "planned", "category": "controlled-composition", "semantic_role": "testimonial", "capabilities": ["layout", "appearance", "typography"], "settings_modules": ["layout", "appearance", "typography"], "block_specific_settings": [], "children": false, "owners": { "data_owner": "testimonial", "state_owner": "none", "layout_owner": "testimonial", "motion_owner": "theme-settings" }, "rendering": { "root_class": "testimonial", "render_mode": "liquid-block", "path": "blocks/testimonial.liquid", "editor_surface": "theme-block" } },
-    { "type": "callout", "status": "planned", "category": "controlled-composition", "semantic_role": "feedback", "capabilities": ["layout", "appearance", "behavior"], "settings_modules": ["layout", "appearance", "behavior"], "block_specific_settings": [], "children": false, "owners": { "data_owner": "callout", "state_owner": "callout", "layout_owner": "callout", "motion_owner": "theme-settings" }, "rendering": { "root_class": "callout", "render_mode": "liquid-block", "path": "blocks/callout.liquid", "editor_surface": "theme-block" } },
-    { "type": "newsletter", "status": "planned", "category": "controlled-composition", "semantic_role": "form", "capabilities": ["layout", "appearance", "behavior"], "settings_modules": ["layout", "appearance", "behavior"], "block_specific_settings": [], "children": false, "owners": { "data_owner": "newsletter", "state_owner": "newsletter-form", "layout_owner": "newsletter", "motion_owner": "theme-settings" }, "rendering": { "root_class": "newsletter", "render_mode": "liquid-block", "path": "blocks/newsletter.liquid", "editor_surface": "theme-block" } },
-    { "type": "accordion", "status": "planned", "category": "controlled-composition", "semantic_role": "disclosure", "capabilities": ["layout", "appearance", "behavior"], "settings_modules": ["layout", "appearance", "behavior"], "block_specific_settings": [], "children": { "allowed_children": ["faq-item"], "static_slots": [], "repeatable": true, "limit": 20, "depth_policy": "no-recursion" }, "owners": { "data_owner": "accordion", "state_owner": "accordion", "layout_owner": "accordion", "motion_owner": "theme-settings" }, "rendering": { "root_class": "accordion", "render_mode": "liquid-block", "path": "blocks/accordion.liquid", "editor_surface": "theme-block" } },
-    { "type": "faq-item", "status": "planned", "category": "controlled-composition", "semantic_role": "faq", "capabilities": ["typography", "behavior"], "settings_modules": ["typography", "behavior"], "block_specific_settings": [], "children": false, "owners": { "data_owner": "faq-item", "state_owner": "accordion", "layout_owner": "accordion", "motion_owner": "theme-settings" }, "rendering": { "root_class": "faq-item", "render_mode": "liquid-block", "path": "blocks/faq-item.liquid", "editor_surface": "theme-block" } },
-    { "type": "product-card", "status": "implemented", "category": "commerce-composition", "semantic_role": "product-card", "capabilities": ["appearance", "behavior"], "settings_modules": ["appearance", "behavior"], "block_specific_settings": [], "schema_contract": { "settings": { "show_ranking": "block-specific.show_ranking", "color_type": "block-specific.color_type", "color_scheme": "appearance.color_scheme" } }, "children": false, "owners": { "data_owner": "product-loop", "state_owner": "product-card", "layout_owner": "product-grid", "motion_owner": "theme-settings" }, "rendering": { "root_class": "commerce-product-card", "render_mode": "liquid-block", "path": "blocks/product-card.liquid", "editor_surface": "theme-block" } },
-    { "type": "product-price", "status": "implemented", "category": "commerce-composition", "semantic_role": "product-price", "capabilities": ["typography", "appearance", "spacing"], "settings_modules": ["typography", "appearance", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "show_sale_badge": "block-specific.show_sale_badge", "show_tax_and_shipping_notice": "block-specific.show_tax_and_shipping_notice", "font": "typography.font", "font_size": "typography.body_scale", "letter_spacing": "typography.letter_spacing", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile" } }, "children": false, "owners": { "data_owner": "product-resource", "state_owner": "product-resource", "layout_owner": "product-section", "motion_owner": "theme-settings" }, "rendering": { "root_class": "commerce-product-price", "render_mode": "liquid-block", "path": "blocks/product-price.liquid", "editor_surface": "theme-block" } },
-    { "type": "product-media-gallery", "status": "implemented", "category": "commerce-composition", "semantic_role": "product-media", "capabilities": ["layout", "appearance", "media"], "settings_modules": ["layout", "appearance", "media"], "block_specific_settings": [], "schema_contract": { "settings": { "show_featured_video": "block-specific.show_featured_video", "desktop_layout": "layout.desktop_layout", "image_zoom": "block-specific.image_zoom", "grid_columns": "layout.grid_columns", "show_pagination": "block-specific.show_pagination", "media_gap": "spacing.gap", "desktop_media_ratio": "media.ratio", "mobile_media_ratio": "media.ratio", "image_fit": "media.image_fit", "mobile_thumbnails": "block-specific.mobile_thumbnails", "thumbnail_size": "block-specific.thumbnail_size", "thumbnail_gap": "spacing.gap" } }, "children": false, "owners": { "data_owner": "product-resource", "state_owner": "product-media", "layout_owner": "product-media", "motion_owner": "theme-settings" }, "rendering": { "root_class": "commerce-media-gallery", "render_mode": "liquid-block", "path": "blocks/product-media-gallery.liquid", "editor_surface": "theme-block" } },
-    { "type": "product-title", "status": "implemented", "category": "commerce-composition", "semantic_role": "product-title", "capabilities": ["typography", "layout", "spacing"], "settings_modules": ["typography", "layout", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "size": "typography.heading_scale", "html_tag": "block-specific.html_tag", "text_case": "typography.text_case", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile" } }, "children": false, "owners": { "data_owner": "product-resource", "state_owner": "product-title", "layout_owner": "product-section", "motion_owner": "theme-settings" }, "rendering": { "root_class": "commerce-product-title", "render_mode": "liquid-block", "path": "blocks/product-title.liquid", "editor_surface": "theme-block" } },
-    { "type": "product-description", "status": "implemented", "category": "commerce-composition", "semantic_role": "product-description", "capabilities": ["typography", "spacing"], "settings_modules": ["typography", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "height_limit": "block-specific.height_limit", "text_size": "typography.body_scale", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile" } }, "children": false, "owners": { "data_owner": "product-resource", "state_owner": "product-description", "layout_owner": "product-section", "motion_owner": "theme-settings" }, "rendering": { "root_class": "commerce-product-description", "render_mode": "liquid-block", "path": "blocks/product-description.liquid", "editor_surface": "theme-block" } },
-    { "type": "product-inventory", "status": "implemented", "category": "commerce-composition", "semantic_role": "product-inventory", "capabilities": ["typography", "appearance", "spacing"], "settings_modules": ["typography", "appearance", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "low_inventory_threshold": "block-specific.low_inventory_threshold", "show_low_inventory_quantity": "block-specific.show_low_inventory_quantity", "show_low_inventory_progress_bar": "block-specific.show_low_inventory_progress_bar", "font": "typography.font", "font_size": "typography.body_scale", "letter_spacing": "typography.letter_spacing", "low_inventory_text_color": "appearance.text_color", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile" } }, "children": false, "owners": { "data_owner": "product-resource", "state_owner": "inventory", "layout_owner": "product-section", "motion_owner": "theme-settings" }, "rendering": { "root_class": "commerce-inventory", "render_mode": "liquid-block", "path": "blocks/product-inventory.liquid", "editor_surface": "theme-block" } },
-    { "type": "buy-buttons", "status": "implemented", "category": "commerce-composition", "semantic_role": "product-actions", "capabilities": ["layout", "behavior", "spacing"], "settings_modules": ["layout", "behavior", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "show_quantity_button": "block-specific.show_quantity_button", "show_accelerated_checkout": "block-specific.show_accelerated_checkout", "show_gift_card_form": "block-specific.show_gift_card_form", "add_to_cart_button_style": "block-specific.add_to_cart_button_style", "gap_desktop": "spacing.gap", "gap_mobile": "spacing.gap", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile" } }, "children": false, "owners": { "data_owner": "product-resource", "state_owner": "product-form", "layout_owner": "product-form", "motion_owner": "theme-settings" }, "rendering": { "root_class": "commerce-buy-buttons", "render_mode": "liquid-block", "path": "blocks/buy-buttons.liquid", "editor_surface": "theme-block" } },
-    { "type": "pickup-availability", "status": "implemented", "category": "commerce-composition", "semantic_role": "pickup-availability", "capabilities": ["layout", "appearance", "behavior", "spacing"], "settings_modules": ["layout", "appearance", "behavior", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "enable_boxed_layout": "block-specific.enable_boxed_layout", "desktop_layout": "layout.desktop_layout", "mobile_layout": "layout.mobile_layout", "pickup_message_size": "typography.body_scale", "pickup_message_color": "appearance.text_color", "border_thickness": "appearance.border_thickness", "corner_radius": "appearance.corner_radius", "shadow": "appearance.shadow", "color_type": "block-specific.color_type", "color_scheme": "appearance.color_scheme", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile" } }, "children": false, "owners": { "data_owner": "product-resource", "state_owner": "pickup", "layout_owner": "product-section", "motion_owner": "theme-settings" }, "rendering": { "root_class": "commerce-pickup", "render_mode": "liquid-block", "path": "blocks/pickup-availability.liquid", "editor_surface": "theme-block" } },
-    { "type": "product-badges", "status": "implemented", "category": "commerce-composition", "semantic_role": "product-badges", "capabilities": ["appearance", "spacing"], "settings_modules": ["appearance", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "show_sold_out_badge": "block-specific.show_sold_out_badge", "show_sale_badge": "block-specific.show_sale_badge", "show_manual_badges": "block-specific.show_manual_badges", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile" } }, "children": false, "owners": { "data_owner": "product-resource", "state_owner": "product-badges", "layout_owner": "product-card", "motion_owner": "theme-settings" }, "rendering": { "root_class": "commerce-product-badges", "render_mode": "liquid-block", "path": "blocks/product-badges.liquid", "editor_surface": "theme-block" } },
-    { "type": "link-list", "status": "implemented", "category": "navigation-utility", "semantic_role": "navigation-list", "capabilities": ["layout", "appearance", "behavior", "link", "spacing"], "settings_modules": ["layout", "appearance", "behavior", "link", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "source": "block-specific.source", "menu": "block-specific.menu", "show_title": "block-specific.show_title", "show_eyebrow": "block-specific.show_eyebrow", "nested_levels": "block-specific.nested_levels", "open_in_new_tab": "behavior.open_in_new_tab", "external_indicator": "block-specific.external_indicator", "mobile_collapse": "behavior.mobile_collapse", "list_style": "layout.list_style", "divider": "appearance.divider", "active_color": "appearance.active_color", "alignment": "layout.alignment", "columns": "layout.columns", "gap": "spacing.gap", "mobile_stack": "layout.mobile_stack", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "padding_left": "spacing.padding_left", "padding_right": "spacing.padding_right", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile", "padding_left_mobile": "spacing.padding_left_mobile", "padding_right_mobile": "spacing.padding_right_mobile" } }, "children": false, "owners": { "data_owner": "menu-context", "state_owner": "navigation-list", "layout_owner": "navigation-list", "motion_owner": "theme-settings" }, "rendering": { "root_class": "navigation-link-list", "render_mode": "liquid-block", "path": "blocks/link-list.liquid", "editor_surface": "theme-block" } },
-    { "type": "breadcrumbs", "status": "implemented", "category": "navigation-utility", "semantic_role": "breadcrumb-navigation", "capabilities": ["layout", "appearance", "behavior", "spacing"], "settings_modules": ["layout", "appearance", "behavior", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "source": "block-specific.source", "show_current_item": "block-specific.show_current_item", "text_role": "typography.body_role", "separator": "block-specific.separator", "current_color": "appearance.text_color", "truncation": "block-specific.truncation", "width": "layout.width", "mobile_behavior": "layout.mobile_behavior", "alignment": "layout.alignment", "gap": "spacing.gap", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile" } }, "children": false, "owners": { "data_owner": "route-context", "state_owner": "breadcrumb", "layout_owner": "breadcrumb", "motion_owner": "theme-settings" }, "rendering": { "root_class": "navigation-breadcrumbs", "render_mode": "liquid-block", "path": "blocks/breadcrumbs.liquid", "editor_surface": "theme-block" } },
-    { "type": "pagination", "status": "implemented", "category": "navigation-utility", "semantic_role": "pagination-navigation", "capabilities": ["layout", "appearance", "behavior", "spacing"], "settings_modules": ["layout", "appearance", "behavior", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "show_previous": "block-specific.show_previous", "show_next": "block-specific.show_next", "show_page_numbers": "block-specific.show_page_numbers", "show_first_last": "block-specific.show_first_last", "ellipsis_behavior": "block-specific.ellipsis_behavior", "previous_label": "block-specific.previous_label", "next_label": "block-specific.next_label", "control_variant": "appearance.control_variant", "current_state": "appearance.current_state", "alignment": "layout.alignment", "flow": "layout.flow", "mobile_compact_mode": "layout.mobile_compact_mode", "gap": "spacing.gap", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "padding_left": "spacing.padding_left", "padding_right": "spacing.padding_right", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile", "padding_left_mobile": "spacing.padding_left_mobile", "padding_right_mobile": "spacing.padding_right_mobile" } }, "children": false, "owners": { "data_owner": "paginate-context", "state_owner": "pagination", "layout_owner": "pagination", "motion_owner": "theme-settings" }, "rendering": { "root_class": "navigation-pagination", "render_mode": "liquid-block", "path": "blocks/pagination.liquid", "editor_surface": "theme-block" } },
-    { "type": "search", "status": "implemented", "category": "navigation-utility", "semantic_role": "search-form", "capabilities": ["layout", "appearance", "behavior", "link", "spacing"], "settings_modules": ["layout", "appearance", "behavior", "link", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "input_label": "block-specific.input_label", "placeholder": "block-specific.placeholder", "submit_label": "block-specific.submit_label", "source": "block-specific.source", "result_route": "link.result_route", "query_parameter": "link.query_parameter", "max_results": "block-specific.max_results", "include_products": "block-specific.include_products", "include_articles": "block-specific.include_articles", "include_pages": "block-specific.include_pages", "no_result_message": "block-specific.no_result_message", "input_variant": "appearance.input_variant", "button_variant": "appearance.button_variant", "icon": "appearance.icon", "color_scheme": "appearance.color_scheme", "alignment": "layout.alignment", "radius": "appearance.corner_radius", "gap": "spacing.gap", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "padding_left": "spacing.padding_left", "padding_right": "spacing.padding_right", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile", "padding_left_mobile": "spacing.padding_left_mobile", "padding_right_mobile": "spacing.padding_right_mobile" } }, "children": false, "owners": { "data_owner": "search-context", "state_owner": "search-form", "layout_owner": "search-form", "motion_owner": "theme-settings" }, "rendering": { "root_class": "navigation-search", "render_mode": "liquid-block", "path": "blocks/search.liquid", "editor_surface": "theme-block" } },
-    { "type": "social-links", "status": "implemented", "category": "navigation-utility", "semantic_role": "social-navigation", "capabilities": ["layout", "appearance", "behavior", "link", "spacing"], "settings_modules": ["layout", "appearance", "behavior", "link", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "link_source": "block-specific.link_source", "icon_size": "block-specific.icon_size", "accessible_labels": "behavior.accessible_labels", "external_target": "behavior.open_in_new_tab", "display": "layout.display", "color_mode": "appearance.color_mode", "alignment": "layout.alignment", "flow": "layout.flow", "gap": "spacing.gap", "mobile_alignment": "layout.mobile_alignment", "mobile_wrap": "layout.mobile_wrap", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile" } }, "children": false, "owners": { "data_owner": "theme-settings", "state_owner": "social-links", "layout_owner": "social-links", "motion_owner": "theme-settings" }, "rendering": { "root_class": "navigation-social-links", "render_mode": "liquid-block", "path": "blocks/social-links.liquid", "editor_surface": "theme-block" } },
-    { "type": "share", "status": "implemented", "category": "navigation-utility", "semantic_role": "share-control", "capabilities": ["layout", "appearance", "behavior", "link", "spacing"], "settings_modules": ["layout", "appearance", "behavior", "link", "spacing"], "block_specific_settings": [], "schema_contract": { "settings": { "target": "link.target", "custom_target": "link.custom_target", "title_source": "block-specific.title_source", "show_native_share": "behavior.show_native_share", "show_copy_link": "behavior.show_copy_link", "show_email": "behavior.show_email", "show_social_channels": "behavior.show_social_channels", "visible_label": "block-specific.visible_label", "copied_label": "block-specific.copied_label", "error_label": "block-specific.error_label", "button_variant": "appearance.button_variant", "icon": "appearance.icon", "orientation": "layout.orientation", "gap": "spacing.gap", "alignment": "layout.alignment", "mobile_behavior": "layout.mobile_behavior", "mobile_stack": "layout.mobile_stack", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "padding_left": "spacing.padding_left", "padding_right": "spacing.padding_right", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile", "padding_left_mobile": "spacing.padding_left_mobile", "padding_right_mobile": "spacing.padding_right_mobile" } }, "children": false, "owners": { "data_owner": "route-context", "state_owner": "share-control", "layout_owner": "share-control", "motion_owner": "theme-settings" }, "rendering": { "root_class": "navigation-share", "render_mode": "liquid-block", "path": "blocks/share.liquid", "editor_surface": "theme-block" } },
-    { "type": "product-info", "status": "planned", "category": "commerce-composition", "semantic_role": "product-info", "capabilities": ["typography", "appearance"], "settings_modules": ["typography", "appearance"], "block_specific_settings": [], "children": false, "owners": { "data_owner": "product-resource", "state_owner": "product-resource", "layout_owner": "product-section", "motion_owner": "theme-settings" }, "rendering": { "root_class": "product-info", "render_mode": "liquid-block", "path": "blocks/product-info.liquid", "editor_surface": "theme-block" } },
-    { "type": "variant-picker", "status": "implemented", "category": "commerce-composition", "semantic_role": "product-form-control", "capabilities": ["layout", "appearance", "behavior"], "settings_modules": ["layout", "appearance", "behavior"], "block_specific_settings": [], "schema_contract": { "settings": { "size_chart_option_name": "block-specific.size_chart_option_name", "size_chart_page": "block-specific.size_chart_page", "size_chart_desktop_layout": "block-specific.size_chart_desktop_layout", "size_chart_width": "block-specific.size_chart_width", "size_chart_mobile_layout": "block-specific.size_chart_mobile_layout", "padding_top": "spacing.padding_top", "padding_bottom": "spacing.padding_bottom", "customize_mobile_padding": "spacing.customize_mobile_padding", "padding_top_mobile": "spacing.padding_top_mobile", "padding_bottom_mobile": "spacing.padding_bottom_mobile" } }, "children": false, "owners": { "data_owner": "product-resource", "state_owner": "product-form", "layout_owner": "product-form", "motion_owner": "theme-settings" }, "rendering": { "root_class": "commerce-variant-picker", "render_mode": "liquid-block", "path": "blocks/variant-picker.liquid", "editor_surface": "theme-block" } },
-    { "type": "product-form", "status": "planned", "category": "commerce-composition", "semantic_role": "product-form", "capabilities": ["layout", "appearance", "behavior"], "settings_modules": ["layout", "appearance", "behavior"], "block_specific_settings": [], "children": false, "owners": { "data_owner": "product-resource", "state_owner": "product-form", "layout_owner": "product-form", "motion_owner": "theme-settings" }, "rendering": { "root_class": "product-form", "render_mode": "liquid-block", "path": "blocks/product-form.liquid", "editor_surface": "theme-block" } },
-    { "type": "cart-item", "status": "planned", "category": "commerce-composition", "semantic_role": "cart-line", "capabilities": ["layout", "appearance", "behavior"], "settings_modules": ["layout", "appearance", "behavior"], "block_specific_settings": [], "children": false, "owners": { "data_owner": "cart", "state_owner": "cart", "layout_owner": "cart", "motion_owner": "theme-settings" }, "rendering": { "root_class": "cart-item", "render_mode": "liquid-block", "path": "blocks/cart-item.liquid", "editor_surface": "theme-block" } },
-    { "type": "filter-group", "status": "planned", "category": "commerce-composition", "semantic_role": "filter", "capabilities": ["layout", "appearance", "behavior"], "settings_modules": ["layout", "appearance", "behavior"], "block_specific_settings": [], "children": false, "owners": { "data_owner": "collection-filter-context", "state_owner": "filter-group", "layout_owner": "filter-group", "motion_owner": "theme-settings" }, "rendering": { "root_class": "filter-group", "render_mode": "liquid-block", "path": "blocks/filter-group.liquid", "editor_surface": "theme-block" } }
+    {
+      "type": "stack",
+      "status": "implemented",
+      "category": "layout",
+      "semantic_role": "layout-surface",
+      "contract_version": "1.0.0",
+      "capabilities": [
+        "layout",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "gap": "spacing.gap",
+          "alignment": "layout.alignment",
+          "width": "layout.width",
+          "max_width": "layout.max_width"
+        }
+      },
+      "children": {
+        "allowed_children": [
+          "heading",
+          "text",
+          "eyebrow",
+          "button",
+          "image",
+          "video",
+          "icon",
+          "header"
+        ],
+        "static_slots": [],
+        "repeatable": true,
+        "limit": 20,
+        "depth_policy": "fixed-allow-list"
+      },
+      "owners": {
+        "data_owner": "parent-context",
+        "state_owner": "none",
+        "layout_owner": "stack",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "block-stack",
+        "render_mode": "liquid-block",
+        "path": "blocks/stack.liquid",
+        "editor_surface": "theme-block"
+      },
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "grid",
+      "status": "implemented",
+      "category": "layout",
+      "semantic_role": "layout-surface",
+      "contract_version": "1.0.0",
+      "capabilities": [
+        "layout",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "columns_desktop": "block-specific.columns_desktop",
+          "columns_tablet": "block-specific.columns_tablet",
+          "columns_mobile": "block-specific.columns_mobile",
+          "column_gap": "spacing.gap",
+          "row_gap": "spacing.gap",
+          "alignment": "layout.alignment",
+          "item_height": "block-specific.item_height"
+        }
+      },
+      "children": {
+        "allowed_children": [
+          "heading",
+          "text",
+          "eyebrow",
+          "button",
+          "image",
+          "video",
+          "icon",
+          "header"
+        ],
+        "static_slots": [],
+        "repeatable": true,
+        "limit": 20,
+        "depth_policy": "fixed-allow-list"
+      },
+      "owners": {
+        "data_owner": "parent-context",
+        "state_owner": "none",
+        "layout_owner": "grid",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "block-grid",
+        "render_mode": "liquid-block",
+        "path": "blocks/grid.liquid",
+        "editor_surface": "theme-block"
+      },
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "columns",
+      "status": "implemented",
+      "category": "layout",
+      "semantic_role": "layout-surface",
+      "contract_version": "1.0.0",
+      "capabilities": [
+        "layout",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "ratio": "block-specific.ratio",
+          "gap": "spacing.gap",
+          "gap_mobile": "spacing.gap",
+          "mobile_order": "block-specific.mobile_order",
+          "vertical_alignment": "layout.alignment"
+        }
+      },
+      "children": {
+        "allowed_children": [
+          "heading",
+          "text",
+          "eyebrow",
+          "button",
+          "image",
+          "video",
+          "icon",
+          "header"
+        ],
+        "static_slots": [],
+        "repeatable": true,
+        "limit": 20,
+        "depth_policy": "fixed-allow-list"
+      },
+      "owners": {
+        "data_owner": "parent-context",
+        "state_owner": "none",
+        "layout_owner": "columns",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "block-columns",
+        "render_mode": "liquid-block",
+        "path": "blocks/columns.liquid",
+        "editor_surface": "theme-block"
+      },
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "spacer",
+      "status": "implemented",
+      "category": "layout",
+      "semantic_role": "spacing-surface",
+      "contract_version": "1.0.0",
+      "capabilities": [
+        "spacing"
+      ],
+      "settings_modules": [
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "unit_desktop": "block-specific.unit_desktop",
+          "size_desktop": "block-specific.size_desktop",
+          "show_on_mobile": "block-specific.show_on_mobile",
+          "unit_mobile": "block-specific.unit_mobile",
+          "size_mobile": "block-specific.size_mobile",
+          "custom_spacing": "block-specific.custom_spacing"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "none",
+        "state_owner": "none",
+        "layout_owner": "spacer",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "block-spacer",
+        "render_mode": "liquid-block",
+        "path": "blocks/spacer.liquid",
+        "editor_surface": "theme-block"
+      },
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "divider",
+      "status": "implemented",
+      "category": "layout",
+      "semantic_role": "separator",
+      "contract_version": "1.0.0",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "style": "block-specific.style",
+          "thickness": "block-specific.thickness",
+          "color": "appearance.color_scheme",
+          "custom_color": "appearance.text_color",
+          "width": "layout.width",
+          "custom_width": "block-specific.custom_width",
+          "alignment": "layout.alignment",
+          "spacing_top": "spacing.padding_top",
+          "spacing_bottom": "spacing.padding_bottom",
+          "spacing_top_mobile": "spacing.padding_top_mobile",
+          "spacing_bottom_mobile": "spacing.padding_bottom_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "none",
+        "state_owner": "none",
+        "layout_owner": "divider",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "block-divider",
+        "render_mode": "liquid-block",
+        "path": "blocks/divider.liquid",
+        "editor_surface": "theme-block"
+      },
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "heading",
+      "status": "implemented",
+      "category": "basic-kernel",
+      "semantic_role": "heading",
+      "capabilities": [
+        "layout",
+        "typography",
+        "appearance",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "typography",
+        "appearance",
+        "spacing"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "heading",
+          "type": "inline_richtext",
+          "default": "Heading",
+          "value_mapping": "heading rich text content",
+          "constraints": {
+            "owner": "heading",
+            "inline_only": true
+          }
+        },
+        {
+          "id": "heading_size",
+          "type": "select",
+          "values": [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "display"
+          ],
+          "default": "lg",
+          "value_mapping": "heading visual scale class",
+          "constraints": {
+            "owner": "typography",
+            "html_tag_independent": true
+          }
+        },
+        {
+          "id": "html_tag",
+          "type": "select",
+          "values": [
+            "div",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
+          ],
+          "default": "h2",
+          "value_mapping": "semantic HTML tag",
+          "constraints": {
+            "owner": "heading",
+            "one_h1_per_surface": true
+          }
+        }
+      ],
+      "schema_contract": {
+        "settings": {
+          "heading": "block-specific.heading",
+          "heading_size": "block-specific.heading_size",
+          "html_tag": "block-specific.html_tag",
+          "text_color": "appearance.text_color",
+          "width": "layout.width",
+          "width_mobile": "layout.width_mobile",
+          "alignment": "layout.alignment",
+          "customize_mobile_alignment": "layout.customize_mobile_alignment",
+          "alignment_mobile": "layout.alignment_mobile",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "heading",
+        "state_owner": "none",
+        "layout_owner": "heading",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "heading",
+        "render_mode": "liquid-block",
+        "path": "blocks/heading.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "eyebrow",
+      "status": "implemented",
+      "category": "basic-kernel",
+      "semantic_role": "eyebrow",
+      "capabilities": [
+        "layout",
+        "typography",
+        "appearance",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "typography",
+        "appearance",
+        "spacing"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "text",
+          "type": "inline_richtext",
+          "default": "Eyebrow",
+          "value_mapping": "eyebrow rich text content",
+          "constraints": {
+            "owner": "eyebrow",
+            "long_form_content": false
+          }
+        }
+      ],
+      "schema_contract": {
+        "settings": {
+          "text": "block-specific.text",
+          "text_color": "appearance.text_color",
+          "show_background": "appearance.show_background",
+          "show_icon": "appearance.show_icon",
+          "icon": "appearance.icon",
+          "border_thickness": "appearance.border_thickness",
+          "corner_radius": "appearance.corner_radius",
+          "color_scheme": "appearance.color_scheme",
+          "width": "layout.width",
+          "width_mobile": "layout.width_mobile",
+          "alignment": "layout.alignment",
+          "customize_mobile_alignment": "layout.customize_mobile_alignment",
+          "alignment_mobile": "layout.alignment_mobile",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "eyebrow",
+        "state_owner": "none",
+        "layout_owner": "eyebrow",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "eyebrow",
+        "render_mode": "liquid-block",
+        "path": "blocks/eyebrow.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "button",
+      "status": "implemented",
+      "category": "basic-kernel",
+      "semantic_role": "action",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "link",
+        "behavior"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "link",
+        "behavior"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "label",
+          "type": "text",
+          "default": "Button",
+          "value_mapping": "accessible action label",
+          "constraints": {
+            "owner": "button",
+            "required": true
+          }
+        },
+        {
+          "id": "style",
+          "type": "select",
+          "values": [
+            "primary",
+            "secondary",
+            "tertiary"
+          ],
+          "default": "primary",
+          "value_mapping": "button variant class",
+          "constraints": {
+            "owner": "button"
+          }
+        }
+      ],
+      "schema_contract": {
+        "settings": {
+          "label": "block-specific.label",
+          "link": "link.link",
+          "style": "block-specific.style",
+          "show_icon": "block-specific.show_icon",
+          "icon": "block-specific.icon",
+          "icon_position": "block-specific.icon_position",
+          "icon_size": "block-specific.icon_size",
+          "icon_size_custom": "block-specific.icon_size_custom",
+          "open_in_new_tab": "behavior.open_in_new_tab"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "button",
+        "state_owner": "button",
+        "layout_owner": "button",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "button",
+        "render_mode": "liquid-block",
+        "path": "blocks/button.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "keyboard accessible",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "image",
+      "status": "implemented",
+      "category": "basic-kernel",
+      "semantic_role": "media",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "media",
+        "link",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "media",
+        "link",
+        "spacing"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "default": null,
+          "value_mapping": "image object",
+          "constraints": {
+            "owner": "image",
+            "empty_state": "placeholder"
+          }
+        },
+        {
+          "id": "alt",
+          "type": "text",
+          "default": "Image",
+          "value_mapping": "alt attribute",
+          "constraints": {
+            "owner": "image",
+            "accessibility": "replace with meaningful text when image conveys information"
+          }
+        }
+      ],
+      "schema_contract": {
+        "settings": {
+          "image": "block-specific.image",
+          "mobile_image": "block-specific.mobile_image",
+          "show_image_first_on_mobile": "block-specific.show_image_first_on_mobile",
+          "alt": "block-specific.alt",
+          "link": "link.link",
+          "open_in_new_tab": "behavior.open_in_new_tab",
+          "ratio": "media.ratio",
+          "device": "block-specific.device",
+          "width": "layout.width",
+          "limit_width": "block-specific.limit_width",
+          "max_width": "block-specific.max_width",
+          "corner_radius": "appearance.corner_radius",
+          "padding": "spacing.padding"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "image",
+        "state_owner": "none",
+        "layout_owner": "image",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "image",
+        "render_mode": "liquid-block",
+        "path": "blocks/image.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "video",
+      "status": "implemented",
+      "category": "basic-kernel",
+      "semantic_role": "media",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "media",
+        "behavior",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "media",
+        "behavior",
+        "spacing"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "video",
+          "type": "video",
+          "default": null,
+          "value_mapping": "video object",
+          "constraints": {
+            "owner": "video",
+            "empty_state": "hidden"
+          }
+        },
+        {
+          "id": "autoplay",
+          "type": "checkbox",
+          "default": false,
+          "value_mapping": "video autoplay attribute",
+          "constraints": {
+            "owner": "video",
+            "reduced_motion": "must not autoplay when reduced motion is preferred"
+          }
+        }
+      ],
+      "schema_contract": {
+        "settings": {
+          "source": "block-specific.source",
+          "video": "block-specific.video",
+          "video_url": "block-specific.video_url",
+          "autoplay": "block-specific.autoplay",
+          "loop": "block-specific.loop",
+          "cover_image": "block-specific.cover_image",
+          "aspect_ratio": "media.ratio",
+          "show_play_button": "block-specific.show_play_button",
+          "show_video_first_on_mobile": "block-specific.show_video_first_on_mobile",
+          "play_button_color": "appearance.play_button_color",
+          "background_color": "appearance.background_color",
+          "device": "block-specific.device",
+          "width": "layout.width",
+          "limit_width": "block-specific.limit_width",
+          "max_width": "block-specific.max_width",
+          "corner_radius": "appearance.corner_radius",
+          "padding": "spacing.padding"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "video",
+        "state_owner": "media",
+        "layout_owner": "video",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "video",
+        "render_mode": "liquid-block",
+        "path": "blocks/video.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "icon",
+      "status": "implemented",
+      "category": "basic-kernel",
+      "semantic_role": "icon",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "link",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "link",
+        "spacing"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "icon",
+          "type": "select",
+          "values": [
+            "account",
+            "cart"
+          ],
+          "default": "cart",
+          "value_mapping": "inline SVG asset",
+          "constraints": {
+            "owner": "icon",
+            "accessible_name": "decorative by default"
+          }
+        }
+      ],
+      "schema_contract": {
+        "settings": {
+          "source": "block-specific.source",
+          "icon": "block-specific.icon",
+          "custom_icon": "block-specific.custom_icon",
+          "link": "link.link",
+          "open_in_new_tab": "behavior.open_in_new_tab",
+          "icon_width": "block-specific.icon_width",
+          "padding": "spacing.padding",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_mobile": "spacing.padding_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "icon",
+        "state_owner": "none",
+        "layout_owner": "icon",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "icon",
+        "render_mode": "liquid-block",
+        "path": "blocks/icon.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "header",
+      "status": "implemented",
+      "category": "micro-composition",
+      "semantic_role": "header",
+      "capabilities": [
+        "layout",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "spacing"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "limit_width",
+          "type": "checkbox",
+          "default": false,
+          "value_mapping": "--header-max-width",
+          "constraints": {
+            "owner": "header"
+          }
+        },
+        {
+          "id": "max_width",
+          "type": "range",
+          "default": 750,
+          "value_mapping": "--header-max-width",
+          "constraints": {
+            "owner": "header",
+            "visible_if": "limit_width"
+          }
+        }
+      ],
+      "schema_contract": {
+        "settings": {
+          "limit_width": "block-specific.limit_width",
+          "max_width": "block-specific.max_width",
+          "gap_desktop": "block-specific.gap_desktop",
+          "gap_mobile": "block-specific.gap_mobile",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
+        }
+      },
+      "children": {
+        "allowed_children": [
+          "eyebrow",
+          "heading",
+          "text"
+        ],
+        "static_slots": [],
+        "repeatable": true,
+        "limit": 20,
+        "depth_policy": "fixed-allow-list"
+      },
+      "owners": {
+        "data_owner": "parent-context",
+        "state_owner": "none",
+        "layout_owner": "header",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "basic-header",
+        "render_mode": "liquid-block",
+        "path": "blocks/header.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "buttons",
+      "status": "implemented",
+      "category": "micro-composition",
+      "semantic_role": "action-group",
+      "contract_version": "1.0.0",
+      "capabilities": [
+        "layout",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "spacing"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "alignment",
+          "type": "select",
+          "values": [
+            "start",
+            "center",
+            "end"
+          ],
+          "default": "start",
+          "value_mapping": "block.settings.alignment",
+          "constraints": {
+            "owner": "buttons",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "gap",
+          "type": "range",
+          "default": 12,
+          "value_mapping": "block.settings.gap",
+          "constraints": {
+            "owner": "buttons",
+            "source": "schema"
+          }
+        }
+      ],
+      "schema_contract": {
+        "settings": {
+          "alignment": "block-specific.alignment",
+          "gap": "block-specific.gap"
+        }
+      },
+      "children": {
+        "allowed_children": [
+          "button"
+        ],
+        "static_slots": [],
+        "repeatable": true,
+        "limit": 20,
+        "depth_policy": "fixed-allow-list"
+      },
+      "owners": {
+        "data_owner": "parent-context",
+        "state_owner": "none",
+        "layout_owner": "buttons",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "buttons",
+        "render_mode": "liquid-block",
+        "path": "blocks/buttons.liquid",
+        "editor_surface": "theme-block"
+      },
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "keyboard accessible where interactive",
+        "reduced_motion": "inherited"
+      }
+    },
+    {
+      "type": "content-group",
+      "status": "implemented",
+      "category": "flexible-composition",
+      "semantic_role": "content",
+      "capabilities": [
+        "layout",
+        "appearance"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "layout",
+          "type": "select",
+          "values": [
+            "stack",
+            "row"
+          ],
+          "default": "stack",
+          "value_mapping": "block.settings.layout",
+          "constraints": {
+            "owner": "content-group",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "gap",
+          "type": "range",
+          "values": {
+            "min": 0,
+            "max": 64,
+            "step": 4,
+            "unit": "px"
+          },
+          "default": 16,
+          "value_mapping": "block.settings.gap",
+          "constraints": {
+            "owner": "content-group",
+            "source": "schema"
+          }
+        }
+      ],
+      "children": {
+        "allowed_children": [
+          "heading",
+          "text",
+          "eyebrow",
+          "button",
+          "image",
+          "icon"
+        ],
+        "static_slots": [],
+        "repeatable": true,
+        "limit": 20,
+        "depth_policy": "fixed-allow-list"
+      },
+      "owners": {
+        "data_owner": "content-group",
+        "state_owner": "none",
+        "layout_owner": "content-group",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "content-group",
+        "render_mode": "liquid-block",
+        "path": "blocks/content-group.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {
+          "layout": "block-specific.layout",
+          "gap": "block-specific.gap"
+        }
+      }
+    },
+    {
+      "type": "media-with-text",
+      "status": "implemented",
+      "category": "flexible-composition",
+      "semantic_role": "media-content",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "media"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "media"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "default": null,
+          "value_mapping": "block.settings.image",
+          "constraints": {
+            "owner": "media-with-text",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "heading",
+          "type": "text",
+          "default": "Media with text",
+          "value_mapping": "block.settings.heading",
+          "constraints": {
+            "owner": "media-with-text",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "text",
+          "type": "richtext",
+          "default": "<p>Tell your story.</p>",
+          "value_mapping": "block.settings.text",
+          "constraints": {
+            "owner": "media-with-text",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "media_position",
+          "type": "select",
+          "values": [
+            "left",
+            "right"
+          ],
+          "default": "left",
+          "value_mapping": "block.settings.media_position",
+          "constraints": {
+            "owner": "media-with-text",
+            "source": "schema"
+          }
+        }
+      ],
+      "children": false,
+      "owners": {
+        "data_owner": "parent-context",
+        "state_owner": "none",
+        "layout_owner": "media-with-text",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "media-with-text",
+        "render_mode": "liquid-block",
+        "path": "blocks/media-with-text.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {
+          "image": "block-specific.image",
+          "heading": "block-specific.heading",
+          "text": "block-specific.text",
+          "media_position": "block-specific.media_position"
+        }
+      }
+    },
+    {
+      "type": "group-layout",
+      "status": "implemented",
+      "category": "layout",
+      "semantic_role": "layout-surface",
+      "contract_version": "1.0.0",
+      "capabilities": [
+        "layout",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "spacing"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "gap",
+          "type": "range",
+          "default": 16,
+          "value_mapping": "block.settings.gap",
+          "constraints": {
+            "owner": "group-layout",
+            "source": "schema"
+          }
+        }
+      ],
+      "schema_contract": {
+        "settings": {
+          "gap": "block-specific.gap"
+        }
+      },
+      "children": {
+        "allowed_children": [
+          "heading",
+          "text",
+          "button",
+          "image"
+        ],
+        "static_slots": [],
+        "repeatable": true,
+        "limit": 20,
+        "depth_policy": "fixed-allow-list"
+      },
+      "owners": {
+        "data_owner": "parent-context",
+        "state_owner": "none",
+        "layout_owner": "group-layout",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "group-layout",
+        "render_mode": "liquid-block",
+        "path": "blocks/group-layout.liquid",
+        "editor_surface": "theme-block"
+      },
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "keyboard accessible where interactive",
+        "reduced_motion": "inherited"
+      }
+    },
+    {
+      "type": "card",
+      "status": "implemented",
+      "category": "controlled-composition",
+      "semantic_role": "content-card",
+      "capabilities": [
+        "appearance",
+        "layout"
+      ],
+      "settings_modules": [
+        "appearance",
+        "layout"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "default": null,
+          "value_mapping": "block.settings.image",
+          "constraints": {
+            "owner": "card",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "heading",
+          "type": "text",
+          "default": "Card heading",
+          "value_mapping": "block.settings.heading",
+          "constraints": {
+            "owner": "card",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "text",
+          "type": "richtext",
+          "default": "<p>Card content.</p>",
+          "value_mapping": "block.settings.text",
+          "constraints": {
+            "owner": "card",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "link",
+          "type": "url",
+          "default": null,
+          "value_mapping": "block.settings.link",
+          "constraints": {
+            "owner": "card",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "link_label",
+          "type": "text",
+          "default": "Learn more",
+          "value_mapping": "block.settings.link_label",
+          "constraints": {
+            "owner": "card",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "radius",
+          "type": "select",
+          "values": [
+            "square",
+            "rounded"
+          ],
+          "default": "rounded",
+          "value_mapping": "block.settings.radius",
+          "constraints": {
+            "owner": "card",
+            "source": "schema"
+          }
+        }
+      ],
+      "children": false,
+      "owners": {
+        "data_owner": "parent-context",
+        "state_owner": "none",
+        "layout_owner": "card",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "card",
+        "render_mode": "liquid-block",
+        "path": "blocks/card.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {
+          "image": "block-specific.image",
+          "heading": "block-specific.heading",
+          "text": "block-specific.text",
+          "link": "block-specific.link",
+          "link_label": "block-specific.link_label",
+          "radius": "block-specific.radius"
+        }
+      }
+    },
+    {
+      "type": "feature-list",
+      "status": "implemented",
+      "category": "controlled-composition",
+      "semantic_role": "feature-list",
+      "capabilities": [
+        "layout",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "children": {
+        "allowed_children": [
+          "feature-item"
+        ],
+        "static_slots": [],
+        "repeatable": true,
+        "limit": 20,
+        "depth_policy": "fixed-allow-list"
+      },
+      "owners": {
+        "data_owner": "feature-list",
+        "state_owner": "none",
+        "layout_owner": "feature-list",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "feature-list",
+        "render_mode": "liquid-block",
+        "path": "blocks/feature-list.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {}
+      }
+    },
+    {
+      "type": "feature-item",
+      "status": "implemented",
+      "category": "controlled-composition",
+      "semantic_role": "feature",
+      "capabilities": [
+        "layout",
+        "typography",
+        "appearance",
+        "link"
+      ],
+      "settings_modules": [
+        "layout",
+        "typography",
+        "appearance",
+        "link"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "icon",
+          "type": "text",
+          "default": "✓",
+          "value_mapping": "block.settings.icon",
+          "constraints": {
+            "owner": "feature-item",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "heading",
+          "type": "text",
+          "default": "Feature",
+          "value_mapping": "block.settings.heading",
+          "constraints": {
+            "owner": "feature-item",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "text",
+          "type": "textarea",
+          "default": "Feature description.",
+          "value_mapping": "block.settings.text",
+          "constraints": {
+            "owner": "feature-item",
+            "source": "schema"
+          }
+        }
+      ],
+      "children": false,
+      "owners": {
+        "data_owner": "feature-item",
+        "state_owner": "none",
+        "layout_owner": "feature-list",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "feature-item",
+        "render_mode": "liquid-block",
+        "path": "blocks/feature-item.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {
+          "icon": "block-specific.icon",
+          "heading": "block-specific.heading",
+          "text": "block-specific.text"
+        }
+      }
+    },
+    {
+      "type": "testimonial",
+      "status": "implemented",
+      "category": "controlled-composition",
+      "semantic_role": "testimonial",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "typography"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "typography"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "quote",
+          "type": "textarea",
+          "default": "A great experience.",
+          "value_mapping": "block.settings.quote",
+          "constraints": {
+            "owner": "testimonial",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "author",
+          "type": "text",
+          "default": "Customer",
+          "value_mapping": "block.settings.author",
+          "constraints": {
+            "owner": "testimonial",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "role",
+          "type": "text",
+          "default": null,
+          "value_mapping": "block.settings.role",
+          "constraints": {
+            "owner": "testimonial",
+            "source": "schema"
+          }
+        }
+      ],
+      "children": false,
+      "owners": {
+        "data_owner": "testimonial",
+        "state_owner": "none",
+        "layout_owner": "testimonial",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "testimonial",
+        "render_mode": "liquid-block",
+        "path": "blocks/testimonial.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {
+          "quote": "block-specific.quote",
+          "author": "block-specific.author",
+          "role": "block-specific.role"
+        }
+      }
+    },
+    {
+      "type": "callout",
+      "status": "implemented",
+      "category": "controlled-composition",
+      "semantic_role": "feedback",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "heading",
+          "type": "text",
+          "default": "Good to know",
+          "value_mapping": "block.settings.heading",
+          "constraints": {
+            "owner": "callout",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "text",
+          "type": "textarea",
+          "default": "Add an important message.",
+          "value_mapping": "block.settings.text",
+          "constraints": {
+            "owner": "callout",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "link",
+          "type": "url",
+          "default": null,
+          "value_mapping": "block.settings.link",
+          "constraints": {
+            "owner": "callout",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "link_label",
+          "type": "text",
+          "default": "Learn more",
+          "value_mapping": "block.settings.link_label",
+          "constraints": {
+            "owner": "callout",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "tone",
+          "type": "select",
+          "values": [
+            "info",
+            "success",
+            "warning"
+          ],
+          "default": "info",
+          "value_mapping": "block.settings.tone",
+          "constraints": {
+            "owner": "callout",
+            "source": "schema"
+          }
+        }
+      ],
+      "children": false,
+      "owners": {
+        "data_owner": "callout",
+        "state_owner": "callout",
+        "layout_owner": "callout",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "callout",
+        "render_mode": "liquid-block",
+        "path": "blocks/callout.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {
+          "heading": "block-specific.heading",
+          "text": "block-specific.text",
+          "link": "block-specific.link",
+          "link_label": "block-specific.link_label",
+          "tone": "block-specific.tone"
+        }
+      }
+    },
+    {
+      "type": "newsletter",
+      "status": "implemented",
+      "category": "controlled-composition",
+      "semantic_role": "form",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "heading",
+          "type": "text",
+          "default": "Join our newsletter",
+          "value_mapping": "block.settings.heading",
+          "constraints": {
+            "owner": "newsletter",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "text",
+          "type": "textarea",
+          "default": "Get updates in your inbox.",
+          "value_mapping": "block.settings.text",
+          "constraints": {
+            "owner": "newsletter",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "label",
+          "type": "text",
+          "default": "Email",
+          "value_mapping": "block.settings.label",
+          "constraints": {
+            "owner": "newsletter",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "placeholder",
+          "type": "text",
+          "default": "you@example.com",
+          "value_mapping": "block.settings.placeholder",
+          "constraints": {
+            "owner": "newsletter",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "button_label",
+          "type": "text",
+          "default": "Subscribe",
+          "value_mapping": "block.settings.button_label",
+          "constraints": {
+            "owner": "newsletter",
+            "source": "schema"
+          }
+        }
+      ],
+      "children": false,
+      "owners": {
+        "data_owner": "newsletter",
+        "state_owner": "newsletter-form",
+        "layout_owner": "newsletter",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "newsletter",
+        "render_mode": "liquid-block",
+        "path": "blocks/newsletter.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {
+          "heading": "block-specific.heading",
+          "text": "block-specific.text",
+          "label": "block-specific.label",
+          "placeholder": "block-specific.placeholder",
+          "button_label": "block-specific.button_label"
+        }
+      }
+    },
+    {
+      "type": "accordion",
+      "status": "implemented",
+      "category": "controlled-composition",
+      "semantic_role": "disclosure",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "block_specific_settings": [],
+      "children": {
+        "allowed_children": [
+          "faq-item"
+        ],
+        "static_slots": [],
+        "repeatable": true,
+        "limit": 20,
+        "depth_policy": "fixed-allow-list"
+      },
+      "owners": {
+        "data_owner": "accordion",
+        "state_owner": "accordion",
+        "layout_owner": "accordion",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "accordion",
+        "render_mode": "liquid-block",
+        "path": "blocks/accordion.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {}
+      }
+    },
+    {
+      "type": "faq-item",
+      "status": "implemented",
+      "category": "controlled-composition",
+      "semantic_role": "faq",
+      "capabilities": [
+        "typography",
+        "behavior"
+      ],
+      "settings_modules": [
+        "typography",
+        "behavior"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "question",
+          "type": "text",
+          "default": "Frequently asked question",
+          "value_mapping": "block.settings.question",
+          "constraints": {
+            "owner": "faq-item",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "answer",
+          "type": "richtext",
+          "default": "<p>Answer.</p>",
+          "value_mapping": "block.settings.answer",
+          "constraints": {
+            "owner": "faq-item",
+            "source": "schema"
+          }
+        }
+      ],
+      "children": false,
+      "owners": {
+        "data_owner": "faq-item",
+        "state_owner": "accordion",
+        "layout_owner": "accordion",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "faq-item",
+        "render_mode": "liquid-block",
+        "path": "blocks/faq-item.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {
+          "question": "block-specific.question",
+          "answer": "block-specific.answer"
+        }
+      }
+    },
+    {
+      "type": "product-card",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "product-card",
+      "capabilities": [
+        "appearance",
+        "behavior"
+      ],
+      "settings_modules": [
+        "appearance",
+        "behavior"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "show_ranking": "block-specific.show_ranking",
+          "color_type": "block-specific.color_type",
+          "color_scheme": "appearance.color_scheme"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "product-loop",
+        "state_owner": "product-card",
+        "layout_owner": "product-grid",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "commerce-product-card",
+        "render_mode": "liquid-block",
+        "path": "blocks/product-card.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "product-price",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "product-price",
+      "capabilities": [
+        "typography",
+        "appearance",
+        "spacing"
+      ],
+      "settings_modules": [
+        "typography",
+        "appearance",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "show_sale_badge": "block-specific.show_sale_badge",
+          "show_tax_and_shipping_notice": "block-specific.show_tax_and_shipping_notice",
+          "font": "typography.font",
+          "font_size": "typography.body_scale",
+          "letter_spacing": "typography.letter_spacing",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "product-resource",
+        "state_owner": "product-resource",
+        "layout_owner": "product-section",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "commerce-product-price",
+        "render_mode": "liquid-block",
+        "path": "blocks/product-price.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "product-media-gallery",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "product-media",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "media"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "media"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "show_featured_video": "block-specific.show_featured_video",
+          "desktop_layout": "layout.desktop_layout",
+          "image_zoom": "block-specific.image_zoom",
+          "grid_columns": "layout.grid_columns",
+          "show_pagination": "block-specific.show_pagination",
+          "media_gap": "spacing.gap",
+          "desktop_media_ratio": "media.ratio",
+          "mobile_media_ratio": "media.ratio",
+          "image_fit": "media.image_fit",
+          "mobile_thumbnails": "block-specific.mobile_thumbnails",
+          "thumbnail_size": "block-specific.thumbnail_size",
+          "thumbnail_gap": "spacing.gap"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "product-resource",
+        "state_owner": "product-media",
+        "layout_owner": "product-media",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "commerce-media-gallery",
+        "render_mode": "liquid-block",
+        "path": "blocks/product-media-gallery.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "product-title",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "product-title",
+      "capabilities": [
+        "typography",
+        "layout",
+        "spacing"
+      ],
+      "settings_modules": [
+        "typography",
+        "layout",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "size": "typography.heading_scale",
+          "html_tag": "block-specific.html_tag",
+          "text_case": "typography.text_case",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "product-resource",
+        "state_owner": "product-title",
+        "layout_owner": "product-section",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "commerce-product-title",
+        "render_mode": "liquid-block",
+        "path": "blocks/product-title.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "product-description",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "product-description",
+      "capabilities": [
+        "typography",
+        "spacing"
+      ],
+      "settings_modules": [
+        "typography",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "height_limit": "block-specific.height_limit",
+          "text_size": "typography.body_scale",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "product-resource",
+        "state_owner": "product-description",
+        "layout_owner": "product-section",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "commerce-product-description",
+        "render_mode": "liquid-block",
+        "path": "blocks/product-description.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "product-inventory",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "product-inventory",
+      "capabilities": [
+        "typography",
+        "appearance",
+        "spacing"
+      ],
+      "settings_modules": [
+        "typography",
+        "appearance",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "low_inventory_threshold": "block-specific.low_inventory_threshold",
+          "show_low_inventory_quantity": "block-specific.show_low_inventory_quantity",
+          "show_low_inventory_progress_bar": "block-specific.show_low_inventory_progress_bar",
+          "font": "typography.font",
+          "font_size": "typography.body_scale",
+          "letter_spacing": "typography.letter_spacing",
+          "low_inventory_text_color": "appearance.text_color",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "product-resource",
+        "state_owner": "inventory",
+        "layout_owner": "product-section",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "commerce-inventory",
+        "render_mode": "liquid-block",
+        "path": "blocks/product-inventory.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "buy-buttons",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "product-actions",
+      "capabilities": [
+        "layout",
+        "behavior",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "behavior",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "show_quantity_button": "block-specific.show_quantity_button",
+          "show_accelerated_checkout": "block-specific.show_accelerated_checkout",
+          "show_gift_card_form": "block-specific.show_gift_card_form",
+          "add_to_cart_button_style": "block-specific.add_to_cart_button_style",
+          "gap_desktop": "spacing.gap",
+          "gap_mobile": "spacing.gap",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "product-resource",
+        "state_owner": "product-form",
+        "layout_owner": "product-form",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "commerce-buy-buttons",
+        "render_mode": "liquid-block",
+        "path": "blocks/buy-buttons.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "pickup-availability",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "pickup-availability",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "enable_boxed_layout": "block-specific.enable_boxed_layout",
+          "desktop_layout": "layout.desktop_layout",
+          "mobile_layout": "layout.mobile_layout",
+          "pickup_message_size": "typography.body_scale",
+          "pickup_message_color": "appearance.text_color",
+          "border_thickness": "appearance.border_thickness",
+          "corner_radius": "appearance.corner_radius",
+          "shadow": "appearance.shadow",
+          "color_type": "block-specific.color_type",
+          "color_scheme": "appearance.color_scheme",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "product-resource",
+        "state_owner": "pickup",
+        "layout_owner": "product-section",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "commerce-pickup",
+        "render_mode": "liquid-block",
+        "path": "blocks/pickup-availability.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "product-badges",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "product-badges",
+      "capabilities": [
+        "appearance",
+        "spacing"
+      ],
+      "settings_modules": [
+        "appearance",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "show_sold_out_badge": "block-specific.show_sold_out_badge",
+          "show_sale_badge": "block-specific.show_sale_badge",
+          "show_manual_badges": "block-specific.show_manual_badges",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "product-resource",
+        "state_owner": "product-badges",
+        "layout_owner": "product-card",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "commerce-product-badges",
+        "render_mode": "liquid-block",
+        "path": "blocks/product-badges.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "link-list",
+      "status": "implemented",
+      "category": "navigation-utility",
+      "semantic_role": "navigation-list",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior",
+        "link",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior",
+        "link",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "source": "block-specific.source",
+          "menu": "block-specific.menu",
+          "show_title": "block-specific.show_title",
+          "show_eyebrow": "block-specific.show_eyebrow",
+          "nested_levels": "block-specific.nested_levels",
+          "open_in_new_tab": "behavior.open_in_new_tab",
+          "external_indicator": "block-specific.external_indicator",
+          "mobile_collapse": "behavior.mobile_collapse",
+          "list_style": "layout.list_style",
+          "divider": "appearance.divider",
+          "active_color": "appearance.active_color",
+          "alignment": "layout.alignment",
+          "columns": "layout.columns",
+          "gap": "spacing.gap",
+          "mobile_stack": "layout.mobile_stack",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
+        }
+      },
+      "children": {
+        "allowed_children": [
+          "link-item"
+        ],
+        "static_slots": [],
+        "repeatable": true,
+        "limit": 20,
+        "depth_policy": "fixed-allow-list"
+      },
+      "owners": {
+        "data_owner": "menu-context",
+        "state_owner": "navigation-list",
+        "layout_owner": "navigation-list",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "navigation-link-list",
+        "render_mode": "liquid-block",
+        "path": "blocks/link-list.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "keyboard accessible",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "breadcrumbs",
+      "status": "implemented",
+      "category": "navigation-utility",
+      "semantic_role": "breadcrumb-navigation",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "source": "block-specific.source",
+          "show_current_item": "block-specific.show_current_item",
+          "text_role": "typography.body_role",
+          "separator": "block-specific.separator",
+          "current_color": "appearance.text_color",
+          "truncation": "block-specific.truncation",
+          "width": "layout.width",
+          "mobile_behavior": "layout.mobile_behavior",
+          "alignment": "layout.alignment",
+          "gap": "spacing.gap",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "route-context",
+        "state_owner": "breadcrumb",
+        "layout_owner": "breadcrumb",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "navigation-breadcrumbs",
+        "render_mode": "liquid-block",
+        "path": "blocks/breadcrumbs.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "keyboard accessible",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "pagination",
+      "status": "implemented",
+      "category": "navigation-utility",
+      "semantic_role": "pagination-navigation",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "show_previous": "block-specific.show_previous",
+          "show_next": "block-specific.show_next",
+          "show_page_numbers": "block-specific.show_page_numbers",
+          "show_first_last": "block-specific.show_first_last",
+          "ellipsis_behavior": "block-specific.ellipsis_behavior",
+          "previous_label": "block-specific.previous_label",
+          "next_label": "block-specific.next_label",
+          "control_variant": "appearance.control_variant",
+          "current_state": "appearance.current_state",
+          "alignment": "layout.alignment",
+          "flow": "layout.flow",
+          "mobile_compact_mode": "layout.mobile_compact_mode",
+          "gap": "spacing.gap",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "paginate-context",
+        "state_owner": "pagination",
+        "layout_owner": "pagination",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "navigation-pagination",
+        "render_mode": "liquid-block",
+        "path": "blocks/pagination.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "keyboard accessible",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "search",
+      "status": "implemented",
+      "category": "navigation-utility",
+      "semantic_role": "search-form",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior",
+        "link",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior",
+        "link",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "input_label": "block-specific.input_label",
+          "placeholder": "block-specific.placeholder",
+          "submit_label": "block-specific.submit_label",
+          "source": "block-specific.source",
+          "result_route": "link.result_route",
+          "query_parameter": "link.query_parameter",
+          "max_results": "block-specific.max_results",
+          "include_products": "block-specific.include_products",
+          "include_articles": "block-specific.include_articles",
+          "include_pages": "block-specific.include_pages",
+          "no_result_message": "block-specific.no_result_message",
+          "input_variant": "appearance.input_variant",
+          "button_variant": "appearance.button_variant",
+          "icon": "appearance.icon",
+          "color_scheme": "appearance.color_scheme",
+          "alignment": "layout.alignment",
+          "radius": "appearance.corner_radius",
+          "gap": "spacing.gap",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "search-context",
+        "state_owner": "search-form",
+        "layout_owner": "search-form",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "navigation-search",
+        "render_mode": "liquid-block",
+        "path": "blocks/search.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "social-links",
+      "status": "implemented",
+      "category": "navigation-utility",
+      "semantic_role": "social-navigation",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior",
+        "link",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior",
+        "link",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "link_source": "block-specific.link_source",
+          "icon_size": "block-specific.icon_size",
+          "accessible_labels": "behavior.accessible_labels",
+          "external_target": "behavior.open_in_new_tab",
+          "display": "layout.display",
+          "color_mode": "appearance.color_mode",
+          "alignment": "layout.alignment",
+          "flow": "layout.flow",
+          "gap": "spacing.gap",
+          "mobile_alignment": "layout.mobile_alignment",
+          "mobile_wrap": "layout.mobile_wrap",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "theme-settings",
+        "state_owner": "social-links",
+        "layout_owner": "social-links",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "navigation-social-links",
+        "render_mode": "liquid-block",
+        "path": "blocks/social-links.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "keyboard accessible",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "share",
+      "status": "implemented",
+      "category": "navigation-utility",
+      "semantic_role": "share-control",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior",
+        "link",
+        "spacing"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior",
+        "link",
+        "spacing"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "target": "link.target",
+          "custom_target": "link.custom_target",
+          "title_source": "block-specific.title_source",
+          "show_native_share": "behavior.show_native_share",
+          "show_copy_link": "behavior.show_copy_link",
+          "show_email": "behavior.show_email",
+          "show_social_channels": "behavior.show_social_channels",
+          "visible_label": "block-specific.visible_label",
+          "copied_label": "block-specific.copied_label",
+          "error_label": "block-specific.error_label",
+          "button_variant": "appearance.button_variant",
+          "icon": "appearance.icon",
+          "orientation": "layout.orientation",
+          "gap": "spacing.gap",
+          "alignment": "layout.alignment",
+          "mobile_behavior": "layout.mobile_behavior",
+          "mobile_stack": "layout.mobile_stack",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "route-context",
+        "state_owner": "share-control",
+        "layout_owner": "share-control",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "navigation-share",
+        "render_mode": "liquid-block",
+        "path": "blocks/share.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "product-info",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "product-info",
+      "capabilities": [
+        "typography",
+        "appearance"
+      ],
+      "settings_modules": [
+        "typography",
+        "appearance"
+      ],
+      "block_specific_settings": [],
+      "children": false,
+      "owners": {
+        "data_owner": "product-resource",
+        "state_owner": "product-resource",
+        "layout_owner": "product-section",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "product-info",
+        "render_mode": "liquid-block",
+        "path": "blocks/product-info.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {}
+      }
+    },
+    {
+      "type": "variant-picker",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "product-form-control",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {
+          "size_chart_option_name": "block-specific.size_chart_option_name",
+          "size_chart_page": "block-specific.size_chart_page",
+          "size_chart_desktop_layout": "block-specific.size_chart_desktop_layout",
+          "size_chart_width": "block-specific.size_chart_width",
+          "size_chart_mobile_layout": "block-specific.size_chart_mobile_layout",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "product-resource",
+        "state_owner": "product-form",
+        "layout_owner": "product-form",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "commerce-variant-picker",
+        "render_mode": "liquid-block",
+        "path": "blocks/variant-picker.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      }
+    },
+    {
+      "type": "product-form",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "product-form",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "block_specific_settings": [],
+      "children": false,
+      "owners": {
+        "data_owner": "product-resource",
+        "state_owner": "product-form",
+        "layout_owner": "product-form",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "product-form",
+        "render_mode": "liquid-block",
+        "path": "blocks/product-form.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {}
+      }
+    },
+    {
+      "type": "cart-item",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "cart-line",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "block_specific_settings": [],
+      "children": false,
+      "owners": {
+        "data_owner": "cart",
+        "state_owner": "cart",
+        "layout_owner": "cart",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "cart-item",
+        "render_mode": "liquid-block",
+        "path": "blocks/cart-item.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {}
+      }
+    },
+    {
+      "type": "filter-group",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "filter",
+      "capabilities": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance",
+        "behavior"
+      ],
+      "block_specific_settings": [],
+      "children": false,
+      "owners": {
+        "data_owner": "collection-filter-context",
+        "state_owner": "filter-group",
+        "layout_owner": "filter-group",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "filter-group",
+        "render_mode": "liquid-block",
+        "path": "blocks/filter-group.liquid",
+        "editor_surface": "theme-block"
+      },
+      "contract_version": "1.0.0",
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "not interactive",
+        "reduced_motion": "inherited; interactive motion must respect prefers-reduced-motion"
+      },
+      "schema_contract": {
+        "settings": {}
+      }
+    },
+    {
+      "type": "link-item",
+      "status": "implemented",
+      "category": "navigation-utility",
+      "semantic_role": "navigation-link",
+      "contract_version": "1.0.0",
+      "capabilities": [
+        "appearance",
+        "behavior",
+        "link"
+      ],
+      "settings_modules": [
+        "appearance",
+        "behavior",
+        "link"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "label",
+          "type": "text",
+          "default": "Link",
+          "value_mapping": "visible link label",
+          "constraints": {
+            "owner": "link-item",
+            "required": true
+          }
+        },
+        {
+          "id": "link",
+          "type": "url",
+          "default": null,
+          "value_mapping": "href",
+          "constraints": {
+            "owner": "link-item",
+            "required": true
+          }
+        }
+      ],
+      "schema_contract": {
+        "settings": {
+          "label": "block-specific.label",
+          "link": "link.link",
+          "open_in_new_tab": "behavior.open_in_new_tab",
+          "external_indicator": "block-specific.external_indicator"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "link-item",
+        "state_owner": "none",
+        "layout_owner": "link-list",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "navigation-link-list__item",
+        "render_mode": "liquid-block",
+        "path": "blocks/link-item.liquid",
+        "editor_surface": "theme-block"
+      },
+      "accessibility": {
+        "semantic_html": "list item containing link",
+        "focus": "keyboard accessible",
+        "reduced_motion": "inherited"
+      }
+    },
+    {
+      "type": "split-content",
+      "status": "implemented",
+      "category": "flexible-composition",
+      "semantic_role": "content-composition",
+      "contract_version": "1.0.0",
+      "capabilities": [
+        "layout",
+        "appearance"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance"
+      ],
+      "block_specific_settings": [
+        {
+          "id": "ratio",
+          "type": "select",
+          "values": [
+            "equal",
+            "one_two",
+            "two_one"
+          ],
+          "default": "equal",
+          "value_mapping": "block.settings.ratio",
+          "constraints": {
+            "owner": "split-content",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "left",
+          "type": "richtext",
+          "default": "<p>Left content</p>",
+          "value_mapping": "block.settings.left",
+          "constraints": {
+            "owner": "split-content",
+            "source": "schema"
+          }
+        },
+        {
+          "id": "right",
+          "type": "richtext",
+          "default": "<p>Right content</p>",
+          "value_mapping": "block.settings.right",
+          "constraints": {
+            "owner": "split-content",
+            "source": "schema"
+          }
+        }
+      ],
+      "schema_contract": {
+        "settings": {
+          "ratio": "block-specific.ratio",
+          "left": "block-specific.left",
+          "right": "block-specific.right"
+        }
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "parent-context",
+        "state_owner": "none",
+        "layout_owner": "split-content",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "split-content",
+        "render_mode": "liquid-block",
+        "path": "blocks/split-content.liquid",
+        "editor_surface": "theme-block"
+      },
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "keyboard accessible where interactive",
+        "reduced_motion": "inherited"
+      }
+    },
+    {
+      "type": "collection-card",
+      "status": "implemented",
+      "category": "commerce-composition",
+      "semantic_role": "collection-card",
+      "contract_version": "1.0.0",
+      "capabilities": [
+        "layout",
+        "appearance"
+      ],
+      "settings_modules": [
+        "layout",
+        "appearance"
+      ],
+      "block_specific_settings": [],
+      "schema_contract": {
+        "settings": {}
+      },
+      "children": false,
+      "owners": {
+        "data_owner": "parent-context",
+        "state_owner": "none",
+        "layout_owner": "collection-card",
+        "motion_owner": "theme-settings"
+      },
+      "rendering": {
+        "root_class": "collection-card",
+        "render_mode": "liquid-block",
+        "path": "blocks/collection-card.liquid",
+        "editor_surface": "theme-block"
+      },
+      "accessibility": {
+        "semantic_html": "block contract semantic role",
+        "focus": "keyboard accessible where interactive",
+        "reduced_motion": "inherited"
+      }
+    }
   ],
   "section_surfaces": [
     {
       "type": "custom-section",
       "path": "sections/custom-section.liquid",
-      "block_policy": "generic-theme-surface",
-      "allowed_children": "@theme",
+      "block_policy": "explicit-allow-list",
+      "allowed_children": [
+        "text",
+        "group",
+        "stack",
+        "grid",
+        "columns",
+        "spacer",
+        "divider",
+        "heading",
+        "eyebrow",
+        "button",
+        "image",
+        "video",
+        "icon",
+        "header",
+        "buttons",
+        "content-group",
+        "media-with-text",
+        "group-layout",
+        "card",
+        "feature-list",
+        "feature-item",
+        "testimonial",
+        "callout",
+        "newsletter",
+        "accordion",
+        "faq-item",
+        "product-card",
+        "product-price",
+        "product-media-gallery",
+        "product-title",
+        "product-description",
+        "product-inventory",
+        "buy-buttons",
+        "pickup-availability",
+        "product-badges",
+        "link-list",
+        "breadcrumbs",
+        "pagination",
+        "search",
+        "social-links",
+        "share",
+        "product-info",
+        "variant-picker",
+        "product-form",
+        "cart-item",
+        "filter-group",
+        "link-item",
+        "split-content",
+        "collection-card"
+      ],
       "exception_reason": "This is the explicitly documented generic composition surface; curated sections must use an explicit allow-list."
+    },
+    {
+      "type": "product",
+      "path": "sections/product.liquid",
+      "block_policy": "explicit-allow-list",
+      "allowed_children": [
+        "product-title",
+        "product-price",
+        "product-description",
+        "variant-picker",
+        "product-inventory",
+        "buy-buttons",
+        "pickup-availability",
+        "product-badges",
+        "product-media-gallery",
+        "product-info"
+      ]
     }
   ]
 }

@@ -1,0 +1,4 @@
+{% doc %}Repeatable feature list with bounded feature children.{% enddoc %}
+<div class="controlled-feature-list" {{ block.shopify_attributes }}>{% content_for 'blocks' %}</div>
+{% stylesheet %}.controlled-feature-list{display:grid;gap:var(--space-medium)}{% endstylesheet %}
+{% schema %}{"name":"Feature list","blocks":[{"type":"feature-item"}],"settings":[],"presets":[{"name":"Feature list"}]}{% endschema %}

@@ -1,0 +1,4 @@
+{% doc %}Collection card with image, title and link.{% enddoc %}
+{% if collection != blank %}<article class="commerce-collection-card" {{ block.shopify_attributes }}>{% if collection.featured_image %}{{ collection.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: collection.title }}{% endif %}<h3><a href="{{ collection.url }}">{{ collection.title | escape }}</a></h3></article>{% endif %}
+{% stylesheet %}.commerce-collection-card{display:grid;gap:var(--space-small)}.commerce-collection-card img{display:block;width:100%;height:auto}.commerce-collection-card h3{margin:0}{% endstylesheet %}
+{% schema %}{"name":"Collection card","settings":[],"presets":[{"name":"Collection card"}]}{% endschema %}

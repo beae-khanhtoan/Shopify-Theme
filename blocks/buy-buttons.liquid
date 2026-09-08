@@ -10,7 +10,7 @@
     {% endif %}
     {% if product.available %}
       <button class="button button--{{ block.settings.add_to_cart_button_style }}" type="submit" name="add">Add to cart</button>
-      {% if block.settings.show_accelerated_checkout %}<div class="commerce-buy-buttons__accelerated">Express checkout options appear here when available.</div>{% endif %}
+      {% if block.settings.show_accelerated_checkout %}<div class="commerce-buy-buttons__accelerated">{{ product | payment_button }}</div>{% endif %}
       {% if block.settings.show_gift_card_form and product.gift_card? %}<p class="commerce-buy-buttons__gift-card">Gift card delivery details are collected at checkout.</p>{% endif %}
     {% else %}
       <button class="button button--{{ block.settings.add_to_cart_button_style }}" type="button" disabled>Sold out</button>

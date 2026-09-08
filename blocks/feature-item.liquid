@@ -1,0 +1,4 @@
+{% doc %}A single feature item.{% enddoc %}
+<div class="controlled-feature-item" {{ block.shopify_attributes }}>{% if block.settings.icon != blank %}<span aria-hidden="true">{{ block.settings.icon }}</span>{% endif %}<div><h3>{{ block.settings.heading }}</h3><p>{{ block.settings.text }}</p></div></div>
+{% stylesheet %}.controlled-feature-item{display:flex;gap:var(--space-small);align-items:flex-start}.controlled-feature-item h3,.controlled-feature-item p{margin:0}.controlled-feature-item p{color:var(--color-muted)}{% endstylesheet %}
+{% schema %}{"name":"Feature item","settings":[{"type":"text","id":"icon","label":"Icon","default":"✓"},{"type":"text","id":"heading","label":"Heading","default":"Feature"},{"type":"textarea","id":"text","label":"Text","default":"Feature description."}],"presets":[{"name":"Feature item"}]}{% endschema %}

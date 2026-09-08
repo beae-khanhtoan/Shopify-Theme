@@ -10,7 +10,7 @@
 {% if block.settings.image != blank %}
   <div class="image image--{{ block.settings.ratio }} image--device-{{ block.settings.device }} image--radius-{{ block.settings.corner_radius }}" style="--image-width: {{ image_width }}; --image-width-mobile: {{ image_width_mobile }}; --image-padding: {{ block.settings.padding }}px;" {{ block.shopify_attributes }}>
     {% if block.settings.link != blank %}<a class="image__link" href="{{ block.settings.link }}"{% if block.settings.open_in_new_tab %} target="_blank" rel="noopener noreferrer"{% endif %}>{% endif %}
-      <picture>{% if block.settings.mobile_image != blank %}<source media="(max-width: 767.98px)" srcset="{{ mobile_image_source | image_url: width: 1200 }}">{% endif %}{{ block.settings.image | image_url: width: 2000 | image_tag: alt: block.settings.alt, loading: 'lazy' }}</picture>
+      <picture>{% if block.settings.show_image_first_on_mobile and block.settings.mobile_image != blank %}<source media="(max-width: 767.98px)" srcset="{{ mobile_image_source | image_url: width: 1200 }}">{% endif %}{{ block.settings.image | image_url: width: 2000 | image_tag: alt: block.settings.alt, loading: 'lazy' }}</picture>
     {% if block.settings.link != blank %}</a>{% endif %}
   </div>
 {% else %}

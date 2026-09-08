@@ -1,0 +1,4 @@
+{% doc %}Product form surface for quantity and add-to-cart controls.{% enddoc %}
+{% if product != blank %}{% form 'product', product, class: 'commerce-product-form' %}<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"><label>Quantity<input type="number" name="quantity" min="1" value="1"></label><button type="submit" name="add"{% unless product.available %} disabled{% endunless %}>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</button>{% endform %}{% endif %}
+{% stylesheet %}.commerce-product-form{display:grid;gap:var(--space-small)}.commerce-product-form input{max-width:8rem;padding:.5rem}.commerce-product-form button{padding:.75rem 1rem}{% endstylesheet %}
+{% schema %}{"name":"Product form","settings":[],"presets":[{"name":"Product form"}]}{% endschema %}

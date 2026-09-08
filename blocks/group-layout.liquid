@@ -1,0 +1,4 @@
+{% doc %}Legacy-compatible layout group alias with explicit children.{% enddoc %}
+<div class="layout-group" style="--layout-gap: {{ block.settings.gap }}px;" {{ block.shopify_attributes }}>{% content_for 'blocks' %}</div>
+{% stylesheet %}.layout-group{display:grid;gap:var(--layout-gap);min-width:0}.layout-group>*{min-width:0}{% endstylesheet %}
+{% schema %}{"name":"Group layout","blocks":[{"type":"heading"},{"type":"text"},{"type":"button"},{"type":"image"}],"settings":[{"type":"range","id":"gap","label":"Gap","min":0,"max":64,"step":4,"unit":"px","default":16}],"presets":[{"name":"Group layout"}]}{% endschema %}

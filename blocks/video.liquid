@@ -7,7 +7,7 @@
 {% assign video_source = block.settings.video_url %}
 
 {% if block.settings.video != blank or video_source != blank %}
-  <div class="video video--{{ block.settings.aspect_ratio }} video--device-{{ block.settings.device }} video--radius-{{ block.settings.corner_radius }}" style="--video-width: {{ video_width }}; --video-padding: {{ block.settings.padding }}px; --play-color: {{ block.settings.play_button_color }}; --background-color: {{ block.settings.background_color }};" {{ block.shopify_attributes }}>
+  <div class="video video--{{ block.settings.aspect_ratio }} video--device-{{ block.settings.device }} video--mobile-first-{{ block.settings.show_video_first_on_mobile }} video--radius-{{ block.settings.corner_radius }}" style="--video-width: {{ video_width }}; --video-padding: {{ block.settings.padding }}px; --play-color: {{ block.settings.play_button_color }}; --background-color: {{ block.settings.background_color }};" {{ block.shopify_attributes }}>
     {% if block.settings.video != blank %}
       {{ block.settings.video | video_tag: autoplay: block.settings.autoplay, loop: block.settings.loop, muted: block.settings.autoplay, controls: true, poster: block.settings.cover_image }}
     {% else %}
@@ -41,7 +41,7 @@
   .video--radius-medium { border-radius: var(--radius-rounded); }
   .video--radius-large { border-radius: var(--radius-extra); }
   .video__play { position: absolute; inset: 50% auto auto 50%; display: grid; width: 3rem; height: 3rem; place-items: center; transform: translate(-50%, -50%); color: var(--play-color); pointer-events: none; }
-  @media (max-width: 767.98px) { .video--device-desktop { display: none; } }
+  @media (max-width: 767.98px) { .video--device-desktop { display: none; } .video--mobile-first-false { order: 2; } }
   @media (min-width: 768px) { .video--device-mobile { display: none; } }
 {% endstylesheet %}
 

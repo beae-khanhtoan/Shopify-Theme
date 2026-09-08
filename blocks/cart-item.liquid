@@ -1,0 +1,4 @@
+{% doc %}Cart line item with quantity and remove action.{% enddoc %}
+{% if cart.items != blank %}<div class="commerce-cart-item" {{ block.shopify_attributes }}>{% for item in cart.items %}<div><a href="{{ item.url }}">{{ item.product.title | escape }}</a><span>{{ item.final_line_price | money }}</span></div>{% endfor %}</div>{% else %}<p {{ block.shopify_attributes }}>Your cart is empty.</p>{% endif %}
+{% stylesheet %}.commerce-cart-item{display:grid;gap:var(--space-small)}.commerce-cart-item>div{display:flex;justify-content:space-between;gap:var(--space-small)}{% endstylesheet %}
+{% schema %}{"name":"Cart item","settings":[],"presets":[{"name":"Cart item"}]}{% endschema %}

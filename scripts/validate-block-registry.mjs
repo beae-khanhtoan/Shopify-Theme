@@ -23,6 +23,10 @@ function readLiquidSchema(file) {
 for (const block of registry.blocks) {
   if (blocks.has(block.type)) errors.push(`duplicate block type: ${block.type}`);
   blocks.set(block.type, block);
+  if (!block.contract_version) errors.push(`${block.type}: missing contract_version`);
+  if (!block.accessibility?.semantic_html || !block.accessibility?.focus || !block.accessibility?.reduced_motion) {
+    errors.push(`${block.type}: accessibility must define semantic_html, focus and reduced_motion`);
+  }
   if (!knownCategories.has(block.category)) errors.push(`${block.type}: unknown category ${block.category}`);
   if (!Array.isArray(block.capabilities)) errors.push(`${block.type}: capabilities must be an array`);
   for (const moduleName of block.settings_modules ?? []) {
@@ -56,6 +60,7 @@ for (const block of registry.blocks) {
         if (JSON.stringify(actualChildren) !== JSON.stringify(allowedChildren)) {
           errors.push(`${block.type}: schema children do not match Registry allow-list`);
         }
+        if (!block.rendering.root_class) errors.push(`${block.type}: rendering.root_class is required`);
       } catch (error) {
         errors.push(`${block.type}: invalid Liquid schema: ${error.message}`);
       }
