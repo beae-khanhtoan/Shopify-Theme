@@ -166,6 +166,19 @@
           "constraints": {
             "owner": "group"
           }
+        },
+        {
+          "id": "mobile_order",
+          "type": "select",
+          "default": "default",
+          "values": [
+            "default",
+            "reverse"
+          ],
+          "value_mapping": "group.mobile_order",
+          "constraints": {
+            "owner": "group"
+          }
         }
       ],
       "schema_contract": {
@@ -180,10 +193,10 @@
           "text_alignment": "layout.text_alignment",
           "wrap": "block-specific.wrap",
           "stack_on_mobile": "layout.stack_on_mobile",
-          "show_background": "appearance.show_background",
+          "mobile_order": "block-specific.mobile_order",
+          "color_scheme": "appearance.color_scheme",
           "border_thickness": "appearance.border_thickness",
           "corner_radius": "appearance.corner_radius",
-          "color_scheme": "appearance.color_scheme",
           "padding_top": "spacing.padding_top",
           "padding_bottom": "spacing.padding_bottom",
           "padding_left": "spacing.padding_left",
