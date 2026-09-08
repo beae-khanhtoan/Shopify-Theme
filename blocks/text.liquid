@@ -6,17 +6,15 @@
 {% if block.settings.width == 'fill' %}{% assign text_width = '100%' %}{% endif %}
 {% assign text_width_mobile = 'fit-content' %}
 {% if block.settings.customize_mobile_layout and block.settings.width_mobile == 'fill' %}{% assign text_width_mobile = '100%' %}{% else %}{% assign text_width_mobile = text_width %}{% endif %}
-{% assign text_alignment_mobile = block.settings.alignment %}
-{% if block.settings.customize_mobile_layout and block.settings.customize_mobile_alignment and block.settings.width_mobile == 'fill' %}{% assign text_alignment_mobile = block.settings.alignment_mobile %}{% endif %}
-
-<div class="body-text body-{{ block.settings.text_size }}" style="--block-width: {{ text_width }}; --block-width-mobile: {{ text_width_mobile }}; --block-align: {{ block.settings.alignment }}; --block-align-mobile: {{ text_alignment_mobile }}; --block-color: {{ block.settings.text_color | default: 'var(--body-color)' }}; --padding-top: {{ block.settings.padding_top }}px; --padding-bottom: {{ block.settings.padding_bottom }}px; --padding-left: {{ block.settings.padding_left }}px; --padding-right: {{ block.settings.padding_right }}px; --padding-top-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_top_mobile }}{% else %}{{ block.settings.padding_top }}{% endif %}px; --padding-bottom-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_bottom_mobile }}{% else %}{{ block.settings.padding_bottom }}{% endif %}px; --padding-left-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_left_mobile }}{% else %}{{ block.settings.padding_left }}{% endif %}px; --padding-right-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_right_mobile }}{% else %}{{ block.settings.padding_right }}{% endif %}px;" {{ block.shopify_attributes }}>
+<div class="body-text body-{{ block.settings.text_size }}{% if block.settings.text_size == 'custom' %} body-custom{% endif %}" style="--block-width: {{ text_width }}; --block-width-mobile: {{ text_width_mobile }}; --block-align: {{ block.settings.alignment }}; --block-color: {{ block.settings.text_color | default: 'var(--body-color)' }}; --custom-text-size: {{ block.settings.custom_text_size }}px; --padding-top: {{ block.settings.padding_top }}px; --padding-bottom: {{ block.settings.padding_bottom }}px; --padding-left: {{ block.settings.padding_left }}px; --padding-right: {{ block.settings.padding_right }}px; --padding-top-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_top_mobile }}{% else %}{{ block.settings.padding_top }}{% endif %}px; --padding-bottom-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_bottom_mobile }}{% else %}{{ block.settings.padding_bottom }}{% endif %}px; --padding-left-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_left_mobile }}{% else %}{{ block.settings.padding_left }}{% endif %}px; --padding-right-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_right_mobile }}{% else %}{{ block.settings.padding_right }}{% endif %}px;" {{ block.shopify_attributes }}>
   {{ block.settings.text }}
 </div>
 
 {% stylesheet %}
   .body-text { width: var(--block-width); margin: 0; padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left); text-align: var(--block-align); color: var(--block-color); }
+  .body-custom { font-size: var(--custom-text-size); }
   .body-text p, .body-text ul, .body-text ol { margin-block: 0 1em; }
-  @media (max-width: 767.98px) { .body-text { width: var(--block-width-mobile); padding: var(--padding-top-mobile) var(--padding-right-mobile) var(--padding-bottom-mobile) var(--padding-left-mobile); text-align: var(--block-align-mobile); } }
+  @media (max-width: 767.98px) { .body-text { width: var(--block-width-mobile); padding: var(--padding-top-mobile) var(--padding-right-mobile) var(--padding-bottom-mobile) var(--padding-left-mobile); } }
 {% endstylesheet %}
 
 {% schema %}{
@@ -39,30 +37,45 @@
       "options": [
         {
           "value": "xs",
-          "label": "XS"
+          "label": "Extra small"
         },
         {
           "value": "sm",
-          "label": "SM"
+          "label": "Small"
         },
         {
           "value": "md",
-          "label": "MD"
+          "label": "Medium"
         },
         {
           "value": "lg",
-          "label": "LG"
+          "label": "Large"
         },
         {
           "value": "xl",
-          "label": "XL"
+          "label": "Extra large"
         },
         {
           "value": "xxl",
-          "label": "XXL"
+          "label": "Extra extra large"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
         }
       ],
       "default": "md"
+    },
+    {
+      "type": "range",
+      "id": "custom_text_size",
+      "label": "Custom text size",
+      "min": 8,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "visible_if": "{{ block.settings.text_size == 'custom' }}"
     },
     {
       "type": "color",
@@ -133,33 +146,6 @@
       ],
       "default": "start",
       "visible_if": "{{ block.settings.width == 'fill' }}"
-    },
-    {
-      "type": "checkbox",
-      "id": "customize_mobile_alignment",
-      "label": "Customize mobile alignment",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "alignment_mobile",
-      "label": "t:blocks.common.mobile_alignment",
-      "options": [
-        {
-          "value": "start",
-          "label": "Start"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "end",
-          "label": "End"
-        }
-      ],
-      "default": "start",
-      "visible_if": "{{ block.settings.customize_mobile_layout and block.settings.width_mobile == 'fill' }}"
     },
     {
       "type": "range",
