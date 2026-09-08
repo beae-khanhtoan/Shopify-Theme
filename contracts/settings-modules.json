@@ -1,0 +1,121 @@
+{
+  "version": "1.0.0",
+  "description": "Canonical shared setting modules for Theme Block contracts. This file is build-time metadata and is not read by Shopify at runtime.",
+  "modules": {
+    "layout": {
+      "owner": "parent-or-block-layout",
+      "settings": [
+        {
+          "id": "width",
+          "type": "select",
+          "values": ["content", "fill", "fit"],
+          "default": "content",
+          "value_mapping": "semantic layout class or --block-width",
+          "constraints": { "owner": "block", "raw_values_allowed": false }
+        },
+        {
+          "id": "alignment",
+          "type": "text_alignment",
+          "values": ["left", "center", "right"],
+          "default": "left",
+          "value_mapping": "--block-align or text-align",
+          "constraints": { "owner": "block", "responsive_override": "optional" }
+        }
+      ]
+    },
+    "appearance": {
+      "owner": "block-or-surface",
+      "settings": [
+        {
+          "id": "color_scheme",
+          "type": "color_scheme",
+          "values": "theme-settings.color_schemes",
+          "default": "scheme-1",
+          "value_mapping": "--color-* variables from CSS Foundation",
+          "constraints": { "owner": "block", "raw_colors_allowed": false }
+        },
+        {
+          "id": "radius",
+          "type": "select",
+          "values": ["square", "slightly_rounded", "rounded", "extra_rounded", "pill"],
+          "default": "square",
+          "value_mapping": "semantic radius token",
+          "constraints": { "owner": "surface", "raw_values_allowed": false }
+        }
+      ]
+    },
+    "typography": {
+      "owner": "textual-block",
+      "settings": [
+        {
+          "id": "text_role",
+          "type": "select",
+          "values": ["heading-h1", "heading-h2", "heading-h3", "heading-h4", "heading-h5", "heading-h6", "heading-text", "body-text", "accent-text", "eyebrow-text"],
+          "default": "body-text",
+          "value_mapping": "typography role class from CSS Foundation",
+          "constraints": { "owner": "block", "accent_for_long_form": false }
+        }
+      ]
+    },
+    "spacing": {
+      "owner": "parent-layout-or-surface",
+      "settings": [
+        {
+          "id": "gap",
+          "type": "select",
+          "values": ["none", "small", "medium", "large"],
+          "default": "none",
+          "value_mapping": "spacing token from CSS Foundation",
+          "constraints": { "owner": "parent", "raw_values_allowed": false, "kernel_margin_allowed": false }
+        },
+        {
+          "id": "padding",
+          "type": "select",
+          "values": ["none", "small", "medium", "large"],
+          "default": "none",
+          "value_mapping": "spacing token from CSS Foundation",
+          "constraints": { "owner": "surface", "optional_capability": true, "raw_values_allowed": false }
+        }
+      ]
+    },
+    "media": {
+      "owner": "media-block",
+      "settings": [
+        {
+          "id": "ratio",
+          "type": "select",
+          "values": ["adapt", "square", "portrait", "landscape", "wide"],
+          "default": "adapt",
+          "value_mapping": "media ratio class or aspect-ratio",
+          "constraints": { "owner": "media", "raw_values_allowed": false }
+        }
+      ]
+    },
+    "link": {
+      "owner": "interactive-block",
+      "settings": [
+        {
+          "id": "link",
+          "type": "url",
+          "values": "shopify.url",
+          "default": null,
+          "value_mapping": "href with safe empty-state handling",
+          "constraints": { "owner": "block", "accessible_name_required": true }
+        }
+      ]
+    },
+    "behavior": {
+      "owner": "interactive-or-media-block",
+      "settings": [
+        {
+          "id": "open_in_new_tab",
+          "type": "checkbox",
+          "values": [true, false],
+          "default": false,
+          "value_mapping": "target and rel attributes",
+          "constraints": { "owner": "block", "visible_if": "link is not empty" }
+        }
+      ]
+    }
+  }
+}
