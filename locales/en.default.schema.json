@@ -200,6 +200,18 @@
       "spacing_bottom": "Bottom spacing",
       "spacing_top_mobile": "Top spacing mobile",
       "spacing_bottom_mobile": "Bottom spacing mobile"
+    },
+    "commerce": {
+      "product_card_name": "Product Card",
+      "product_price_name": "Product Price",
+      "variant_picker_name": "Variant Picker",
+      "product_media_gallery_name": "Product Media Gallery",
+      "product_title_name": "Product Title",
+      "product_description_name": "Product Description",
+      "product_inventory_name": "Product Inventory",
+      "buy_buttons_name": "Buy Buttons",
+      "pickup_availability_name": "Pickup Availability",
+      "product_badges_name": "Product Badges"
     }
   },
   "options": {
