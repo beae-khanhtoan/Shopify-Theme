@@ -1,0 +1,4 @@
+{% doc %}Repeatable action group with bounded button children.{% enddoc %}
+<div class="micro-buttons micro-buttons--{{ block.settings.alignment }}" style="--buttons-gap: {{ block.settings.gap }}px;" {{ block.shopify_attributes }}>{% content_for 'blocks' %}</div>
+{% stylesheet %}.micro-buttons{display:flex;flex-wrap:wrap;justify-content:var(--buttons-align);gap:var(--buttons-gap)}.micro-buttons--start{--buttons-align:flex-start}.micro-buttons--center{--buttons-align:center}.micro-buttons--end{--buttons-align:flex-end}{% endstylesheet %}
+{% schema %}{"name":"Buttons","blocks":[{"type":"button"}],"settings":[{"type":"select","id":"alignment","label":"Alignment","options":[{"value":"start","label":"Start"},{"value":"center","label":"Center"},{"value":"end","label":"End"}],"default":"start"},{"type":"range","id":"gap","label":"Gap","min":0,"max":64,"step":4,"unit":"px","default":12}],"presets":[{"name":"Buttons"}]}{% endschema %}

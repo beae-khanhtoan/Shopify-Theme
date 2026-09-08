@@ -50,6 +50,178 @@
     "text_style": "Text style",
     "text": "Text"
   },
+  "blocks": {
+    "common": {
+      "alignment": "Alignment",
+      "color_scheme": "Color scheme",
+      "customize_mobile_alignment": "Customize mobile alignment",
+      "customize_mobile_padding": "Customize mobile padding",
+      "inherited_color": "Leave blank to inherit from the color scheme",
+      "link": "Link",
+      "mobile_alignment": "Mobile alignment",
+      "open_new_tab": "Open in new tab",
+      "padding": "Padding",
+      "padding_mobile": "Mobile padding",
+      "padding_bottom": "Padding bottom",
+      "padding_bottom_mobile": "Padding bottom mobile",
+      "padding_left": "Padding left",
+      "padding_left_mobile": "Padding left mobile",
+      "padding_right": "Padding right",
+      "padding_right_mobile": "Padding right mobile",
+      "padding_top": "Padding top",
+      "padding_top_mobile": "Padding top mobile",
+      "ratio": "Ratio",
+      "text_color": "Text color",
+      "width": "Width",
+      "width_mobile": "Width mobile"
+    },
+    "layout": {
+      "layout_mode": "Layout mode",
+      "width": "Width",
+      "max_width": "Maximum width",
+      "gap": "Gap",
+      "customize_mobile_gap": "Customize mobile gap",
+      "mobile_gap": "Mobile gap",
+      "horizontal_alignment": "Horizontal alignment",
+      "vertical_alignment": "Vertical alignment",
+      "text_alignment": "Text alignment",
+      "stack_on_mobile": "Stack on mobile",
+      "alignment": "Alignment",
+      "columns_desktop": "Desktop columns",
+      "columns_tablet": "Tablet columns",
+      "columns_mobile": "Mobile columns",
+      "column_gap": "Column gap",
+      "row_gap": "Row gap",
+      "item_height": "Item height",
+      "ratio": "Column ratio",
+      "custom_left_ratio": "Custom left ratio",
+      "mobile_order": "Mobile order",
+      "padding": "Padding"
+    },
+    "heading": {
+      "name": "Heading",
+      "text": "Heading text",
+      "level": "HTML heading level",
+      "level_info": "Use a logical heading order for accessibility. Choose Text container when this is not a page heading.",
+      "visual_scale": "Visual scale"
+    },
+    "eyebrow": {
+      "name": "Eyebrow",
+      "text": "Eyebrow text",
+      "show_background": "Show background",
+      "show_icon": "Show icon",
+      "icon": "Icon",
+      "border": "Border thickness",
+      "radius": "Corner radius"
+    },
+    "button": {
+      "name": "Button",
+      "label": "Button label",
+      "style": "Button style",
+      "show_icon": "Show icon",
+      "icon": "Icon",
+      "icon_position": "Icon position",
+      "icon_size": "Icon size",
+      "icon_size_custom": "Custom icon size"
+    },
+    "image": {
+      "name": "Image",
+      "source": "Image",
+      "mobile_source": "Mobile image",
+      "mobile_first": "Show image first on mobile",
+      "alt": "Alternative text",
+      "device": "Device visibility",
+      "limit_width": "Limit width",
+      "max_width": "Maximum width",
+      "radius": "Corner radius"
+    },
+    "video": {
+      "name": "Video",
+      "source": "Video",
+      "source_type": "Video source",
+      "external_url": "External video URL",
+      "autoplay": "Autoplay",
+      "loop": "Loop video",
+      "cover": "Cover image",
+      "aspect_ratio": "Aspect ratio",
+      "play_button": "Show play button",
+      "mobile_first": "Show video first on mobile",
+      "play_color": "Play button color",
+      "background_color": "Background color"
+    },
+    "icon": {
+      "name": "Icon",
+      "source_type": "Icon source",
+      "source": "Icon",
+      "custom": "Custom icon",
+      "width": "Icon width"
+    },
+    "header": {
+      "name": "Header",
+      "limit_width": "Limit width",
+      "max_width": "Maximum width",
+      "gap_desktop": "Desktop gap",
+      "gap_mobile": "Mobile gap"
+    },
+    "text": {
+      "name": "Text",
+      "content": "Text content",
+      "size": "Text size"
+    },
+    "group": {
+      "name": "Group"
+    },
+    "stack": {
+      "name": "Stack"
+    },
+    "grid": {
+      "name": "Grid"
+    },
+    "columns": {
+      "name": "Columns"
+    },
+    "spacer": {
+      "name": "Spacer",
+      "unit_desktop": "Desktop unit",
+      "size_desktop": "Desktop size",
+      "show_on_mobile": "Show on mobile",
+      "unit_mobile": "Mobile unit",
+      "size_mobile": "Mobile size",
+      "custom_spacing": "Custom spacing"
+    },
+    "divider": {
+      "name": "Divider",
+      "style": "Style",
+      "thickness": "Thickness",
+      "color": "Color",
+      "custom_color": "Custom color",
+      "custom_width": "Custom width",
+      "spacing_top": "Top spacing",
+      "spacing_bottom": "Bottom spacing",
+      "spacing_top_mobile": "Top spacing mobile",
+      "spacing_bottom_mobile": "Bottom spacing mobile"
+    },
+    "commerce": {
+      "product_card_name": "Product Card",
+      "product_price_name": "Product Price",
+      "variant_picker_name": "Variant Picker",
+      "product_media_gallery_name": "Product Media Gallery",
+      "product_title_name": "Product Title",
+      "product_description_name": "Product Description",
+      "product_inventory_name": "Product Inventory",
+      "buy_buttons_name": "Buy Buttons",
+      "pickup_availability_name": "Pickup Availability",
+      "product_badges_name": "Product Badges"
+    },
+    "navigation": {
+      "link_list_name": "Link List",
+      "breadcrumbs_name": "Breadcrumbs",
+      "pagination_name": "Pagination",
+      "search_name": "Search",
+      "social_links_name": "Social Links",
+      "share_name": "Share"
+    }
+  },
   "options": {
     "alignment": {
       "left": "Left",
@@ -72,6 +244,6 @@
       "title": "Title",
       "subtitle": "Subtitle",
       "normal": "Normal text"
-    },
+    }
   }
 }

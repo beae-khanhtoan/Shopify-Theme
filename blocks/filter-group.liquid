@@ -1,0 +1,4 @@
+{% doc %}Collection filter group with Shopify filter links.{% enddoc %}
+{% if collection.filters != blank %}<div class="commerce-filter-group" {{ block.shopify_attributes }}>{% for filter in collection.filters %}<details><summary>{{ filter.label }}</summary><ul role="list">{% for value in filter.values %}<li><a href="{{ value.url_to_add }}">{{ value.label }} ({{ value.count }})</a></li>{% endfor %}</ul></details>{% endfor %}</div>{% endif %}
+{% stylesheet %}.commerce-filter-group{display:grid;gap:var(--space-small)}.commerce-filter-group details{padding-block:var(--space-small);border-bottom:1px solid var(--color-border)}.commerce-filter-group summary{cursor:pointer;font-weight:600}.commerce-filter-group ul{margin:var(--space-small) 0 0;padding-inline-start:1rem}{% endstylesheet %}
+{% schema %}{"name":"Filter group","settings":[],"presets":[{"name":"Filter group"}]}{% endschema %}

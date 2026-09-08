@@ -1,0 +1,4 @@
+{% doc %}Single accessible FAQ item.{% enddoc %}
+<details class="controlled-faq-item" {{ block.shopify_attributes }}><summary>{{ block.settings.question }}</summary><div>{{ block.settings.answer }}</div></details>
+{% stylesheet %}.controlled-faq-item{padding-block:var(--space-small);border-bottom:1px solid var(--color-border)}.controlled-faq-item summary{cursor:pointer;font-weight:600}.controlled-faq-item div{padding-block-start:var(--space-small)}{% endstylesheet %}
+{% schema %}{"name":"FAQ item","settings":[{"type":"text","id":"question","label":"Question","default":"Frequently asked question"},{"type":"richtext","id":"answer","label":"Answer","default":"<p>Answer.</p>"}],"presets":[{"name":"FAQ item"}]}{% endschema %}
