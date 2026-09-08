@@ -1,0 +1,7 @@
+{% doc %}A repeatable link child for the Link List block.{% enddoc %}
+{% if block.settings.label != blank and block.settings.link != blank %}
+  <li class="navigation-link-list__item" {{ block.shopify_attributes }}>
+    <a class="navigation-link-list__link" href="{{ block.settings.link }}"{% if block.settings.open_in_new_tab %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ block.settings.label | escape }}{% if block.settings.external_indicator and block.settings.open_in_new_tab %}<span class="navigation-link-list__external" aria-hidden="true">↗</span>{% endif %}</a>
+  </li>
+{% endif %}
+{% schema %}{"name":"Repeatable link","settings":[{"type":"text","id":"label","label":"Label","default":"Link"},{"type":"url","id":"link","label":"Link"},{"type":"checkbox","id":"open_in_new_tab","label":"Open in new tab","default":false},{"type":"checkbox","id":"external_indicator","label":"External indicator","default":true}],"presets":[{"name":"Repeatable link"}]}{% endschema %}

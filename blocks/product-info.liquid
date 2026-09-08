@@ -1,0 +1,4 @@
+{% doc %}Product information composition surface.{% enddoc %}
+<div class="commerce-product-info" {{ block.shopify_attributes }}>{% if product != blank %}<h1>{{ product.title | escape }}</h1>{% if product.description != blank %}<div>{{ product.description }}</div>{% endif %}{% endif %}</div>
+{% stylesheet %}.commerce-product-info{min-width:0}.commerce-product-info h1{margin-block-start:0}{% endstylesheet %}
+{% schema %}{"name":"Product info","settings":[],"presets":[{"name":"Product info"}]}{% endschema %}

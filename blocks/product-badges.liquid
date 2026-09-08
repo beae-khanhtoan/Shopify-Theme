@@ -1,0 +1,18 @@
+{% doc %}Product state badges with sold-out priority over sale and manual labels.{% enddoc %}
+{% if product != blank %}
+  {% assign has_badge = false %}
+  {% if block.settings.show_sold_out_badge and product.available == false %}{% assign has_badge = true %}{% endif %}
+  {% if product.available and block.settings.show_sale_badge and product.compare_at_price_max > product.price %}{% assign has_badge = true %}{% endif %}
+  {% if block.settings.show_manual_badges %}{% for tag in product.tags %}{% assign normalized_tag = tag | downcase %}{% if normalized_tag == 'new' or normalized_tag == 'new arrival' or normalized_tag == 'bestseller' or normalized_tag == 'best seller' %}{% assign has_badge = true %}{% endif %}{% endfor %}{% endif %}
+  {% if has_badge %}
+    <div class="commerce-product-badges" style="--badges-padding-top: {{ block.settings.padding_top }}px; --badges-padding-bottom: {{ block.settings.padding_bottom }}px; --badges-padding-top-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_top_mobile }}{% else %}{{ block.settings.padding_top }}{% endif %}px; --badges-padding-bottom-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_bottom_mobile }}{% else %}{{ block.settings.padding_bottom }}{% endif %}px;" {{ block.shopify_attributes }}>
+      {% if block.settings.show_sold_out_badge and product.available == false %}<span class="commerce-product-badge">Sold out</span>
+      {% else %}
+        {% if block.settings.show_sale_badge and product.compare_at_price_max > product.price %}<span class="commerce-product-badge">Sale</span>{% endif %}
+        {% if block.settings.show_manual_badges %}{% for tag in product.tags %}{% assign normalized_tag = tag | downcase %}{% if normalized_tag == 'new' or normalized_tag == 'new arrival' or normalized_tag == 'bestseller' or normalized_tag == 'best seller' %}<span class="commerce-product-badge">{{ tag | escape }}</span>{% endif %}{% endfor %}{% endif %}
+      {% endif %}
+    </div>
+  {% endif %}
+{% endif %}
+{% stylesheet %}.commerce-product-badges { display: flex; flex-wrap: wrap; gap: var(--space-small); padding-block: var(--badges-padding-top) var(--badges-padding-bottom); }.commerce-product-badge { padding: .25em .5em; background: var(--color-foreground); color: var(--color-background); font-size: .75em; } @media (max-width: 767.98px) { .commerce-product-badges { padding-block: var(--badges-padding-top-mobile) var(--badges-padding-bottom-mobile); } }{% endstylesheet %}
+{% schema %}{"name":"t:blocks.commerce.product_badges_name","settings":[{"type":"checkbox","id":"show_sold_out_badge","label":"Show sold out badge","default":true},{"type":"checkbox","id":"show_sale_badge","label":"Show sale badge","default":true},{"type":"checkbox","id":"show_manual_badges","label":"Show manual badges","default":false},{"type":"range","id":"padding_top","label":"Top padding","min":0,"max":100,"step":1,"unit":"px","default":0},{"type":"range","id":"padding_bottom","label":"Bottom padding","min":0,"max":100,"step":1,"unit":"px","default":0},{"type":"checkbox","id":"customize_mobile_padding","label":"Custom mobile padding","default":false},{"type":"range","id":"padding_top_mobile","label":"Mobile top padding","min":0,"max":100,"step":1,"unit":"px","default":0,"visible_if":"{{ block.settings.customize_mobile_padding }}"},{"type":"range","id":"padding_bottom_mobile","label":"Mobile bottom padding","min":0,"max":100,"step":1,"unit":"px","default":0,"visible_if":"{{ block.settings.customize_mobile_padding }}"}],"presets":[{"name":"t:blocks.commerce.product_badges_name"}]}{% endschema %}

@@ -1,0 +1,41 @@
+{% doc %}
+  Renders a library or merchant-uploaded icon with local sizing and spacing.
+{% enddoc %}
+
+{% capture icon_markup %}
+  {% if block.settings.source == 'custom' and block.settings.custom_icon != blank %}
+    {{ block.settings.custom_icon | image_url: width: 256 | image_tag: alt: '', loading: 'lazy' }}
+  {% elsif block.settings.icon == 'account' %}
+    {{ 'icon-account.svg' | inline_asset_content }}
+  {% else %}
+    {{ 'icon-cart.svg' | inline_asset_content }}
+  {% endif %}
+{% endcapture %}
+
+{% if block.settings.link != blank %}<a class="icon" style="--icon-width: {{ block.settings.icon_width }}px; --icon-padding: {{ block.settings.padding }}px; --icon-padding-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_mobile }}{% else %}{{ block.settings.padding }}{% endif %}px;" href="{{ block.settings.link }}"{% if block.settings.open_in_new_tab %} target="_blank" rel="noopener noreferrer"{% endif %} {{ block.shopify_attributes }}>{% else %}<span class="icon" style="--icon-width: {{ block.settings.icon_width }}px; --icon-padding: {{ block.settings.padding }}px; --icon-padding-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_mobile }}{% else %}{{ block.settings.padding }}{% endif %}px;" aria-hidden="true" {{ block.shopify_attributes }}>{% endif %}
+  {{ icon_markup }}
+{% if block.settings.link != blank %}</a>{% else %}</span>{% endif %}
+
+{% stylesheet %}
+  .icon { display: inline-flex; align-items: center; justify-content: center; width: var(--icon-width); padding: var(--icon-padding); color: inherit; text-decoration: none; }
+  .icon svg, .icon img { display: block; width: 100%; height: auto; stroke-width: var(--icon-stroke-width); }
+  @media (max-width: 767.98px) { .icon { padding: var(--icon-padding-mobile); } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:blocks.icon.name",
+  "settings": [
+    { "type": "select", "id": "source", "label": "t:blocks.icon.source_type", "options": [{ "value": "library", "label": "Library" }, { "value": "custom", "label": "Custom" }], "default": "library" },
+    { "type": "select", "id": "icon", "label": "t:blocks.icon.source", "options": [{ "value": "account", "label": "Account" }, { "value": "cart", "label": "Cart" }], "default": "cart", "visible_if": "{{ block.settings.source == 'library' }}" },
+    { "type": "image_picker", "id": "custom_icon", "label": "t:blocks.icon.custom", "visible_if": "{{ block.settings.source == 'custom' }}" },
+    { "type": "url", "id": "link", "label": "t:blocks.common.link" },
+    { "type": "checkbox", "id": "open_in_new_tab", "label": "t:blocks.common.open_new_tab", "default": false, "visible_if": "{{ block.settings.link != blank }}" },
+    { "type": "range", "id": "icon_width", "label": "t:blocks.icon.width", "min": 12, "max": 96, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding", "label": "t:blocks.common.padding", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "checkbox", "id": "customize_mobile_padding", "label": "t:blocks.common.customize_mobile_padding", "default": false },
+    { "type": "range", "id": "padding_mobile", "label": "t:blocks.common.padding_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.customize_mobile_padding }}" }
+  ],
+  "presets": [{ "name": "t:blocks.icon.name" }]
+}
+{% endschema %}

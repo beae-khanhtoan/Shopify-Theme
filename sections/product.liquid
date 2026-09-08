@@ -41,12 +41,25 @@
 
     <input type="submit" value="Add to cart">
     {{ form | payment_button }}
+    {% content_for 'blocks' %}
   {% endform %}
 </div>
 
 {% schema %}
 {
   "name": "t:general.product",
+  "blocks": [
+    { "type": "product-title" },
+    { "type": "product-price" },
+    { "type": "product-description" },
+    { "type": "variant-picker" },
+    { "type": "product-inventory" },
+    { "type": "buy-buttons" },
+    { "type": "pickup-availability" },
+    { "type": "product-badges" },
+    { "type": "product-media-gallery" }
+    ,{ "type": "product-info" }
+  ],
   "settings": [],
   "disabled_on": {
     "groups": ["header", "footer"]
