@@ -1,4 +1,28 @@
-{% doc %}Purchase controls composed around the parent product form context.{% enddoc %}
-{% if product != blank %}<div class="commerce-buy-buttons" {{ block.shopify_attributes }}>{% if product.available %}<button class="button button--{{ block.settings.button_style }}" type="submit" name="add">{{ block.settings.add_to_cart_label }}</button>{% else %}<button class="button" type="button" disabled>Sold out</button>{% endif %}</div>{% endif %}
-{% stylesheet %}.commerce-buy-buttons { display: grid; gap: var(--space-small); }.commerce-buy-buttons .button { width: 100%; }{% endstylesheet %}
-{% schema %}{"name":"t:blocks.commerce.buy_buttons_name","settings":[{"type":"text","id":"add_to_cart_label","label":"Add to cart label","default":"Add to cart"},{"type":"select","id":"button_style","label":"Button style","options":[{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"tertiary","label":"Tertiary"}],"default":"primary"},{"type":"checkbox","id":"show_dynamic_checkout","label":"Show dynamic checkout","default":false}],"presets":[{"name":"t:blocks.commerce.buy_buttons_name"}]}{% endschema %}
+{% doc %}Purchase controls rendered inside the product form supplied by the parent section.{% enddoc %}
+{% if product != blank %}
+  {% assign buy_variant = product.selected_or_first_available_variant %}
+  <div class="commerce-buy-buttons" style="--buy-gap-desktop: {{ block.settings.gap_desktop }}px; --buy-gap-mobile: {{ block.settings.gap_mobile }}px; --buy-padding-top: {{ block.settings.padding_top }}px; --buy-padding-bottom: {{ block.settings.padding_bottom }}px; --buy-padding-top-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_top_mobile }}{% else %}{{ block.settings.padding_top }}{% endif %}px; --buy-padding-bottom-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_bottom_mobile }}{% else %}{{ block.settings.padding_bottom }}{% endif %}px;" {{ block.shopify_attributes }}>
+    {% if block.settings.show_quantity_button and product.available %}
+      <label class="commerce-buy-buttons__quantity">
+        <span>Quantity</span>
+        <input type="number" name="quantity" min="{{ buy_variant.quantity_rule.min | default: 1 }}" step="{{ buy_variant.quantity_rule.increment | default: 1 }}"{% if buy_variant.quantity_rule.max %} max="{{ buy_variant.quantity_rule.max }}"{% endif %} value="{{ buy_variant.quantity_rule.min | default: 1 }}">
+      </label>
+    {% endif %}
+    {% if product.available %}
+      <button class="button button--{{ block.settings.add_to_cart_button_style }}" type="submit" name="add">Add to cart</button>
+      {% if block.settings.show_accelerated_checkout %}<div class="commerce-buy-buttons__accelerated">Express checkout options appear here when available.</div>{% endif %}
+      {% if block.settings.show_gift_card_form and product.gift_card? %}<p class="commerce-buy-buttons__gift-card">Gift card delivery details are collected at checkout.</p>{% endif %}
+    {% else %}
+      <button class="button button--{{ block.settings.add_to_cart_button_style }}" type="button" disabled>Sold out</button>
+    {% endif %}
+  </div>
+{% endif %}
+{% stylesheet %}
+.commerce-buy-buttons { display: grid; gap: var(--buy-gap-desktop); padding-block: var(--buy-padding-top) var(--buy-padding-bottom); }
+.commerce-buy-buttons .button { width: 100%; }
+.commerce-buy-buttons__quantity { display: grid; gap: .35rem; }
+.commerce-buy-buttons__quantity input { max-width: 7rem; }
+.commerce-buy-buttons__accelerated, .commerce-buy-buttons__gift-card { margin: 0; color: var(--color-muted); font-size: .875em; }
+@media (max-width: 767.98px) { .commerce-buy-buttons { gap: var(--buy-gap-mobile); padding-block: var(--buy-padding-top-mobile) var(--buy-padding-bottom-mobile); } }
+{% endstylesheet %}
+{% schema %}{"name":"t:blocks.commerce.buy_buttons_name","settings":[{"type":"checkbox","id":"show_quantity_button","label":"Show quantity button","default":true},{"type":"checkbox","id":"show_accelerated_checkout","label":"Show accelerated checkout","default":true},{"type":"checkbox","id":"show_gift_card_form","label":"Show gift card form","default":false},{"type":"select","id":"add_to_cart_button_style","label":"Add to cart button style","options":[{"value":"primary","label":"Primary"},{"value":"secondary","label":"Secondary"},{"value":"tertiary","label":"Tertiary (Outline)"}],"default":"tertiary"},{"type":"range","id":"gap_desktop","label":"Desktop gap","min":0,"max":64,"step":4,"unit":"px","default":12},{"type":"range","id":"gap_mobile","label":"Mobile gap","min":0,"max":64,"step":4,"unit":"px","default":12},{"type":"range","id":"padding_top","label":"Top padding","min":0,"max":100,"step":1,"unit":"px","default":0},{"type":"range","id":"padding_bottom","label":"Bottom padding","min":0,"max":100,"step":1,"unit":"px","default":0},{"type":"checkbox","id":"customize_mobile_padding","label":"Custom mobile padding","default":false},{"type":"range","id":"padding_top_mobile","label":"Mobile top padding","min":0,"max":100,"step":1,"unit":"px","default":0,"visible_if":"{{ block.settings.customize_mobile_padding }}"},{"type":"range","id":"padding_bottom_mobile","label":"Mobile bottom padding","min":0,"max":100,"step":1,"unit":"px","default":0,"visible_if":"{{ block.settings.customize_mobile_padding }}"}],"presets":[{"name":"t:blocks.commerce.buy_buttons_name"}]}{% endschema %}
