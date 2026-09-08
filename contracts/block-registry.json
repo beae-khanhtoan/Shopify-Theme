@@ -630,20 +630,29 @@
           "constraints": {
             "owner": "heading"
           }
+        },
+        {
+          "id": "custom_heading_size",
+          "type": "range",
+          "default": 48,
+          "value_mapping": "heading visual size in px",
+          "constraints": {
+            "owner": "typography",
+            "visible_when": "heading_size == custom"
+          }
         }
       ],
       "schema_contract": {
         "settings": {
           "text": "block-specific.text",
           "heading_size": "block-specific.heading_size",
+          "custom_heading_size": "block-specific.custom_heading_size",
           "html_tag": "block-specific.html_tag",
           "text_color": "appearance.text_color",
           "width": "layout.width",
           "customize_mobile_width": "layout.customize_mobile_width",
           "width_mobile": "layout.width_mobile",
           "alignment": "layout.alignment",
-          "customize_mobile_alignment": "layout.customize_mobile_alignment",
-          "alignment_mobile": "layout.alignment_mobile",
           "padding_top": "spacing.padding_top",
           "padding_bottom": "spacing.padding_bottom",
           "padding_left": "spacing.padding_left",
