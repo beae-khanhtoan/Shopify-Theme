@@ -5,9 +5,9 @@
 {% assign eyebrow_width = 'fit-content' %}
 {% if block.settings.width == 'fill' %}{% assign eyebrow_width = '100%' %}{% endif %}
 {% assign eyebrow_width_mobile = 'fit-content' %}
-{% if block.settings.width_mobile == 'fill' %}{% assign eyebrow_width_mobile = '100%' %}{% endif %}
+{% if block.settings.customize_mobile_width and block.settings.width_mobile == 'fill' %}{% assign eyebrow_width_mobile = '100%' %}{% endif %}
 {% assign eyebrow_alignment_mobile = block.settings.alignment %}
-{% if block.settings.customize_mobile_alignment and block.settings.width_mobile == 'fill' %}{% assign eyebrow_alignment_mobile = block.settings.alignment_mobile %}{% endif %}
+{% if block.settings.customize_mobile_width and block.settings.customize_mobile_alignment and block.settings.width_mobile == 'fill' %}{% assign eyebrow_alignment_mobile = block.settings.alignment_mobile %}{% endif %}
 
 {% if block.settings.text != blank %}
   <div class="eyebrow-block eyebrow-scheme-{{ block.settings.color_scheme }}{% if block.settings.show_background %} eyebrow-block--background{% endif %}{% if block.settings.show_icon %} eyebrow-block--icon{% endif %}" style="--block-width: {{ eyebrow_width }}; --block-width-mobile: {{ eyebrow_width_mobile }}; --block-align: {{ block.settings.alignment }}; --block-align-mobile: {{ eyebrow_alignment_mobile }}; --block-color: {{ block.settings.color | default: 'var(--accent-color)' }}; --border-thickness: {{ block.settings.border_thickness }}px; --corner-radius: {{ block.settings.corner_radius }}px; --padding-top: {{ block.settings.padding_top }}px; --padding-bottom: {{ block.settings.padding_bottom }}px; --padding-left: {{ block.settings.padding_left }}px; --padding-right: {{ block.settings.padding_right }}px; --padding-top-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_top_mobile }}{% else %}{{ block.settings.padding_top }}{% endif %}px; --padding-bottom-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_bottom_mobile }}{% else %}{{ block.settings.padding_bottom }}{% endif %}px; --padding-left-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_left_mobile }}{% else %}{{ block.settings.padding_left }}{% endif %}px; --padding-right-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_right_mobile }}{% else %}{{ block.settings.padding_right }}{% endif %}px;" {{ block.shopify_attributes }}>
@@ -25,35 +25,252 @@
   @media (max-width: 767.98px) { .eyebrow-block { width: var(--block-width-mobile); padding: var(--padding-top-mobile) var(--padding-right-mobile) var(--padding-bottom-mobile) var(--padding-left-mobile); text-align: var(--block-align-mobile); } }
 {% endstylesheet %}
 
-{% schema %}
-{
+{% schema %}{
   "name": "t:blocks.eyebrow.name",
   "settings": [
-    { "type": "richtext", "id": "text", "label": "t:blocks.eyebrow.text", "default": "<p>Eyebrow</p>" },
-    { "type": "color", "id": "color", "label": "t:blocks.common.text_color", "info": "t:blocks.common.inherited_color" },
-    { "type": "checkbox", "id": "show_background", "label": "t:blocks.eyebrow.show_background", "default": false },
-    { "type": "checkbox", "id": "show_icon", "label": "t:blocks.eyebrow.show_icon", "default": false },
-    { "type": "header", "content": "Appearance" },
-    { "type": "range", "id": "border_thickness", "label": "t:blocks.eyebrow.border", "min": 0, "max": 4, "step": 1, "unit": "px", "default": 0 },
-    { "type": "range", "id": "corner_radius", "label": "t:blocks.eyebrow.radius", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
-    { "type": "color_scheme", "id": "color_scheme", "label": "t:blocks.common.color_scheme", "default": "scheme-1" },
-    { "type": "header", "content": "Layout" },
-    { "type": "select", "id": "width", "label": "t:blocks.common.width", "options": [{ "value": "fit", "label": "Fit" }, { "value": "fill", "label": "Fill" }], "default": "fit" },
-    { "type": "select", "id": "width_mobile", "label": "t:blocks.common.width_mobile", "options": [{ "value": "fit", "label": "Fit" }, { "value": "fill", "label": "Fill" }], "default": "fit" },
-    { "type": "select", "id": "alignment", "label": "t:blocks.common.alignment", "options": [{ "value": "start", "label": "Start" }, { "value": "center", "label": "Center" }, { "value": "end", "label": "End" }], "default": "start", "visible_if": "{{ block.settings.width == 'fill' }}" },
-    { "type": "checkbox", "id": "customize_mobile_alignment", "label": "t:blocks.common.customize_mobile_alignment", "default": false },
-    { "type": "select", "id": "alignment_mobile", "label": "t:blocks.common.mobile_alignment", "options": [{ "value": "start", "label": "Start" }, { "value": "center", "label": "Center" }, { "value": "end", "label": "End" }], "default": "start", "visible_if": "{{ block.settings.customize_mobile_alignment and block.settings.width_mobile == 'fill' }}" },
-    { "type": "header", "content": "t:blocks.common.padding" },
-    { "type": "range", "id": "padding_top", "label": "t:blocks.common.padding_top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
-    { "type": "range", "id": "padding_bottom", "label": "t:blocks.common.padding_bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
-    { "type": "range", "id": "padding_left", "label": "t:blocks.common.padding_left", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
-    { "type": "range", "id": "padding_right", "label": "t:blocks.common.padding_right", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
-    { "type": "checkbox", "id": "customize_mobile_padding", "label": "t:blocks.common.customize_mobile_padding", "default": false },
-    { "type": "range", "id": "padding_top_mobile", "label": "t:blocks.common.padding_top_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.customize_mobile_padding }}" },
-    { "type": "range", "id": "padding_bottom_mobile", "label": "t:blocks.common.padding_bottom_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.customize_mobile_padding }}" },
-    { "type": "range", "id": "padding_left_mobile", "label": "t:blocks.common.padding_left_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.customize_mobile_padding }}" },
-    { "type": "range", "id": "padding_right_mobile", "label": "t:blocks.common.padding_right_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.customize_mobile_padding }}" }
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:blocks.eyebrow.text",
+      "default": "<p>Eyebrow</p>"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:blocks.common.text_color",
+      "info": "t:blocks.common.inherited_color"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_background",
+      "label": "t:blocks.eyebrow.show_background",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "t:blocks.eyebrow.show_icon",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "label": "t:blocks.eyebrow.border",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:blocks.eyebrow.radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:blocks.common.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:blocks.common.width",
+      "options": [
+        {
+          "value": "fit",
+          "label": "Fit"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        }
+      ],
+      "default": "fit"
+    },
+    {
+      "type": "checkbox",
+      "id": "customize_mobile_width",
+      "label": "Customize mobile width",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "width_mobile",
+      "label": "t:blocks.common.width_mobile",
+      "options": [
+        {
+          "value": "fit",
+          "label": "Fit"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        }
+      ],
+      "default": "fit",
+      "visible_if": "{{ block.settings.customize_mobile_width }}"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:blocks.common.alignment",
+      "options": [
+        {
+          "value": "start",
+          "label": "Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "end",
+          "label": "End"
+        }
+      ],
+      "default": "start",
+      "visible_if": "{{ block.settings.width == 'fill' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "customize_mobile_alignment",
+      "label": "t:blocks.common.customize_mobile_alignment",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "alignment_mobile",
+      "label": "t:blocks.common.mobile_alignment",
+      "options": [
+        {
+          "value": "start",
+          "label": "Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "end",
+          "label": "End"
+        }
+      ],
+      "default": "start",
+      "visible_if": "{{ block.settings.customize_mobile_alignment and block.settings.customize_mobile_width and block.settings.width_mobile == 'fill' }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:blocks.common.padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:blocks.common.padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "label": "t:blocks.common.padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "label": "t:blocks.common.padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "customize_mobile_padding",
+      "label": "t:blocks.common.customize_mobile_padding",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "t:blocks.common.padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.customize_mobile_padding }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "t:blocks.common.padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.customize_mobile_padding }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "label": "t:blocks.common.padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.customize_mobile_padding }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "label": "t:blocks.common.padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.customize_mobile_padding }}"
+    }
   ],
-  "presets": [{ "name": "t:blocks.eyebrow.name" }]
-}
-{% endschema %}
+  "presets": [
+    {
+      "name": "t:blocks.eyebrow.name"
+    }
+  ]
+}{% endschema %}

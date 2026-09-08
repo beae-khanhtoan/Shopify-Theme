@@ -65,6 +65,7 @@
           "text_size": "block-specific.text_size",
           "text_color": "appearance.text_color",
           "width": "layout.width",
+          "customize_mobile_layout": "layout.customize_mobile_layout",
           "width_mobile": "layout.width_mobile",
           "alignment": "layout.alignment",
           "customize_mobile_alignment": "layout.customize_mobile_alignment",
@@ -638,6 +639,7 @@
           "html_tag": "block-specific.html_tag",
           "text_color": "appearance.text_color",
           "width": "layout.width",
+          "customize_mobile_width": "layout.customize_mobile_width",
           "width_mobile": "layout.width_mobile",
           "alignment": "layout.alignment",
           "customize_mobile_alignment": "layout.customize_mobile_alignment",
@@ -712,6 +714,7 @@
           "corner_radius": "appearance.corner_radius",
           "color_scheme": "appearance.color_scheme",
           "width": "layout.width",
+          "customize_mobile_width": "layout.customize_mobile_width",
           "width_mobile": "layout.width_mobile",
           "alignment": "layout.alignment",
           "customize_mobile_alignment": "layout.customize_mobile_alignment",
@@ -766,25 +769,81 @@
       ],
       "block_specific_settings": [
         {
-          "id": "label",
+          "id": "button_label",
           "type": "text",
           "default": "Button",
-          "value_mapping": "accessible action label",
+          "value_mapping": "button.button_label",
           "constraints": {
-            "owner": "button",
-            "required": true
+            "owner": "button"
           }
         },
         {
-          "id": "style",
+          "id": "button_style",
           "type": "select",
+          "default": "primary",
           "values": [
             "primary",
             "secondary",
             "tertiary"
           ],
-          "default": "primary",
-          "value_mapping": "button variant class",
+          "value_mapping": "button.button_style",
+          "constraints": {
+            "owner": "button"
+          }
+        },
+        {
+          "id": "show_icon",
+          "type": "checkbox",
+          "default": false,
+          "value_mapping": "button.show_icon",
+          "constraints": {
+            "owner": "button"
+          }
+        },
+        {
+          "id": "icon",
+          "type": "select",
+          "default": "cart",
+          "values": [
+            "account",
+            "cart"
+          ],
+          "value_mapping": "button.icon",
+          "constraints": {
+            "owner": "button"
+          }
+        },
+        {
+          "id": "icon_position",
+          "type": "select",
+          "default": "right",
+          "values": [
+            "left",
+            "right"
+          ],
+          "value_mapping": "button.icon_position",
+          "constraints": {
+            "owner": "button"
+          }
+        },
+        {
+          "id": "icon_size",
+          "type": "select",
+          "default": "inherit",
+          "values": [
+            "inherit",
+            "custom"
+          ],
+          "value_mapping": "button.icon_size",
+          "constraints": {
+            "owner": "button"
+          }
+        },
+        {
+          "id": "icon_size_custom",
+          "type": "range",
+          "default": 18,
+          "value_mapping": "button.icon_size_custom",
           "constraints": {
             "owner": "button"
           }
@@ -792,15 +851,26 @@
       ],
       "schema_contract": {
         "settings": {
-          "label": "block-specific.label",
-          "link": "link.link",
-          "style": "block-specific.style",
+          "button_label": "block-specific.label",
+          "button_link": "link.link",
+          "button_style": "block-specific.style",
+          "button_open_in_new_tab": "behavior.open_in_new_tab",
           "show_icon": "block-specific.show_icon",
           "icon": "block-specific.icon",
           "icon_position": "block-specific.icon_position",
           "icon_size": "block-specific.icon_size",
           "icon_size_custom": "block-specific.icon_size_custom",
-          "open_in_new_tab": "behavior.open_in_new_tab"
+          "width": "layout.width",
+          "width_mobile": "layout.width_mobile",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
         }
       },
       "children": false,

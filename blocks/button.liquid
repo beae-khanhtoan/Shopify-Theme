@@ -2,16 +2,20 @@
   Renders a semantic button or link using the global button variant contract.
 {% enddoc %}
 
-{% if block.settings.link != blank %}
-  <a class="button button--{{ block.settings.style }}" style="--button-icon-size: {% if block.settings.icon_size == 'custom' %}{{ block.settings.icon_size_custom }}px{% else %}1em{% endif %}" href="{{ block.settings.link }}"{% if block.settings.open_in_new_tab %} target="_blank" rel="noopener noreferrer"{% endif %} {{ block.shopify_attributes }}>
+{% assign button_width = 'fit-content' %}{% if block.settings.width == 'fill' %}{% assign button_width = '100%' %}{% endif %}
+{% assign button_width_mobile = 'fit-content' %}{% if block.settings.width_mobile == 'fill' %}{% assign button_width_mobile = '100%' %}{% endif %}
+{% capture button_style %}--button-width: {{ button_width }}; --button-width-mobile: {{ button_width_mobile }}; --button-padding-top: {{ block.settings.padding_top }}px; --button-padding-right: {{ block.settings.padding_right }}px; --button-padding-bottom: {{ block.settings.padding_bottom }}px; --button-padding-left: {{ block.settings.padding_left }}px; --button-padding-top-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_top_mobile }}{% else %}{{ block.settings.padding_top }}{% endif %}px; --button-padding-right-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_right_mobile }}{% else %}{{ block.settings.padding_right }}{% endif %}px; --button-padding-bottom-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_bottom_mobile }}{% else %}{{ block.settings.padding_bottom }}{% endif %}px; --button-padding-left-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_left_mobile }}{% else %}{{ block.settings.padding_left }}{% endif %}px; --button-icon-size: {% if block.settings.icon_size == 'custom' %}{{ block.settings.icon_size_custom }}px{% else %}1em{% endif %};{% endcapture %}
+
+{% if block.settings.button_link != blank %}
+  <a class="button button--{{ block.settings.button_style }}" style="{{ button_style }}" href="{{ block.settings.button_link }}"{% if block.settings.button_open_in_new_tab %} target="_blank" rel="noopener noreferrer"{% endif %} {{ block.shopify_attributes }}>
     {% if block.settings.show_icon and block.settings.icon_position == 'left' %}<span class="button__icon" aria-hidden="true">{% if block.settings.icon == 'account' %}{{ 'icon-account.svg' | inline_asset_content }}{% else %}{{ 'icon-cart.svg' | inline_asset_content }}{% endif %}</span>{% endif %}
-    <span>{{ block.settings.label | escape }}</span>
+    <span>{{ block.settings.button_label | escape }}</span>
     {% if block.settings.show_icon and block.settings.icon_position == 'right' %}<span class="button__icon" aria-hidden="true">{% if block.settings.icon == 'account' %}{{ 'icon-account.svg' | inline_asset_content }}{% else %}{{ 'icon-cart.svg' | inline_asset_content }}{% endif %}</span>{% endif %}
   </a>
 {% else %}
-  <button class="button button--{{ block.settings.style }}" style="--button-icon-size: {% if block.settings.icon_size == 'custom' %}{{ block.settings.icon_size_custom }}px{% else %}1em{% endif %}" type="button" {{ block.shopify_attributes }}>
+  <button class="button button--{{ block.settings.button_style }}" style="{{ button_style }}" type="button" {{ block.shopify_attributes }}>
     {% if block.settings.show_icon and block.settings.icon_position == 'left' %}<span class="button__icon" aria-hidden="true">{% if block.settings.icon == 'account' %}{{ 'icon-account.svg' | inline_asset_content }}{% else %}{{ 'icon-cart.svg' | inline_asset_content }}{% endif %}</span>{% endif %}
-    <span>{{ block.settings.label | escape }}</span>
+    <span>{{ block.settings.button_label | escape }}</span>
     {% if block.settings.show_icon and block.settings.icon_position == 'right' %}<span class="button__icon" aria-hidden="true">{% if block.settings.icon == 'account' %}{{ 'icon-account.svg' | inline_asset_content }}{% else %}{{ 'icon-cart.svg' | inline_asset_content }}{% endif %}</span>{% endif %}
   </button>
 {% endif %}
@@ -21,8 +25,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: var(--button-width);
     min-height: 2.75rem;
-    padding-inline: 1.25rem;
+    padding: var(--button-padding-top) var(--button-padding-right) var(--button-padding-bottom) var(--button-padding-left);
     border-radius: var(--radius-buttons-inputs);
     font: inherit;
     text-decoration: none;
@@ -33,24 +38,260 @@
   .button--primary { background: var(--color-primary-button); color: var(--color-on-primary-button); }
   .button--secondary { background: var(--color-secondary-button); color: var(--color-on-secondary-button); }
   .button--tertiary { background: transparent; color: var(--color-foreground); border: var(--border-width) solid currentColor; }
+  @media (max-width: 767.98px) { .button { width: var(--button-width-mobile); padding: var(--button-padding-top-mobile) var(--button-padding-right-mobile) var(--button-padding-bottom-mobile) var(--button-padding-left-mobile); } }
 {% endstylesheet %}
 
-{% schema %}
-{
+{% schema %}{
   "name": "t:blocks.button.name",
   "settings": [
-    { "type": "text", "id": "label", "label": "t:blocks.button.label", "default": "Button" },
-    { "type": "url", "id": "link", "label": "t:blocks.common.link" },
-    { "type": "select", "id": "style", "label": "t:blocks.button.style", "options": [
-      { "value": "primary", "label": "Primary" }, { "value": "secondary", "label": "Secondary" }, { "value": "tertiary", "label": "Tertiary" }
-    ], "default": "primary" },
-    { "type": "checkbox", "id": "show_icon", "label": "t:blocks.button.show_icon", "default": false },
-    { "type": "select", "id": "icon", "label": "t:blocks.button.icon", "options": [{ "value": "account", "label": "Account" }, { "value": "cart", "label": "Cart" }], "default": "cart", "visible_if": "{{ block.settings.show_icon }}" },
-    { "type": "select", "id": "icon_position", "label": "t:blocks.button.icon_position", "options": [{ "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }], "default": "right", "visible_if": "{{ block.settings.show_icon }}" },
-    { "type": "select", "id": "icon_size", "label": "t:blocks.button.icon_size", "options": [{ "value": "inherit", "label": "Inherit" }, { "value": "custom", "label": "Custom" }], "default": "inherit", "visible_if": "{{ block.settings.show_icon }}" },
-    { "type": "range", "id": "icon_size_custom", "label": "t:blocks.button.icon_size_custom", "min": 12, "max": 32, "step": 1, "unit": "px", "default": 18, "visible_if": "{{ block.settings.show_icon and block.settings.icon_size == 'custom' }}" },
-    { "type": "checkbox", "id": "open_in_new_tab", "label": "t:blocks.common.open_new_tab", "default": false, "visible_if": "{{ block.settings.link != blank }}" }
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:blocks.button.label",
+      "default": "Button"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:blocks.common.link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:blocks.button.style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "tertiary",
+          "label": "Tertiary"
+        }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_open_in_new_tab",
+      "label": "t:blocks.common.open_new_tab",
+      "default": false,
+      "visible_if": "{{ block.settings.button_link != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "t:blocks.button.show_icon",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "t:blocks.button.icon",
+      "options": [
+        {
+          "value": "account",
+          "label": "Account"
+        },
+        {
+          "value": "cart",
+          "label": "Cart"
+        }
+      ],
+      "default": "cart",
+      "visible_if": "{{ block.settings.show_icon }}"
+    },
+    {
+      "type": "select",
+      "id": "icon_position",
+      "label": "t:blocks.button.icon_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right",
+      "visible_if": "{{ block.settings.show_icon }}"
+    },
+    {
+      "type": "select",
+      "id": "icon_size",
+      "label": "t:blocks.button.icon_size",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Inherit"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "inherit",
+      "visible_if": "{{ block.settings.show_icon }}"
+    },
+    {
+      "type": "range",
+      "id": "icon_size_custom",
+      "label": "t:blocks.button.icon_size_custom",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 18,
+      "visible_if": "{{ block.settings.show_icon and block.settings.icon_size == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "options": [
+        {
+          "value": "fit",
+          "label": "Fit"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        }
+      ],
+      "default": "fit"
+    },
+    {
+      "type": "select",
+      "id": "width_mobile",
+      "label": "Width mobile",
+      "options": [
+        {
+          "value": "fit",
+          "label": "Fit"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        }
+      ],
+      "default": "fit"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "label": "Left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "label": "Right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "customize_mobile_padding",
+      "label": "Customize mobile padding",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.customize_mobile_padding }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.customize_mobile_padding }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "label": "Left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.customize_mobile_padding }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "label": "Right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.customize_mobile_padding }}"
+    }
   ],
-  "presets": [{ "name": "t:blocks.button.name" }]
-}
-{% endschema %}
+  "presets": [
+    {
+      "name": "t:blocks.button.name"
+    }
+  ]
+}{% endschema %}
