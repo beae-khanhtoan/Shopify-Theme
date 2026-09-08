@@ -1,0 +1,4 @@
+{% doc %}Accordion with repeatable FAQ items.{% enddoc %}
+<div class="controlled-accordion" {{ block.shopify_attributes }}>{% content_for 'blocks' %}</div>
+{% stylesheet %}.controlled-accordion{display:grid;gap:var(--space-small)}{% endstylesheet %}
+{% schema %}{"name":"Accordion","blocks":[{"type":"faq-item"}],"settings":[],"presets":[{"name":"Accordion"}]}{% endschema %}

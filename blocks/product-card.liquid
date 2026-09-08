@@ -1,6 +1,6 @@
 {% doc %}Commerce product card. Reads the current product context only.{% enddoc %}
 {% if product != blank %}
-  <article class="commerce-product-card commerce-product-card--{{ block.settings.color_type }}" {{ block.shopify_attributes }}>
+  <article class="commerce-product-card commerce-product-card--{{ block.settings.color_type }} commerce-product-card--scheme-{{ block.settings.color_scheme }}" {{ block.shopify_attributes }}>
     <a class="commerce-product-card__media" href="{{ product.url }}">
       {% if product.featured_image %}{{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: product.featured_image.alt | default: product.title }}{% else %}<div class="commerce-product-card__placeholder" aria-hidden="true"></div>{% endif %}
     </a>
