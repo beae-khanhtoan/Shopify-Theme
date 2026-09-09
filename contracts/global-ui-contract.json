@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "scope": "global-ui",
+  "surfaces": [
+    { "id": "header", "type": "section", "placement": "header-group", "owner": "global-header", "data": ["shop", "routes", "linklist", "cart", "localization", "customer"] },
+    { "id": "footer", "type": "section", "placement": "footer-group", "owner": "global-footer", "data": ["shop", "routes", "linklist", "policies", "localization", "newsletter"] },
+    { "id": "cart", "type": "section", "placement": "cart-template", "owner": "global-cart", "data": ["cart", "routes", "localization"] },
+    { "id": "search", "type": "section", "placement": "search-template", "owner": "global-search", "data": ["search", "routes", "predictive-search", "localization"] },
+    { "id": "navigation", "type": "snippet", "placement": "header|footer|surface", "owner": "global-navigation", "data": ["linklist", "current-route"] }
+  ],
+  "rules": {
+    "navigation_source": "Shopify linklist setting",
+    "cart_totals": "Shopify cart context only",
+    "search_catalog": "Shopify search/predictive search only",
+    "overlay_owner": "parent surface",
+    "editor_root": "stable section root and block shopify_attributes",
+    "section_attributes": "never use section.shopify_attributes"
+  },
+  "qa": ["desktop", "mobile", "reduced-motion", "keyboard", "empty-state", "editor-lifecycle", "theme-check"]
+}
