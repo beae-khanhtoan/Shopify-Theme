@@ -15,15 +15,15 @@
 - Git `main` maps to the stable theme after `dev` has passed checks and preview QA.
 - Store: `layouthub-khanhnguyen.myshopify.com`.
 - Stable theme (`main`): `theme/main` — theme ID `164351607026`.
-- Development/draft theme (`dev`): `theme/dev` — theme ID `165655281906`.
+- Development/draft theme (`dev`): `theme/dev` — theme ID `165661769970`.
 
 ## Development workflow
 
 1. Start from the repository root on `dev`; check branch and working tree.
 2. If `main` moved, merge `origin/main` into `dev` before coding.
-3. Run `shopify theme check`, inspect `git diff`, and use `shopify theme dev --store layouthub-khanhnguyen.myshopify.com --theme 165655281906`.
+3. Run `shopify theme check`, inspect `git diff`, and use `shopify theme dev --store layouthub-khanhnguyen.myshopify.com --theme 165661769970`.
 4. Verify local preview, Theme Editor preview, responsive behavior, and the shareable preview link.
-5. Commit clearly on `dev`, then push `dev` and upload only to theme ID `165655281906`.
+5. Commit clearly on `dev`, then push `dev` and upload only to theme ID `165661769970`.
 6. Promote to `main` only after review; do not publish a live theme as part of this workflow.
 
 ## Release gate
