@@ -1,4 +1,5 @@
-<dialog class="cart-drawer" id="CartDrawer-{{ section.id }}" data-cart-drawer data-section-id="{{ section.id }}" aria-labelledby="CartDrawerTitle-{{ section.id }}">
+{% unless template.name == 'cart' %}
+<dialog class="cart-drawer" id="CartDrawer-{{ section.id }}" data-cart-drawer data-section-id="{{ section.id }}" data-section-rendering-id="{{ section.id }}" aria-labelledby="CartDrawerTitle-{{ section.id }}">
   {% render 'cart-surface', presentation: 'drawer', section_id: section.id, heading: 'Your cart', empty_message: 'Your cart is empty.', continue_label: 'Continue shopping', continue_url: routes.all_products_collection_url, show_note: true %}
 </dialog>
 {% stylesheet %}
@@ -36,7 +37,7 @@
     const busy = (value) => root.querySelectorAll('button, input, textarea').forEach((control) => { control.disabled = value; });
     const count = (value) => document.querySelectorAll('[data-cart-count]').forEach((badge) => { badge.textContent = value; badge.hidden = Number(value) < 1; });
     const close = () => { if (root.open) root.close(); document.documentElement.classList.remove('cart-drawer-open'); lastFocused?.focus(); };
-    const refresh = async () => { const response = await fetch(`${window.Shopify.routes.root}cart?section_id=${encodeURIComponent(root.dataset.sectionId)}`, { headers: { Accept: 'text/html' } }); if (!response.ok) throw new Error(); const html = new DOMParser().parseFromString(await response.text(), 'text/html'); const next = html.querySelector('[data-cart-surface]'); if (!next) throw new Error(); surface().replaceWith(next); count(next.dataset.cartItemCount || 0); };
+    const refresh = async () => { const response = await fetch(`${window.location.pathname}?sections=${encodeURIComponent(root.dataset.sectionRenderingId)}`, { headers: { Accept: 'application/json' } }); if (!response.ok) throw new Error(); const renderedSections = await response.json(); const renderedSection = renderedSections[root.dataset.sectionRenderingId]; if (!renderedSection) throw new Error(); const html = new DOMParser().parseFromString(renderedSection, 'text/html'); const next = html.querySelector('[data-cart-surface]'); if (!next) throw new Error(); surface().replaceWith(next); count(next.dataset.cartItemCount || 0); };
     const mutate = async (payload) => { busy(true); try { const response = await fetch(`${window.Shopify.routes.root}cart/update.js`, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) }); if (!response.ok) throw new Error(); await refresh(); } catch (error) { const status = root.querySelector('[data-cart-status]'); if (status) status.textContent = 'Unable to update your cart. Please try again.'; } finally { busy(false); } };
     document.addEventListener('click', (event) => { const trigger = event.target.closest('[data-cart-open]'); if (trigger) { event.preventDefault(); lastFocused = trigger; root.showModal(); document.documentElement.classList.add('cart-drawer-open'); root.querySelector('[data-cart-close]')?.focus(); } const remove = event.target.closest('[data-cart-remove]'); if (remove && root.contains(remove)) { event.preventDefault(); mutate({ updates: { [remove.dataset.lineKey]: 0 } }); } });
     root.addEventListener('click', (event) => { if (event.target === root || event.target.closest('[data-cart-close]')) close(); });
@@ -45,6 +46,7 @@
     document.addEventListener('shopify:section:unload', (event) => { if (event.target === root) close(); });
   })();
 {% endjavascript %}
+{% endunless %}
 {% schema %}
 { "name": "Cart drawer", "settings": [] }
 {% endschema %}

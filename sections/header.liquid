@@ -11,7 +11,7 @@
     <div class="site-header__actions" aria-label="Utility links">
       {% if section.settings.show_search %}<a href="{{ routes.search_url }}" aria-label="Search">Search</a>{% endif %}
       {% if section.settings.show_account and shop.customer_accounts_enabled %}<a href="{{ routes.account_url }}" aria-label="Account">Account</a>{% endif %}
-      {% if section.settings.show_cart %}<a href="{{ routes.cart_url }}" data-cart-open aria-label="Cart{% if cart.item_count > 0 %}, {{ cart.item_count }} items{% endif %}">Cart (<span data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>)</a>{% endif %}
+      {% if section.settings.show_cart %}<a href="{{ routes.cart_url }}"{% unless template.name == 'cart' %} data-cart-open aria-haspopup="dialog" aria-controls="CartDrawer-cart-drawer"{% endunless %} aria-label="Cart{% if cart.item_count > 0 %}, {{ cart.item_count }} items{% endif %}">Cart (<span data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>)</a>{% endif %}
     </div>
   </div>
   <dialog class="site-header__drawer" id="HeaderNavigation-{{ section.id }}" data-header-drawer>
