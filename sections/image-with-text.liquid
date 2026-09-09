@@ -1,0 +1,80 @@
+{% liquid
+  assign image_ratio = 'auto'
+  case section.settings.image_ratio
+    when 'square'
+      assign image_ratio = '1 / 1'
+    when 'portrait'
+      assign image_ratio = '3 / 4'
+    when 'landscape'
+      assign image_ratio = '4 / 3'
+    when 'wide'
+      assign image_ratio = '16 / 9'
+  endcase
+  assign image_alt = section.settings.image_alt | default: section.settings.image.alt | default: shop.name
+%}
+
+<section id="ImageWithText-{{ section.id }}" class="image-with-text image-with-text--{{ section.settings.image_position }} image-with-text--{{ section.settings.content_alignment }}" data-section-id="{{ section.id }}" style="--image-with-text-gap: {{ section.settings.gap }}px; --image-with-text-ratio: {{ image_ratio }}; --image-with-text-padding-top: {{ section.settings.padding_top }}px; --image-with-text-padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="image-with-text__inner page-width">
+    <div class="image-with-text__media">
+      {% if section.settings.image != blank %}
+        <picture>
+          {% if section.settings.mobile_image != blank %}<source media="(max-width: 767.98px)" srcset="{{ section.settings.mobile_image | image_url: width: 1600 }}">{% endif %}
+          {{ section.settings.image | image_url: width: 2400 | image_tag: alt: image_alt, loading: 'lazy', widths: '480, 720, 960, 1200, 1600, 2000, 2400' }}
+        </picture>
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+    </div>
+    <div class="image-with-text__content">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .image-with-text { padding-block: var(--image-with-text-padding-top) var(--image-with-text-padding-bottom); background: var(--color-background); color: var(--color-foreground); }
+  .image-with-text__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--image-with-text-gap); align-items: center; padding-inline: var(--page-margin); }
+  .image-with-text--right .image-with-text__media { order: 2; }
+  .image-with-text__media { min-width: 0; overflow: hidden; aspect-ratio: var(--image-with-text-ratio); border-radius: var(--style-border-radius-medium); }
+  .image-with-text__media picture, .image-with-text__media img, .image-with-text__media .placeholder-svg { display: block; width: 100%; height: 100%; }
+  .image-with-text__media img, .image-with-text__media .placeholder-svg { object-fit: cover; }
+  .image-with-text__content { min-width: 0; display: flex; flex-direction: column; align-items: var(--content-align); justify-content: center; }
+  .image-with-text--start .image-with-text__content { --content-align: flex-start; }
+  .image-with-text--center .image-with-text__content { --content-align: center; }
+  .image-with-text--end .image-with-text__content { --content-align: flex-end; }
+  @media (max-width: 767.98px) {
+    .image-with-text__inner { grid-template-columns: 1fr; gap: var(--image-with-text-gap); padding-inline: var(--page-margin-mobile); }
+    .image-with-text--right .image-with-text__media { order: 0; }
+    .image-with-text__content { align-items: stretch; }
+  }
+  @media (prefers-reduced-motion: reduce) { .image-with-text__media img { transition: none; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Image with text",
+  "tag": "section",
+  "class": "section-image-with-text",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Desktop image" },
+    { "type": "image_picker", "id": "mobile_image", "label": "Mobile image", "info": "Falls back to the desktop image when empty." },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "info": "Describe the image for visitors using assistive technology." },
+    { "type": "select", "id": "image_position", "label": "Desktop image position", "options": [{ "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }], "default": "left" },
+    { "type": "select", "id": "image_ratio", "label": "Image ratio", "options": [{ "value": "auto", "label": "Auto" }, { "value": "square", "label": "Square" }, { "value": "portrait", "label": "Portrait" }, { "value": "landscape", "label": "Landscape" }, { "value": "wide", "label": "Wide" }], "default": "landscape" },
+    { "type": "select", "id": "content_alignment", "label": "Content alignment", "options": [{ "value": "start", "label": "Start" }, { "value": "center", "label": "Center" }, { "value": "end", "label": "End" }], "default": "start" },
+    { "type": "range", "id": "gap", "label": "Content gap", "min": 0, "max": 96, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    { "type": "eyebrow" },
+    { "type": "heading" },
+    { "type": "text" },
+    { "type": "buttons" }
+  ],
+  "presets": [
+    { "name": "Image with text", "blocks": [{ "type": "eyebrow" }, { "type": "heading" }, { "type": "text" }, { "type": "buttons" }] }
+  ],
+  "enabled_on": { "templates": ["*"] }
+}
+{% endschema %}

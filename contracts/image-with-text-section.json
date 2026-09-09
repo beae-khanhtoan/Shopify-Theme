@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "identity": { "id": "image-with-text", "role": "media-content composition", "placement": "dynamic JSON template" },
+  "context": { "data": "section settings and configured blocks", "resource": "none" },
+  "ownership": {
+    "section": ["media source", "desktop image position", "outer spacing", "content gap", "content alignment", "responsive stacking"],
+    "blocks": ["eyebrow content", "heading content and semantics", "text content", "button content and interaction"],
+    "theme_settings": ["color", "typography", "radius", "motion", "spacing tokens"]
+  },
+  "allowed_blocks": { "eyebrow": 1, "heading": 1, "text": 1, "buttons": 1 },
+  "data_flow": "section settings -> semantic media shell; content_for blocks -> existing block contracts",
+  "states": ["desktop-left", "desktop-right", "mobile-stacked", "missing-desktop-image-placeholder", "missing-mobile-image-fallback"],
+  "qa": {
+    "contract": "pass",
+    "placement": "pass",
+    "schema": "pass",
+    "block_slots": "pass",
+    "storefront": "pending",
+    "theme_editor": "pending",
+    "responsive": "pending",
+    "accessibility": "pending",
+    "runtime_lifecycle": "pass",
+    "release": "pending"
+  }
+}
