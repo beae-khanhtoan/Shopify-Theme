@@ -3187,6 +3187,7 @@
       "block_specific_settings": [],
       "schema_contract": {
         "settings": {
+          "data_source": "block-specific.data_source",
           "show_previous": "block-specific.show_previous",
           "show_next": "block-specific.show_next",
           "show_page_numbers": "block-specific.show_page_numbers",
@@ -3194,6 +3195,7 @@
           "ellipsis_behavior": "block-specific.ellipsis_behavior",
           "previous_label": "block-specific.previous_label",
           "next_label": "block-specific.next_label",
+          "aria_labels": "block-specific.aria_labels",
           "control_variant": "appearance.control_variant",
           "current_state": "appearance.current_state",
           "alignment": "layout.alignment",
