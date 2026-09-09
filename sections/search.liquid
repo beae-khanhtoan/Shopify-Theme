@@ -1,70 +1,15 @@
-{% comment %}
-  This section is used in the search template to render search results for
-  products, articles, and pages.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/search
-{% endcomment %}
-
-<h1>{{ 'search.title' | t }}</h1>
-
-<form action="{{ routes.search_url }}" method="get" role="search">
-  <input
-    type="search"
-    size="50"
-    name="q"
-    value="{{ search.terms | escape }}"
-    placeholder="{{ 'search.placeholder' | t }}"
-  >
-  <button type="submit">{{ 'search.submit' | t }}</button>
-</form>
-
-{% if search.performed %}
-  {% if search.results_count == 0 %}
-    <p>{{ 'search.no_results_html' | t: terms: search.terms }}</p>
-  {% else %}
-    <p>{{ 'search.results_for_html' | t: terms: search.terms, count: search.results_count }}</p>
-
-    <div class="search-results">
-      {% paginate search.results by 20 %}
-        {% # Search result items may be an article, a page, or a product. %}
-        {% for result in search.results %}
-          <div class="search-result">
-            {% assign featured_image = result.featured_image | default: result.image %}
-            {% if featured_image %}
-              {% render 'image', class: 'search-result__image', image: featured_image, url: result.url, width: 400 %}
-            {% endif %}
-            <div class="search-result__content">
-              <p>
-                {{ result.title | link_to: result.url }}
-                {% if result.price %}
-                  {{ result.price | money_with_currency }}
-                {% endif %}
-              </p>
-            </div>
-          </div>
-        {% endfor %}
-
-        {{ paginate | default_pagination }}
-      {% endpaginate %}
-    </div>
-  {% endif %}
-{% endif %}
-
-{% stylesheet %}
-  .search-results {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-  .search-results .prev,
-  .search-results .page,
-  .search-results .next {
-    grid-column: 1 / -1;
-  }
-{% endstylesheet %}
-
-{% schema %}
-{
-  "name": "t:general.search",
-  "settings": []
-}
-{% endschema %}
+<main class="search-page page-width" data-search-section data-search-predictive-enabled="{{ section.settings.predictive_enabled }}" data-search-min-chars="{{ section.settings.min_chars }}" data-search-predictive-limit="{{ section.settings.predictive_limit }}" data-section-id="{{ section.id }}">
+  <h1>{{ section.settings.heading | escape }}</h1>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+    <label class="visually-hidden" for="SearchInput-{{ section.id }}">{{ section.settings.placeholder | escape }}</label>
+    <input id="SearchInput-{{ section.id }}" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.placeholder | escape }}" autocomplete="off" data-search-input>
+    <input type="hidden" name="options[prefix]" value="last"><button type="submit" class="button">{{ section.settings.submit_label | escape }}</button>
+  </form>
+  <div class="search-predictive" role="status" aria-live="polite" data-search-predictive></div>
+  {% if search.performed %}<h2>{{ search.results_count }} results</h2>{% paginate search.results by section.settings.results_per_page %}<div class="search-results">{% for result in search.results %}<article><a href="{{ result.url }}">{% if result.image %}{{ result.image | image_url: width: 320 | image_tag: alt: result.image.alt, loading: 'lazy' }}{% endif %}<h3>{{ result.title | escape }}</h3></a>{% if result.price %}<p>{{ result.price | money }}</p>{% endif %}</article>{% else %}<p>{{ section.settings.no_results | escape }}</p>{% endfor %}</div>{{ paginate | default_pagination }}{% endpaginate %}{% endif %}
+</main>
+{% stylesheet %}.search-page{max-width:var(--page-width);margin:3rem auto;padding:0 var(--page-margin)}.search-form{display:flex;gap:.5rem;max-width:48rem}.search-form input{flex:1;min-width:0}.search-predictive{position:relative;z-index:2}.search-predictive ul{margin:.5rem 0;padding:1rem;list-style:none;background:var(--color-background);border:var(--border-width) solid var(--border-color)}.search-results{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem}.search-results img{width:100%;height:auto}.search-results h3{font-size:1rem}.search-results a{color:inherit;text-decoration:none}@media(max-width:749px){.search-page{padding:0 var(--page-margin-mobile)}.search-results{grid-template-columns:repeat(2,minmax(0,1fr))}}{% endstylesheet %}
+{% javascript %}
+  (() => { const root = document.querySelector('[data-search-section]'); if (!root || root.dataset.initialized === 'true') return; root.dataset.initialized = 'true'; const input = root.querySelector('[data-search-input]'), output = root.querySelector('[data-search-predictive]'); let controller; const search = () => { const query = input.value.trim(); if (root.dataset.searchPredictiveEnabled !== 'true' || query.length < Number(root.dataset.searchMinChars)) { output.replaceChildren(); return; } controller?.abort(); controller = new AbortController(); fetch(`/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product,collection,page,article&resources[limit]=${root.dataset.searchPredictiveLimit}`, { signal: controller.signal }).then(response => response.ok ? response.json() : Promise.reject()).then(data => { const results = data.resources?.results?.products || []; output.innerHTML = results.length ? `<ul>${results.map(item => `<li><a href="${item.url}">${item.title}</a></li>`).join('')}</ul>` : ''; }).catch(error => { if (error.name !== 'AbortError') output.replaceChildren(); }); }; input?.addEventListener('input', search); })();
+{% endjavascript %}
+{% schema %}{"name":"Search","settings":[{"type":"text","id":"heading","label":"Heading","default":"Search"},{"type":"text","id":"placeholder","label":"Placeholder","default":"Search products"},{"type":"text","id":"submit_label","label":"Submit label","default":"Search"},{"type":"textarea","id":"no_results","label":"No results message","default":"No results found."},{"type":"range","id":"results_per_page","label":"Results per page","min":4,"max":48,"step":4,"default":20},{"type":"checkbox","id":"predictive_enabled","label":"Enable predictive search","default":true},{"type":"range","id":"min_chars","label":"Minimum characters","min":1,"max":4,"step":1,"default":2},{"type":"range","id":"predictive_limit","label":"Predictive result limit","min":4,"max":10,"step":1,"default":6}]}{% endschema %}

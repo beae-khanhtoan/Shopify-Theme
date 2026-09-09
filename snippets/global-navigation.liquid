@@ -1,0 +1,50 @@
+{% comment %}
+  Renders a shared navigation tree. The parent surface owns presentation and
+  overlay/focus behavior; this snippet owns link semantics and active state.
+
+  Accepts:
+  - menu: link list object
+  - label: accessible navigation label
+  - id: optional stable id for disclosure controls
+  - presentation: inline, drawer, accordion, or footer
+  - max_depth: 1-3
+{% endcomment %}
+{% liquid
+  assign navigation_label = label | default: 'Navigation'
+  assign navigation_depth = max_depth | default: 2 | at_most: 3
+%}
+
+{% if menu != blank %}
+  <nav class="global-navigation global-navigation--{{ presentation | default: 'inline' }}" aria-label="{{ navigation_label | escape }}">
+    <ul class="global-navigation__list" role="list">
+      {% for link in menu.links %}
+        <li class="global-navigation__item{% if link.current %} is-current{% endif %}">
+          <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+          {% if link.links != blank and navigation_depth > 1 %}
+            <details class="global-navigation__disclosure">
+              <summary aria-label="{{ 'Expand' | append: ' ' | append: link.title | escape }}">
+                <span aria-hidden="true">⌄</span>
+              </summary>
+              <ul role="list">
+                {% for child_link in link.links %}
+                  <li{% if child_link.current %} class="is-current"{% endif %}>
+                    <a href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a>
+                    {% if child_link.links != blank and navigation_depth > 2 %}
+                      <ul role="list">
+                        {% for grandchild_link in child_link.links %}
+                          <li{% if grandchild_link.current %} class="is-current"{% endif %}>
+                            <a href="{{ grandchild_link.url }}"{% if grandchild_link.current %} aria-current="page"{% endif %}>{{ grandchild_link.title | escape }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            </details>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
