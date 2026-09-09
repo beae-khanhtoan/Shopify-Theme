@@ -2626,9 +2626,13 @@
           "letter_spacing": "typography.letter_spacing",
           "padding_top": "spacing.padding_top",
           "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
           "customize_mobile_padding": "spacing.customize_mobile_padding",
           "padding_top_mobile": "spacing.padding_top_mobile",
-          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
         }
       },
       "children": false,
@@ -2726,9 +2730,13 @@
           "text_case": "typography.text_case",
           "padding_top": "spacing.padding_top",
           "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
           "customize_mobile_padding": "spacing.customize_mobile_padding",
           "padding_top_mobile": "spacing.padding_top_mobile",
-          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
         }
       },
       "children": false,
@@ -2771,9 +2779,13 @@
           "text_size": "typography.body_scale",
           "padding_top": "spacing.padding_top",
           "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
           "customize_mobile_padding": "spacing.customize_mobile_padding",
           "padding_top_mobile": "spacing.padding_top_mobile",
-          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
         }
       },
       "children": false,
@@ -2823,9 +2835,13 @@
           "low_inventory_text_color": "appearance.text_color",
           "padding_top": "spacing.padding_top",
           "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
           "customize_mobile_padding": "spacing.customize_mobile_padding",
           "padding_top_mobile": "spacing.padding_top_mobile",
-          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
         }
       },
       "children": false,
@@ -2874,9 +2890,13 @@
           "gap_mobile": "spacing.gap",
           "padding_top": "spacing.padding_top",
           "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
           "customize_mobile_padding": "spacing.customize_mobile_padding",
           "padding_top_mobile": "spacing.padding_top_mobile",
-          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
         }
       },
       "children": false,
@@ -2931,9 +2951,13 @@
           "color_scheme": "appearance.color_scheme",
           "padding_top": "spacing.padding_top",
           "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
           "customize_mobile_padding": "spacing.customize_mobile_padding",
           "padding_top_mobile": "spacing.padding_top_mobile",
-          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
         }
       },
       "children": false,
@@ -2977,9 +3001,13 @@
           "show_manual_badges": "block-specific.show_manual_badges",
           "padding_top": "spacing.padding_top",
           "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
           "customize_mobile_padding": "spacing.customize_mobile_padding",
           "padding_top_mobile": "spacing.padding_top_mobile",
-          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
         }
       },
       "children": false,
@@ -3466,9 +3494,13 @@
           "size_chart_mobile_layout": "block-specific.size_chart_mobile_layout",
           "padding_top": "spacing.padding_top",
           "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
           "customize_mobile_padding": "spacing.customize_mobile_padding",
           "padding_top_mobile": "spacing.padding_top_mobile",
-          "padding_bottom_mobile": "spacing.padding_bottom_mobile"
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
         }
       },
       "children": false,
