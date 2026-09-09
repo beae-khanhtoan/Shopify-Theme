@@ -3321,10 +3321,27 @@
         "link",
         "spacing"
       ],
-      "block_specific_settings": [],
+      "block_specific_settings": [
+        {
+          "id": "custom_facebook_url",
+          "type": "url",
+          "default": "",
+          "value_mapping": "social-links.custom_facebook_url",
+          "constraints": "optional; used when link_source is custom"
+        },
+        {
+          "id": "custom_instagram_url",
+          "type": "url",
+          "default": "",
+          "value_mapping": "social-links.custom_instagram_url",
+          "constraints": "optional; used when link_source is custom"
+        }
+      ],
       "schema_contract": {
         "settings": {
           "link_source": "block-specific.link_source",
+          "custom_facebook_url": "block-specific.custom_facebook_url",
+          "custom_instagram_url": "block-specific.custom_instagram_url",
           "icon_size": "block-specific.icon_size",
           "accessible_labels": "behavior.accessible_labels",
           "external_target": "behavior.open_in_new_tab",
