@@ -1499,45 +1499,170 @@
       ],
       "block_specific_settings": [
         {
-          "id": "alignment",
-          "type": "select",
-          "values": [
-            "start",
-            "center",
-            "end"
-          ],
-          "default": "start",
-          "value_mapping": "block.settings.alignment",
+          "id": "button_1_label",
+          "type": "text",
+          "default": "Primary action",
+          "value_mapping": "buttons.button_1_label",
           "constraints": {
-            "owner": "buttons",
-            "source": "schema"
+            "owner": "buttons"
           }
         },
         {
-          "id": "gap",
-          "type": "range",
-          "default": 12,
-          "value_mapping": "block.settings.gap",
+          "id": "button_1_link",
+          "type": "url",
+          "default": null,
+          "value_mapping": "buttons.button_1_link",
           "constraints": {
-            "owner": "buttons",
-            "source": "schema"
+            "owner": "buttons"
+          }
+        },
+        {
+          "id": "button_1_open_in_new_tab",
+          "type": "checkbox",
+          "default": false,
+          "value_mapping": "buttons.button_1_open_in_new_tab",
+          "constraints": {
+            "owner": "buttons"
+          }
+        },
+        {
+          "id": "button_1_style",
+          "type": "select",
+          "default": "primary",
+          "values": [
+            "primary",
+            "secondary",
+            "tertiary"
+          ],
+          "value_mapping": "buttons.button_1_style",
+          "constraints": {
+            "owner": "buttons"
+          }
+        },
+        {
+          "id": "button_1_show_icon",
+          "type": "checkbox",
+          "default": false,
+          "value_mapping": "buttons.button_1_show_icon",
+          "constraints": {
+            "owner": "buttons"
+          }
+        },
+        {
+          "id": "button_2_label",
+          "type": "text",
+          "default": "Secondary action",
+          "value_mapping": "buttons.button_2_label",
+          "constraints": {
+            "owner": "buttons"
+          }
+        },
+        {
+          "id": "button_2_link",
+          "type": "url",
+          "default": null,
+          "value_mapping": "buttons.button_2_link",
+          "constraints": {
+            "owner": "buttons"
+          }
+        },
+        {
+          "id": "button_2_open_in_new_tab",
+          "type": "checkbox",
+          "default": false,
+          "value_mapping": "buttons.button_2_open_in_new_tab",
+          "constraints": {
+            "owner": "buttons"
+          }
+        },
+        {
+          "id": "button_2_style",
+          "type": "select",
+          "default": "secondary",
+          "values": [
+            "primary",
+            "secondary",
+            "tertiary"
+          ],
+          "value_mapping": "buttons.button_2_style",
+          "constraints": {
+            "owner": "buttons"
+          }
+        },
+        {
+          "id": "button_2_show_icon",
+          "type": "checkbox",
+          "default": false,
+          "value_mapping": "buttons.button_2_show_icon",
+          "constraints": {
+            "owner": "buttons"
+          }
+        },
+        {
+          "id": "direction",
+          "type": "select",
+          "default": "row",
+          "values": [
+            "row",
+            "stack"
+          ],
+          "value_mapping": "buttons.direction",
+          "constraints": {
+            "owner": "buttons"
+          }
+        },
+        {
+          "id": "mobile_stacking",
+          "type": "select",
+          "default": "stack",
+          "values": [
+            "row",
+            "stack"
+          ],
+          "value_mapping": "buttons.mobile_stacking",
+          "constraints": {
+            "owner": "buttons"
           }
         }
       ],
       "schema_contract": {
         "settings": {
-          "alignment": "block-specific.alignment",
-          "gap": "block-specific.gap"
+          "button_1_label": "block-specific.button_1_label",
+          "button_1_link": "block-specific.button_1_link",
+          "button_1_open_in_new_tab": "block-specific.button_1_open_in_new_tab",
+          "button_1_style": "block-specific.button_1_style",
+          "button_1_show_icon": "block-specific.button_1_show_icon",
+          "button_2_label": "block-specific.button_2_label",
+          "button_2_link": "block-specific.button_2_link",
+          "button_2_open_in_new_tab": "block-specific.button_2_open_in_new_tab",
+          "button_2_style": "block-specific.button_2_style",
+          "button_2_show_icon": "block-specific.button_2_show_icon",
+          "direction": "block-specific.direction",
+          "gap": "spacing.gap",
+          "gap_mobile": "spacing.gap_mobile",
+          "width": "layout.width",
+          "alignment": "layout.alignment",
+          "mobile_stacking": "block-specific.mobile_stacking",
+          "padding_top": "spacing.padding_top",
+          "padding_bottom": "spacing.padding_bottom",
+          "padding_left": "spacing.padding_left",
+          "padding_right": "spacing.padding_right",
+          "customize_mobile_padding": "spacing.customize_mobile_padding",
+          "padding_top_mobile": "spacing.padding_top_mobile",
+          "padding_bottom_mobile": "spacing.padding_bottom_mobile",
+          "padding_left_mobile": "spacing.padding_left_mobile",
+          "padding_right_mobile": "spacing.padding_right_mobile"
         }
       },
       "children": {
-        "allowed_children": [
-          "button"
+        "allowed_children": [],
+        "static_slots": [
+          "button_1",
+          "button_2"
         ],
-        "static_slots": [],
-        "repeatable": true,
-        "limit": 20,
-        "depth_policy": "fixed-allow-list"
+        "repeatable": false,
+        "limit": 2,
+        "depth_policy": "fixed-slots"
       },
       "owners": {
         "data_owner": "parent-context",
@@ -1546,7 +1671,7 @@
         "motion_owner": "theme-settings"
       },
       "rendering": {
-        "root_class": "buttons",
+        "root_class": "micro-buttons",
         "render_mode": "liquid-block",
         "path": "blocks/buttons.liquid",
         "editor_surface": "theme-block"
