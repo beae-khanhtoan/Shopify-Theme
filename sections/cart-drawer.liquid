@@ -1,0 +1,50 @@
+<dialog class="cart-drawer" id="CartDrawer-{{ section.id }}" data-cart-drawer data-section-id="{{ section.id }}" aria-labelledby="CartDrawerTitle-{{ section.id }}">
+  {% render 'cart-surface', presentation: 'drawer', section_id: section.id, heading: 'Your cart', empty_message: 'Your cart is empty.', continue_label: 'Continue shopping', continue_url: routes.all_products_collection_url, show_note: true %}
+</dialog>
+{% stylesheet %}
+  .cart-drawer { width: min(100% - 2rem, 28rem); height: 100dvh; max-height: none; margin: 0 0 0 auto; padding: 0; border: 0; border-left: var(--overlay-border-width) solid var(--border-color); border-radius: var(--overlay-radius) 0 0 var(--overlay-radius); color: var(--overlay-foreground); background: var(--overlay-background); box-shadow: var(--overlay-shadow); }
+  .cart-drawer::backdrop { background: rgb(0 0 0 / var(--overlay-opacity)); backdrop-filter: var(--overlay-backdrop-blur); }
+  .cart-drawer[open] { display: flex; flex-direction: column; }
+  .cart-drawer__surface { display: flex; flex: 1; min-height: 0; flex-direction: column; padding: var(--drawer-padding-desktop); }
+  .cart-drawer__header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-bottom: 1rem; border-bottom: var(--border-width) solid var(--border-color); }
+  .cart-drawer__heading { margin: 0; font-size: var(--overlay-title-size); }
+  .cart-drawer__close { display: inline-grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 0; color: inherit; background: transparent; cursor: pointer; font-size: 1.5rem; }
+  .cart-drawer__body { flex: 1; min-height: 0; overflow-y: auto; padding: 1rem 0; }
+  .cart-drawer .cart-lines { display: grid; gap: 0; }
+  .cart-drawer .cart-line { grid-template-columns: 4rem minmax(0, 1fr); gap: .75rem; padding: .75rem 0; }
+  .cart-drawer .cart-line__image { width: 4rem; height: 4rem; }
+  .cart-drawer .cart-line__title { margin: 0; font-size: 1rem; }
+  .cart-drawer .cart-line a { color: inherit; }
+  .cart-drawer .cart-line__quantity { display: grid; gap: .35rem; max-width: 7rem; margin-top: .75rem; }
+  .cart-drawer .cart-line__quantity input { width: 100%; }
+  .cart-drawer .cart-line__price { grid-column: 2; }
+  .cart-drawer .cart-page__note { display: grid; gap: .35rem; margin-top: 1rem; }
+  .cart-drawer .cart-summary { justify-items: stretch; margin-top: 0; padding-top: 1rem; border-top: var(--border-width) solid var(--border-color); }
+  .cart-drawer .cart-summary__actions { display: grid; }
+  .cart-drawer .cart-summary__actions .button { width: 100%; }
+  .cart-drawer__empty { display: grid; min-height: 100%; align-content: center; justify-items: center; gap: 1rem; text-align: center; }
+  .cart-drawer__status { min-height: 1.25rem; margin: 0; color: var(--color-error); }
+  @media (max-width: 749px) { .cart-drawer { width: 100%; border-radius: 0; } .cart-drawer__surface { padding: var(--drawer-padding-mobile); } }
+  @media (prefers-reduced-motion: no-preference) { .cart-drawer { translate: 100% 0; transition: translate .2s ease; } .cart-drawer[open] { translate: 0 0; } }
+{% endstylesheet %}
+{% javascript %}
+  (() => {
+    const root = document.querySelector('[data-cart-drawer]');
+    if (!root || root.dataset.initialized === 'true') return;
+    root.dataset.initialized = 'true'; let lastFocused;
+    const surface = () => root.querySelector('[data-cart-surface]');
+    const busy = (value) => root.querySelectorAll('button, input, textarea').forEach((control) => { control.disabled = value; });
+    const count = (value) => document.querySelectorAll('[data-cart-count]').forEach((badge) => { badge.textContent = value; badge.hidden = Number(value) < 1; });
+    const close = () => { if (root.open) root.close(); document.documentElement.classList.remove('cart-drawer-open'); lastFocused?.focus(); };
+    const refresh = async () => { const response = await fetch(`${window.Shopify.routes.root}cart?section_id=${encodeURIComponent(root.dataset.sectionId)}`, { headers: { Accept: 'text/html' } }); if (!response.ok) throw new Error(); const html = new DOMParser().parseFromString(await response.text(), 'text/html'); const next = html.querySelector('[data-cart-surface]'); if (!next) throw new Error(); surface().replaceWith(next); count(next.dataset.cartItemCount || 0); };
+    const mutate = async (payload) => { busy(true); try { const response = await fetch(`${window.Shopify.routes.root}cart/update.js`, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) }); if (!response.ok) throw new Error(); await refresh(); } catch (error) { const status = root.querySelector('[data-cart-status]'); if (status) status.textContent = 'Unable to update your cart. Please try again.'; } finally { busy(false); } };
+    document.addEventListener('click', (event) => { const trigger = event.target.closest('[data-cart-open]'); if (trigger) { event.preventDefault(); lastFocused = trigger; root.showModal(); document.documentElement.classList.add('cart-drawer-open'); root.querySelector('[data-cart-close]')?.focus(); } const remove = event.target.closest('[data-cart-remove]'); if (remove && root.contains(remove)) { event.preventDefault(); mutate({ updates: { [remove.dataset.lineKey]: 0 } }); } });
+    root.addEventListener('click', (event) => { if (event.target === root || event.target.closest('[data-cart-close]')) close(); });
+    root.addEventListener('change', (event) => { const input = event.target.closest('[data-cart-quantity]'); if (input) mutate({ updates: { [input.dataset.lineKey]: Math.max(0, Number(input.value) || 0) } }); });
+    root.addEventListener('cancel', (event) => { event.preventDefault(); close(); });
+    document.addEventListener('shopify:section:unload', (event) => { if (event.target === root) close(); });
+  })();
+{% endjavascript %}
+{% schema %}
+{ "name": "Cart drawer", "settings": [], "presets": [{ "name": "Cart drawer" }] }
+{% endschema %}

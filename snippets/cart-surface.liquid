@@ -1,0 +1,13 @@
+{% liquid
+  assign is_drawer = false
+  assign surface_class = 'cart-page'
+  if presentation == 'drawer'
+    assign is_drawer = true
+    assign surface_class = 'cart-drawer__surface'
+  endif
+%}
+<div class="{{ surface_class }}" data-cart-surface data-cart-item-count="{{ cart.item_count }}">
+  {% if is_drawer %}<header class="cart-drawer__header"><h2 class="cart-drawer__heading" id="CartDrawerTitle-{{ section_id }}">{{ heading | escape }}</h2><button class="cart-drawer__close" type="button" aria-label="Close cart" data-cart-close>×</button></header>{% else %}<h1 class="cart-page__heading">{{ heading | escape }}</h1>{% endif %}
+  {% if cart.item_count == 0 %}<div class="{% if is_drawer %}cart-drawer__empty{% endif %}"><p>{{ empty_message | escape }}</p><a class="button" href="{{ continue_url | default: routes.all_products_collection_url }}">{{ continue_label | escape }}</a></div>
+  {% else %}<div class="{% if is_drawer %}cart-drawer__body{% endif %}"><form action="{{ routes.cart_url }}" method="post" id="CartForm-{{ section_id }}"><div class="cart-lines">{% for item in cart.items %}<article class="cart-line"><a href="{{ item.url }}" aria-label="{{ item.product.title | escape }}">{% if item.image %}{{ item.image | image_url: width: 160 | image_tag: class: 'cart-line__image', alt: item.image.alt, loading: 'lazy' }}{% endif %}</a><div><h3 class="cart-line__title"><a href="{{ item.url }}">{{ item.product.title | escape }}</a></h3>{% unless item.product.has_only_default_variant %}<p>{{ item.variant.title | escape }}</p>{% endunless %}<label class="cart-line__quantity" for="CartQuantity-{{ section_id }}-{{ item.index }}">Quantity<input id="CartQuantity-{{ section_id }}-{{ item.index }}" type="number" min="0" value="{{ item.quantity }}" data-cart-quantity data-line-key="{{ item.key }}" name="updates[]"></label><a href="{{ item.url_to_remove }}" data-cart-remove data-line-key="{{ item.key }}">{{ 'cart.remove' | t }}</a></div><strong class="cart-line__price">{{ item.final_line_price | money }}</strong></article>{% endfor %}</div>{% if show_note %}<label class="cart-page__note" for="CartNote-{{ section_id }}">Order note<textarea id="CartNote-{{ section_id }}" name="note">{{ cart.note }}</textarea></label>{% endif %}<div class="cart-summary"><p>Total <strong>{{ cart.total_price | money }}</strong></p><p class="cart-drawer__status" data-cart-status role="status" aria-live="polite"></p><div class="cart-summary__actions"><button type="submit" name="update" class="button button--secondary">{{ 'cart.update' | t }}</button><button type="submit" name="checkout" class="button">{{ 'cart.checkout' | t }}</button></div></div></form></div>{% endif %}
+</div>

@@ -598,3 +598,5 @@ input:not([type='submit']):not([type='checkbox']):not([type='radio']) {
 .shopify-section > .full-width {
   grid-column: 1 / -1;
 }
+html.cart-drawer-open,
+html.cart-drawer-open body { overflow: hidden; }
