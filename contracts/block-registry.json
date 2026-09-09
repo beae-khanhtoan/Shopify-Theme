@@ -3188,6 +3188,8 @@
       "schema_contract": {
         "settings": {
           "data_source": "block-specific.data_source",
+          "manual_previous_url": "block-specific.manual_previous_url",
+          "manual_next_url": "block-specific.manual_next_url",
           "show_previous": "block-specific.show_previous",
           "show_next": "block-specific.show_next",
           "show_page_numbers": "block-specific.show_page_numbers",
