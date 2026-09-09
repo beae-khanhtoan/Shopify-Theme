@@ -1,7 +1,45 @@
-{% doc %}Two-column split layout with explicit ratio and mobile order.{% enddoc %}
-{% assign column_template = '1fr 1fr' %}{% if block.settings.ratio == 'one_two' %}{% assign column_template = '1fr 2fr' %}{% elsif block.settings.ratio == 'two_one' %}{% assign column_template = '2fr 1fr' %}{% endif %}
-<div class="block-columns block-columns--{{ block.settings.mobile_order }}" style="--columns-template: {{ column_template }}; --columns-gap: {{ block.settings.gap }}px; --columns-gap-mobile: {{ block.settings.gap_mobile }}px; --columns-vertical: {{ block.settings.vertical_alignment }};" {{ block.shopify_attributes }}>{% content_for 'blocks' %}</div>
-{% stylesheet %}.block-columns { display: grid; grid-template-columns: var(--columns-template); gap: var(--columns-gap); align-items: var(--columns-vertical); width: 100%; min-width: 0; overflow: hidden; }.block-columns > * { min-width: 0; max-width: 100%; }.block-columns--right-first > :first-child { order: 2; }.block-columns--right-first > :last-child { order: 1; } @media (max-width: 767.98px) { .block-columns { grid-template-columns: minmax(0, 1fr); gap: var(--columns-gap-mobile); } }{% endstylesheet %}
+{% doc %}Two-slot split layout with explicit ratio, responsive stacking and spacing controls.{% enddoc %}
+{% assign column_template = '1fr 1fr' %}
+{% if block.settings.ratio == 'one_two' %}{% assign column_template = '1fr 2fr' %}{% elsif block.settings.ratio == 'two_one' %}{% assign column_template = '2fr 1fr' %}{% elsif block.settings.ratio == 'custom' %}{% assign custom_right_ratio = 100 | minus: block.settings.custom_left_ratio %}{% assign column_template = block.settings.custom_left_ratio | append: 'fr ' | append: custom_right_ratio | append: 'fr' %}{% endif %}
+{% assign columns_breakpoint_class = 'block-columns--breakpoint-' | append: block.settings.breakpoint %}
+<div class="block-columns {{ columns_breakpoint_class }} block-columns--{{ block.settings.mobile_order }}" style="--columns-template: {{ column_template }}; --columns-gap: {{ block.settings.desktop_gap }}px; --columns-gap-mobile: {{ block.settings.mobile_gap }}px; --columns-cross-axis: {{ block.settings.cross_axis_alignment }}; --columns-vertical: {{ block.settings.vertical_alignment }}; --columns-padding-top: {{ block.settings.padding_top }}px; --columns-padding-right: {{ block.settings.padding_right }}px; --columns-padding-bottom: {{ block.settings.padding_bottom }}px; --columns-padding-left: {{ block.settings.padding_left }}px; --columns-padding-top-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_top_mobile }}{% else %}{{ block.settings.padding_top }}{% endif %}px; --columns-padding-right-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_right_mobile }}{% else %}{{ block.settings.padding_right }}{% endif %}px; --columns-padding-bottom-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_bottom_mobile }}{% else %}{{ block.settings.padding_bottom }}{% endif %}px; --columns-padding-left-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_left_mobile }}{% else %}{{ block.settings.padding_left }}{% endif %}px;" {{ block.shopify_attributes }}>{% content_for 'blocks' %}</div>
+{% stylesheet %}
+  .block-columns { box-sizing: border-box; display: grid; grid-template-columns: var(--columns-template); gap: var(--columns-gap); align-items: var(--columns-vertical); justify-items: var(--columns-cross-axis); width: 100%; min-width: 0; overflow: clip; padding: var(--columns-padding-top) var(--columns-padding-right) var(--columns-padding-bottom) var(--columns-padding-left); }
+  .block-columns > * { min-width: 0; max-width: 100%; }
+  .block-columns--right-first > :first-child { order: 2; }
+  .block-columns--right-first > :last-child { order: 1; }
+  @media (max-width: 1149.98px) { .block-columns--breakpoint-tablet { grid-template-columns: minmax(0, 1fr); gap: var(--columns-gap-mobile); padding: var(--columns-padding-top-mobile) var(--columns-padding-right-mobile) var(--columns-padding-bottom-mobile) var(--columns-padding-left-mobile); } }
+  @media (max-width: 767.98px) { .block-columns--breakpoint-mobile { grid-template-columns: minmax(0, 1fr); gap: var(--columns-gap-mobile); padding: var(--columns-padding-top-mobile) var(--columns-padding-right-mobile) var(--columns-padding-bottom-mobile) var(--columns-padding-left-mobile); } }
+{% endstylesheet %}
 {% schema %}
-{"name":"t:blocks.columns.name","blocks":[{"type":"heading"},{"type":"text"},{"type":"eyebrow"},{"type":"button"},{"type":"image"},{"type":"video"},{"type":"icon"},{"type":"header"}],"settings":[{"type":"select","id":"ratio","label":"t:blocks.layout.ratio","options":[{"value":"equal","label":"Equal"},{"value":"one_two","label":"1:2"},{"value":"two_one","label":"2:1"}],"default":"equal"},{"type":"range","id":"gap","label":"t:blocks.layout.gap","min":0,"max":80,"step":4,"unit":"px","default":24},{"type":"range","id":"gap_mobile","label":"t:blocks.layout.mobile_gap","min":0,"max":64,"step":4,"unit":"px","default":16},{"type":"select","id":"mobile_order","label":"t:blocks.layout.mobile_order","options":[{"value":"left-first","label":"Left first"},{"value":"right-first","label":"Right first"}],"default":"left-first"},{"type":"select","id":"vertical_alignment","label":"t:blocks.layout.vertical_alignment","options":[{"value":"start","label":"Start"},{"value":"center","label":"Center"},{"value":"end","label":"End"},{"value":"stretch","label":"Stretch"}],"default":"stretch"}],"presets":[{"name":"t:blocks.columns.name"}]}
+{
+  "name": "t:blocks.columns.name",
+  "blocks": [
+    { "type": "heading" }, { "type": "text" }, { "type": "eyebrow" }, { "type": "button" },
+    { "type": "image" }, { "type": "video" }, { "type": "icon" }, { "type": "header" }
+  ],
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "ratio", "label": "Column ratio", "options": [{ "value": "equal", "label": "Equal" }, { "value": "one_two", "label": "1:2" }, { "value": "two_one", "label": "2:1" }, { "value": "custom", "label": "Custom" }], "default": "equal" },
+    { "type": "range", "id": "custom_left_ratio", "label": "Custom left ratio", "min": 20, "max": 80, "step": 1, "unit": "%", "default": 50, "visible_if": "{{ block.settings.ratio == 'custom' }}" },
+    { "type": "range", "id": "desktop_gap", "label": "Desktop gap", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "mobile_gap", "label": "t:blocks.layout.mobile_gap", "min": 0, "max": 64, "step": 4, "unit": "px", "default": 16 },
+    { "type": "select", "id": "cross_axis_alignment", "label": "Cross-axis alignment", "options": [{ "value": "stretch", "label": "Stretch" }, { "value": "start", "label": "Start" }, { "value": "center", "label": "Center" }, { "value": "end", "label": "End" }], "default": "stretch" },
+    { "type": "select", "id": "vertical_alignment", "label": "Vertical alignment", "options": [{ "value": "start", "label": "Start" }, { "value": "center", "label": "Center" }, { "value": "end", "label": "End" }, { "value": "stretch", "label": "Stretch" }], "default": "start" },
+    { "type": "header", "content": "Stacking" },
+    { "type": "select", "id": "breakpoint", "label": "Breakpoint", "options": [{ "value": "tablet", "label": "Tablet" }, { "value": "mobile", "label": "Mobile" }], "default": "tablet" },
+    { "type": "select", "id": "mobile_order", "label": "Mobile order", "options": [{ "value": "left-first", "label": "Left-first" }, { "value": "right-first", "label": "Right-first" }], "default": "left-first" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "label": "Top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_left", "label": "Left", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_right", "label": "Right", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "checkbox", "id": "customize_mobile_padding", "label": "t:blocks.common.customize_mobile_padding", "default": false },
+    { "type": "range", "id": "padding_top_mobile", "label": "t:blocks.common.padding_top_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.customize_mobile_padding }}" },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "t:blocks.common.padding_bottom_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.customize_mobile_padding }}" },
+    { "type": "range", "id": "padding_left_mobile", "label": "t:blocks.common.padding_left_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.customize_mobile_padding }}" },
+    { "type": "range", "id": "padding_right_mobile", "label": "t:blocks.common.padding_right_mobile", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.customize_mobile_padding }}" }
+  ],
+  "presets": [{ "name": "t:blocks.columns.name" }]
+}
 {% endschema %}
