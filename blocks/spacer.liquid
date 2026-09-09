@@ -10,11 +10,11 @@
   "settings": [
     { "type": "header", "content": "Desktop" },
     { "type": "select", "id": "unit_desktop", "label": "Unit", "options": [{ "value": "pixel", "label": "Pixel" }, { "value": "percent", "label": "Percent" }], "default": "pixel" },
-    { "type": "range", "id": "size_desktop", "label": "Size", "min": 0, "max": 400, "step": 1, "unit": "px", "default": 100 },
+    { "type": "range", "id": "size_desktop", "label": "Size", "min": 0, "max": 400, "step": 4, "unit": "px", "default": 100 },
     { "type": "header", "content": "Mobile" },
     { "type": "checkbox", "id": "show_on_mobile", "label": "Show on mobile", "default": true },
     { "type": "select", "id": "unit_mobile", "label": "Unit", "options": [{ "value": "pixel", "label": "Pixel" }, { "value": "percent", "label": "Percent" }], "default": "pixel", "visible_if": "{{ block.settings.show_on_mobile }}" },
-    { "type": "range", "id": "size_mobile", "label": "Size", "min": 0, "max": 400, "step": 1, "unit": "px", "default": 52, "visible_if": "{{ block.settings.show_on_mobile }}" },
+    { "type": "range", "id": "size_mobile", "label": "Size", "min": 0, "max": 400, "step": 4, "unit": "px", "default": 52, "visible_if": "{{ block.settings.show_on_mobile }}" },
     { "type": "header", "content": "Advanced settings" },
     { "type": "checkbox", "id": "custom_spacing", "label": "Custom spacing", "default": false }
   ],
