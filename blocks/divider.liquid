@@ -1,7 +1,35 @@
-{% doc %}Visual divider owned by the layout flow.{% enddoc %}
+{% doc %}Visual divider with controlled appearance, width, alignment and responsive spacing.{% enddoc %}
 {% assign divider_width = '100%' %}{% if block.settings.width == 'content' %}{% assign divider_width = 'fit-content' %}{% elsif block.settings.width == 'custom' %}{% assign divider_width = block.settings.custom_width | append: '%' %}{% endif %}
-<div class="block-divider block-divider--{{ block.settings.style }} block-divider--{{ block.settings.thickness }} block-divider--align-{{ block.settings.alignment }}" style="--divider-width: {{ divider_width }}; --divider-color: {% if block.settings.color == 'muted' %}var(--color-muted){% elsif block.settings.color == 'custom' %}{{ block.settings.custom_color }}{% else %}var(--color-border){% endif %}; --divider-top: {{ block.settings.spacing_top }}px; --divider-bottom: {{ block.settings.spacing_bottom }}px; --divider-top-mobile: {{ block.settings.spacing_top_mobile }}px; --divider-bottom-mobile: {{ block.settings.spacing_bottom_mobile }}px;" role="separator" {{ block.shopify_attributes }}></div>
-{% stylesheet %}.block-divider { width: var(--divider-width); margin-block-start: var(--divider-top); margin-block-end: var(--divider-bottom); border-top: var(--divider-border) var(--divider-color); }.block-divider--align-start { margin-inline-end: auto; }.block-divider--align-center { margin-inline: auto; }.block-divider--align-end { margin-inline-start: auto; }.block-divider--solid { border-top-style: solid; }.block-divider--dashed { border-top-style: dashed; }.block-divider--dotted { border-top-style: dotted; }.block-divider--thin { --divider-border: 1px; }.block-divider--medium { --divider-border: 2px; }.block-divider--custom { --divider-border: 3px; } @media (max-width: 767.98px) { .block-divider { margin-block-start: var(--divider-top-mobile); margin-block-end: var(--divider-bottom-mobile); } }{% endstylesheet %}
+{% assign divider_thickness = 1 %}{% if block.settings.thickness == 'medium' %}{% assign divider_thickness = 2 %}{% elsif block.settings.thickness == 'custom' %}{% assign divider_thickness = block.settings.custom_thickness %}{% endif %}
+<div class="block-divider block-divider--{{ block.settings.style }} block-divider--align-{{ block.settings.alignment }}" style="--divider-width: {{ divider_width }}; --divider-color: {% if block.settings.color == 'muted' %}var(--color-muted){% elsif block.settings.color == 'custom' %}{{ block.settings.custom_color }}{% else %}var(--color-border){% endif %}; --divider-thickness: {{ divider_thickness }}px; --divider-top: {{ block.settings.desktop_spacing }}px; --divider-bottom: {{ block.settings.desktop_spacing }}px; --divider-top-mobile: {{ block.settings.mobile_spacing }}px; --divider-bottom-mobile: {{ block.settings.mobile_spacing }}px;" role="separator" {{ block.shopify_attributes }}></div>
+{% stylesheet %}
+  .block-divider { width: var(--divider-width); margin-block: var(--divider-top); border-top: var(--divider-thickness) var(--divider-color); }
+  .block-divider--align-start { margin-inline-end: auto; }
+  .block-divider--align-center { margin-inline: auto; }
+  .block-divider--align-end { margin-inline-start: auto; }
+  .block-divider--solid { border-top-style: solid; }
+  .block-divider--dashed { border-top-style: dashed; }
+  .block-divider--dotted { border-top-style: dotted; }
+  @media (max-width: 767.98px) { .block-divider { margin-block: var(--divider-top-mobile); } }
+{% endstylesheet %}
 {% schema %}
-{"name":"t:blocks.divider.name","settings":[{"type":"select","id":"style","label":"t:blocks.divider.style","options":[{"value":"solid","label":"Solid"},{"value":"dashed","label":"Dashed"},{"value":"dotted","label":"Dotted"}],"default":"solid"},{"type":"select","id":"thickness","label":"t:blocks.divider.thickness","options":[{"value":"thin","label":"Thin"},{"value":"medium","label":"Medium"},{"value":"custom","label":"Custom"}],"default":"thin"},{"type":"select","id":"color","label":"t:blocks.divider.color","options":[{"value":"scheme","label":"Scheme"},{"value":"muted","label":"Muted"},{"value":"custom","label":"Custom"}],"default":"scheme"},{"type":"color","id":"custom_color","label":"t:blocks.divider.custom_color","visible_if":"{{ block.settings.color == 'custom' }}"},{"type":"select","id":"width","label":"t:blocks.layout.width","options":[{"value":"full","label":"Full"},{"value":"content","label":"Content"},{"value":"custom","label":"Custom"}],"default":"full"},{"type":"range","id":"custom_width","label":"t:blocks.divider.custom_width","min":10,"max":100,"step":5,"unit":"%","default":100,"visible_if":"{{ block.settings.width == 'custom' }}"},{"type":"select","id":"alignment","label":"t:blocks.layout.alignment","options":[{"value":"start","label":"Start"},{"value":"center","label":"Center"},{"value":"end","label":"End"}],"default":"center"},{"type":"range","id":"spacing_top","label":"t:blocks.divider.spacing_top","min":0,"max":100,"step":1,"unit":"px","default":16},{"type":"range","id":"spacing_bottom","label":"t:blocks.divider.spacing_bottom","min":0,"max":100,"step":1,"unit":"px","default":16},{"type":"range","id":"spacing_top_mobile","label":"t:blocks.divider.spacing_top_mobile","min":0,"max":100,"step":1,"unit":"px","default":12},{"type":"range","id":"spacing_bottom_mobile","label":"t:blocks.divider.spacing_bottom_mobile","min":0,"max":100,"step":1,"unit":"px","default":12}],"presets":[{"name":"t:blocks.divider.name"}]}
+{
+  "name": "t:blocks.divider.name",
+  "settings": [
+    { "type": "header", "content": "Appearance" },
+    { "type": "select", "id": "style", "label": "t:blocks.divider.style", "options": [{ "value": "solid", "label": "Solid" }, { "value": "dashed", "label": "Dashed" }, { "value": "dotted", "label": "Dotted" }], "default": "solid" },
+    { "type": "select", "id": "thickness", "label": "t:blocks.divider.thickness", "options": [{ "value": "thin", "label": "Thin" }, { "value": "medium", "label": "Medium" }, { "value": "custom", "label": "Custom" }], "default": "thin" },
+    { "type": "range", "id": "custom_thickness", "label": "Custom thickness", "min": 1, "max": 8, "step": 1, "unit": "px", "default": 3, "visible_if": "{{ block.settings.thickness == 'custom' }}" },
+    { "type": "select", "id": "color", "label": "t:blocks.divider.color", "options": [{ "value": "scheme", "label": "Scheme" }, { "value": "muted", "label": "Muted" }, { "value": "custom", "label": "Custom" }], "default": "scheme" },
+    { "type": "color", "id": "custom_color", "label": "t:blocks.divider.custom_color", "visible_if": "{{ block.settings.color == 'custom' }}" },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "width", "label": "t:blocks.layout.width", "options": [{ "value": "full", "label": "Full" }, { "value": "content", "label": "Content" }, { "value": "custom", "label": "Custom" }], "default": "full" },
+    { "type": "range", "id": "custom_width", "label": "Custom width", "min": 10, "max": 100, "step": 5, "unit": "%", "default": 100, "visible_if": "{{ block.settings.width == 'custom' }}" },
+    { "type": "select", "id": "alignment", "label": "t:blocks.layout.alignment", "options": [{ "value": "start", "label": "Start" }, { "value": "center", "label": "Center" }, { "value": "end", "label": "End" }], "default": "center" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "desktop_spacing", "label": "Desktop spacing", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "mobile_spacing", "label": "Mobile spacing", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 16 }
+  ],
+  "presets": [{ "name": "t:blocks.divider.name" }]
+}
 {% endschema %}
