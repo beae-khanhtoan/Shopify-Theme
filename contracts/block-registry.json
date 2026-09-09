@@ -337,7 +337,7 @@
         {
           "id": "columns_tablet",
           "type": "select",
-          "values": ["1", "2", "3", "4"],
+          "values": ["1", "2", "3", "4", "5", "6"],
           "default": "3",
           "value_mapping": "grid.columns_tablet",
           "constraints": {
@@ -347,7 +347,7 @@
         {
           "id": "columns_mobile",
           "type": "select",
-          "values": ["1", "2", "3"],
+          "values": ["1", "2", "3", "4", "5", "6"],
           "default": "1",
           "value_mapping": "grid.columns_mobile",
           "constraints": {
