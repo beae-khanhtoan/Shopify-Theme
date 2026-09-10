@@ -77,7 +77,10 @@
 {% stylesheet %}
   .video { position: relative; box-sizing: border-box; justify-self: start; width: var(--video-width); max-width: var(--video-max-width); aspect-ratio: var(--video-ratio); overflow: hidden; border-radius: var(--video-radius); padding: var(--video-padding-top) var(--video-padding-right) var(--video-padding-bottom) var(--video-padding-left); }
   .video video, .video iframe, .video .placeholder-svg { display: block; width: 100%; height: 100%; object-fit: cover; }
-  .video__play { position: absolute; inset: 50% auto auto 50%; display: grid; width: var(--play-button-size); height: var(--play-button-size); place-items: center; padding: 0; transform: translate(-50%, -50%); border: 0; border-radius: 50%; background: var(--play-button-background); color: var(--play-button-icon); cursor: pointer; }
+  .video__play { position: absolute; inset: 50% auto auto 50%; display: grid; width: var(--play-button-size); height: var(--play-button-size); place-items: center; padding: 0; transform: translate(-50%, -50%); border: 0; border-radius: 50%; background: var(--play-button-background); color: var(--play-button-icon); box-shadow: 0 2px 12px rgb(0 0 0 / 20%); cursor: pointer; font-size: 0; transition: transform 180ms ease, box-shadow 180ms ease; }
+  .video__play::before { content: ''; display: block; width: 0; height: 0; margin-inline-start: .18em; border-block: .36em solid transparent; border-inline-start: .56em solid currentColor; }
+  .video__play:hover { transform: translate(-50%, -50%) scale(1.06); box-shadow: 0 4px 16px rgb(0 0 0 / 28%); }
+  .video__play:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
   .video__play[hidden] { display: none; }
   @media (max-width: 767.98px) { .video { width: var(--video-width-mobile); max-width: var(--video-max-width-mobile); padding: var(--video-padding-top-mobile) var(--video-padding-right-mobile) var(--video-padding-bottom-mobile) var(--video-padding-left-mobile); }.video__play { width: var(--play-button-size-mobile); height: var(--play-button-size-mobile); } }
 {% endstylesheet %}
