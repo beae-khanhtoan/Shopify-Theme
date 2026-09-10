@@ -1,66 +1,40 @@
 {% liquid
   assign header_logo = settings.logo | default: settings.logo_transparent
+  assign cart_drawer_id = 'CartDrawer-cart-drawer'
+  assign search_drawer_id = 'SearchDrawer-search-drawer'
+  assign mobile_navigation_id = section.id | append: '-mobile'
 %}
-<header id="Header-{{ section.id }}" class="site-header{% if section.settings.sticky %} site-header--sticky{% endif %}" data-header data-section-id="{{ section.id }}">
-  <div class="site-header__inner">
-    <button class="site-header__menu-button" type="button" aria-expanded="false" aria-controls="HeaderNavigation-{{ section.id }}" data-header-menu><span class="visually-hidden">Open menu</span><span aria-hidden="true">☰</span></button>
-    <a class="site-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}" style="--logo-width: {{ settings.logo_width }}px; --logo-width-mobile: {{ settings.logo_width_mobile }}px">
-      {% if header_logo %}{{ header_logo | image_url: width: settings.logo_width | image_tag: alt: shop.name, widths: '120, 160, 240, 320', loading: 'eager' }}{% else %}{{ shop.name | escape }}{% endif %}
-    </a>
-    {% render 'global-navigation', menu: section.settings.menu, label: 'Primary navigation', presentation: 'inline', max_depth: section.settings.max_depth %}
-    <div class="site-header__actions" aria-label="Utility links">
-      {% if section.settings.show_search %}<a href="{{ routes.search_url }}" aria-label="Search">Search</a>{% endif %}
-      {% if section.settings.show_account and shop.customer_accounts_enabled %}<a href="{{ routes.account_url }}" aria-label="Account">Account</a>{% endif %}
-      {% if section.settings.show_cart %}<a href="{{ routes.cart_url }}"{% unless template.name == 'cart' %} data-cart-open aria-haspopup="dialog" aria-controls="CartDrawer-cart-drawer"{% endunless %} aria-label="Cart{% if cart.item_count > 0 %}, {{ cart.item_count }} items{% endif %}">Cart (<span data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>)</a>{% endif %}
+<global-header id="Header-{{ section.id }}" class="site-header{% if section.settings.sticky %} site-header--sticky{% endif %}" data-section-id="{{ section.id }}">
+  <header class="site-header__surface">
+    <div class="site-header__inner">
+      <button class="site-header__icon-button site-header__menu-button" type="button" aria-expanded="false" aria-controls="HeaderNavigation-{{ section.id }}" data-header-menu>
+        <span class="site-header__visually-hidden">{{ section.settings.open_menu_label | escape }}</span><span aria-hidden="true">☰</span>
+      </button>
+      <a class="site-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}" style="--logo-width: {{ settings.logo_width }}px; --logo-width-mobile: {{ settings.logo_width_mobile }}px">
+        {% if header_logo %}{{ header_logo | image_url: width: settings.logo_width | image_tag: alt: shop.name, widths: '120, 160, 240, 320', loading: 'eager' }}{% else %}{{ shop.name | escape }}{% endif %}
+      </a>
+      {% render 'global-navigation', menu: section.settings.menu, label: section.settings.navigation_label, presentation: 'inline', max_depth: section.settings.max_depth, id_prefix: section.id %}
+      <nav class="site-header__actions" aria-label="{{ section.settings.utility_label | escape }}">
+        {% if section.settings.show_search %}<a href="{{ routes.search_url }}"{% unless template.name == 'search' %} data-search-open aria-haspopup="dialog" aria-expanded="false" aria-controls="{{ search_drawer_id }}"{% endunless %}>{{ section.settings.search_label | escape }}</a>{% endif %}
+        {% if section.settings.show_account and shop.customer_accounts_enabled %}<a href="{{ routes.account_url }}">{{ section.settings.account_label | escape }}</a>{% endif %}
+        {% if section.settings.show_cart %}<a href="{{ routes.cart_url }}"{% unless template.name == 'cart' %} data-cart-open aria-haspopup="dialog" aria-expanded="false" aria-controls="{{ cart_drawer_id }}"{% endunless %} aria-label="{{ section.settings.cart_label | escape }}{% if cart.item_count > 0 %}, {{ cart.item_count }} items{% endif %}">{{ section.settings.cart_label | escape }} <span class="site-header__cart-count" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span></a>{% endif %}
+      </nav>
     </div>
-  </div>
-  <dialog class="site-header__drawer" id="HeaderNavigation-{{ section.id }}" data-header-drawer>
-    <div class="site-header__drawer-header"><span>{{ shop.name | escape }}</span><button type="button" aria-label="Close menu" data-header-close>×</button></div>
-    {% render 'global-navigation', menu: section.settings.menu, label: 'Mobile navigation', presentation: 'drawer', max_depth: section.settings.max_depth %}
+  </header>
+  <dialog class="site-header__drawer" id="HeaderNavigation-{{ section.id }}" data-header-drawer scroll-lock aria-labelledby="HeaderNavigationTitle-{{ section.id }}">
+    <div class="site-header__drawer-panel">
+      <div class="site-header__drawer-header"><span id="HeaderNavigationTitle-{{ section.id }}">{{ section.settings.navigation_label | escape }}</span><button class="site-header__icon-button" type="button" aria-label="{{ section.settings.close_menu_label | escape }}" data-header-close>×</button></div>
+      {% render 'global-navigation', menu: section.settings.menu, label: section.settings.mobile_navigation_label, presentation: 'drawer', max_depth: section.settings.max_depth, id_prefix: mobile_navigation_id %}
+      <nav class="site-header__mobile-utilities" aria-label="{{ section.settings.utility_label | escape }}">{% if section.settings.show_search %}<a href="{{ routes.search_url }}"{% unless template.name == 'search' %} data-search-open aria-haspopup="dialog" aria-expanded="false" aria-controls="{{ search_drawer_id }}"{% endunless %}>{{ section.settings.search_label | escape }}</a>{% endif %}{% if section.settings.show_account and shop.customer_accounts_enabled %}<a href="{{ routes.account_url }}">{{ section.settings.account_label | escape }}</a>{% endif %}</nav>
+    </div>
   </dialog>
-</header>
+</global-header>
 {% stylesheet %}
-  .site-header { position: relative; z-index: 20; color: var(--color-foreground); background: var(--color-background); border-bottom: var(--border-width) solid var(--border-color); }
-  .site-header--sticky { position: sticky; top: 0; }
-  .site-header__inner { min-height: 5rem; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 2rem; padding: 0 var(--page-margin); }
-  .site-header__brand { color: inherit; font-family: var(--font-heading-family); font-size: 1.25rem; text-decoration: none; white-space: nowrap; }
-  .site-header__brand img { display: block; width: var(--logo-width); max-height: 3rem; object-fit: contain; }
-  .site-header__actions, .site-header__actions a { display: flex; align-items: center; gap: 1rem; color: inherit; }
-  .site-header__actions a { text-decoration: none; }
-  .site-header__menu-button, .site-header__drawer { display: none; }
-  .global-navigation__list, .global-navigation ul { display: flex; align-items: center; gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
-  .global-navigation a { color: inherit; text-decoration: none; }
-  .global-navigation__item { display: flex; align-items: center; gap: .25rem; position: relative; }
-  .global-navigation__disclosure { position: absolute; top: 100%; left: 0; min-width: 12rem; padding: .75rem; background: var(--color-background); border: var(--border-width) solid var(--border-color); box-shadow: var(--overlay-shadow); }
-  .global-navigation__disclosure summary { cursor: pointer; list-style: none; }
-  .global-navigation__disclosure summary::-webkit-details-marker { display: none; }
-  .global-navigation__disclosure > ul, .global-navigation__disclosure ul ul { display: grid; gap: .5rem; }
-  .global-navigation__disclosure ul ul { padding: .35rem 0 .35rem 1rem; }
-  .site-header__drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; font-family: var(--font-heading-family); }
-  .site-header__drawer-header button { border: 0; background: transparent; font-size: 1.5rem; cursor: pointer; }
-  @media (max-width: 749px) {
-    .site-header__inner { grid-template-columns: auto 1fr auto; gap: .75rem; padding: .75rem var(--page-margin-mobile); }
-    .site-header__menu-button { display: inline-flex; justify-content: center; align-items: center; width: 2.5rem; height: 2.5rem; border: 0; background: transparent; color: inherit; cursor: pointer; }
-    .site-header > .global-navigation { display: none; }
-    .site-header__actions { justify-content: flex-end; gap: .5rem; font-size: .875rem; }
-    .site-header__actions a:first-child { display: none; }
-    .site-header__brand img { width: var(--logo-width-mobile); max-height: 2.5rem; }
-    .site-header__drawer[open] { display: block; position: fixed; inset: 0 auto 0 0; width: min(88vw, 22rem); height: 100dvh; margin: 0; padding: 1.25rem; border: 0; background: var(--color-background); color: var(--color-foreground); box-shadow: var(--overlay-shadow); }
-    .site-header__drawer::backdrop { background: rgb(0 0 0 / var(--overlay-opacity)); }
-    .site-header__drawer .global-navigation__list, .site-header__drawer .global-navigation ul { display: grid; align-items: start; gap: .75rem; }
-    .site-header__drawer .global-navigation__disclosure { position: static; min-width: 0; padding: .5rem 0 0 1rem; border: 0; box-shadow: none; }
-  }
+  .site-header{position:relative;z-index:20;display:block;color:var(--color-foreground);background:var(--color-background)}.site-header--sticky{position:sticky;top:0}.site-header__surface{border-bottom:var(--border-width) solid var(--border-color)}.site-header__inner{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:2rem;min-height:5rem;max-width:var(--page-width);margin-inline:auto;padding-inline:var(--page-margin)}.site-header__brand{color:inherit;font-family:var(--font-heading-family);font-size:1.25rem;text-decoration:none;white-space:nowrap}.site-header__brand img{display:block;width:min(var(--logo-width),100%);max-height:3rem;object-fit:contain}.site-header__actions{display:flex;align-items:center;justify-content:flex-end;gap:1rem}.site-header__actions a{display:inline-flex;min-height:2.75rem;align-items:center;gap:.35rem;color:inherit;text-decoration:none}.site-header__cart-count{display:inline-grid;min-width:1.35rem;min-height:1.35rem;place-items:center;padding-inline:.25rem;border-radius:999px;background:var(--color-button);color:var(--color-button-label);font-size:.75rem;line-height:1}.site-header__icon-button{display:inline-grid;width:2.75rem;min-height:2.75rem;place-items:center;padding:0;border:0;background:transparent;color:inherit;font-size:1.5rem}.site-header__menu-button,.site-header__drawer{display:none}.site-header .global-navigation__list{display:flex;align-items:center;justify-content:center;gap:1.25rem;margin:0;padding:0;list-style:none}.site-header .global-navigation__item{position:relative;display:flex;align-items:center;gap:.25rem}.site-header .global-navigation a{color:inherit;text-decoration:none}.site-header .global-navigation a[aria-current=page]{text-decoration:underline;text-underline-offset:.25em}.site-header .global-navigation__toggle{width:2rem;min-height:2rem;padding:0;border:0;background:transparent;color:inherit}.site-header .global-navigation__submenu{position:absolute;z-index:2;top:calc(100% + .5rem);left:0;display:grid;min-width:14rem;gap:.65rem;margin:0;padding:1rem;border:var(--border-width) solid var(--border-color);background:var(--color-background);box-shadow:var(--overlay-shadow);list-style:none}.site-header .global-navigation__submenu[hidden]{display:none}.site-header .global-navigation__nested{display:grid;gap:.5rem;margin:.5rem 0 0;padding-left:1rem;list-style:none}.site-header__drawer::backdrop{background:rgb(0 0 0 / var(--overlay-opacity));backdrop-filter:var(--overlay-backdrop-blur)}.site-header__drawer-panel{min-height:100%;padding:var(--drawer-padding-mobile);background:var(--color-background)}.site-header__drawer-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;font-family:var(--font-heading-family)}
+  @media(max-width:749px){.site-header__inner{gap:.75rem;min-height:4.5rem;padding-inline:var(--page-margin-mobile)}.site-header__menu-button{display:inline-grid}.site-header__inner>.global-navigation{display:none}.site-header__actions{gap:.65rem;font-size:.875rem}.site-header__actions [data-search-open],.site-header__actions a[href*='/account']{display:none}.site-header__brand img{width:min(var(--logo-width-mobile),100%);max-height:2.5rem}.site-header__drawer[open]{position:fixed;inset:0 auto 0 0;display:block;width:min(90vw,24rem);max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0}.site-header__drawer .global-navigation__list,.site-header__drawer .global-navigation__submenu{display:grid;gap:.75rem;margin:0;padding:0;list-style:none}.site-header__drawer .global-navigation__item{display:grid;grid-template-columns:minmax(0,1fr) auto}.site-header__drawer .global-navigation__submenu{position:static;grid-column:1/-1;padding:.5rem 0 .5rem 1rem;border:0;box-shadow:none}}
+  .site-header__visually-hidden{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important}.site-header__mobile-utilities{display:none}
+  @media(max-width:749px){.site-header__drawer .site-header__mobile-utilities{display:grid;gap:.75rem;margin-top:1.5rem;padding-top:1.5rem;border-top:var(--border-width) solid var(--border-color)}.site-header__mobile-utilities a{color:inherit}}
 {% endstylesheet %}
-{% javascript %}
-  (() => { const root = document.querySelector('[data-header]'); if (!root || root.dataset.initialized === 'true') return; root.dataset.initialized = 'true'; const trigger = root.querySelector('[data-header-menu]'); const drawer = root.querySelector('[data-header-drawer]'); const close = root.querySelector('[data-header-close]'); let lastFocused; const closeDrawer = () => { if (drawer?.open) drawer.close(); trigger?.setAttribute('aria-expanded', 'false'); lastFocused?.focus(); }; trigger?.addEventListener('click', () => { lastFocused = document.activeElement; drawer?.showModal(); trigger.setAttribute('aria-expanded', 'true'); close?.focus(); }); close?.addEventListener('click', closeDrawer); drawer?.addEventListener('click', event => { if (event.target === drawer) closeDrawer(); }); drawer?.addEventListener('cancel', event => { event.preventDefault(); closeDrawer(); }); })();
-{% endjavascript %}
 {% schema %}
-{ "name": "Header", "settings": [
-  { "type": "link_list", "id": "menu", "label": "Navigation menu", "default": "main-menu" },
-  { "type": "checkbox", "id": "sticky", "label": "Sticky header", "default": false },
-  { "type": "checkbox", "id": "show_search", "label": "Show search link", "default": true },
-  { "type": "checkbox", "id": "show_account", "label": "Show account link", "default": true },
-  { "type": "checkbox", "id": "show_cart", "label": "Show cart link", "default": true },
-  { "type": "range", "id": "max_depth", "label": "Menu depth", "min": 1, "max": 3, "step": 1, "default": 2 }
-] }
+{"name":"Header","settings":[{"type":"link_list","id":"menu","label":"Navigation menu","default":"main-menu"},{"type":"checkbox","id":"sticky","label":"Sticky header","default":false},{"type":"checkbox","id":"show_search","label":"Show search","default":true},{"type":"checkbox","id":"show_account","label":"Show account","default":true},{"type":"checkbox","id":"show_cart","label":"Show cart","default":true},{"type":"range","id":"max_depth","label":"Menu depth","min":1,"max":3,"step":1,"default":3},{"type":"text","id":"navigation_label","label":"Navigation label","default":"Primary navigation"},{"type":"text","id":"mobile_navigation_label","label":"Mobile navigation label","default":"Menu"},{"type":"text","id":"utility_label","label":"Utility navigation label","default":"Store tools"},{"type":"text","id":"search_label","label":"Search label","default":"Search"},{"type":"text","id":"account_label","label":"Account label","default":"Account"},{"type":"text","id":"cart_label","label":"Cart label","default":"Cart"},{"type":"text","id":"open_menu_label","label":"Open menu label","default":"Open menu"},{"type":"text","id":"close_menu_label","label":"Close menu label","default":"Close menu"}]}
 {% endschema %}

@@ -6,8 +6,44 @@
     assign surface_class = 'cart-drawer__surface'
   endif
 %}
-<div class="{{ surface_class }}" data-cart-surface data-cart-item-count="{{ cart.item_count }}">
-  {% if is_drawer %}<header class="cart-drawer__header"><h2 class="cart-drawer__heading" id="CartDrawerTitle-{{ section_id }}">{{ heading | escape }}</h2><button class="cart-drawer__close" type="button" aria-label="Close cart" data-cart-close>×</button></header>{% else %}<h1 class="cart-page__heading">{{ heading | escape }}</h1>{% endif %}
-  {% if cart.item_count == 0 %}<div class="{% if is_drawer %}cart-drawer__empty{% endif %}"><p>{{ empty_message | escape }}</p><a class="button" href="{{ continue_url | default: routes.all_products_collection_url }}">{{ continue_label | escape }}</a></div>
-  {% else %}<div class="{% if is_drawer %}cart-drawer__body{% endif %}"><form action="{{ routes.cart_url }}" method="post" id="CartForm-{{ section_id }}"><div class="cart-lines">{% for item in cart.items %}<article class="cart-line"><a href="{{ item.url }}" aria-label="{{ item.product.title | escape }}">{% if item.image %}{{ item.image | image_url: width: 160 | image_tag: class: 'cart-line__image', alt: item.image.alt, loading: 'lazy' }}{% endif %}</a><div><h3 class="cart-line__title"><a href="{{ item.url }}">{{ item.product.title | escape }}</a></h3>{% unless item.product.has_only_default_variant %}<p>{{ item.variant.title | escape }}</p>{% endunless %}<label class="cart-line__quantity" for="CartQuantity-{{ section_id }}-{{ item.index }}">Quantity<input id="CartQuantity-{{ section_id }}-{{ item.index }}" type="number" min="0" value="{{ item.quantity }}" data-cart-quantity data-line-key="{{ item.key }}" name="updates[]"></label><a href="{{ item.url_to_remove }}" data-cart-remove data-line-key="{{ item.key }}">{{ 'cart.remove' | t }}</a></div><strong class="cart-line__price">{{ item.final_line_price | money }}</strong></article>{% endfor %}</div>{% if show_note %}<label class="cart-page__note" for="CartNote-{{ section_id }}">Order note<textarea id="CartNote-{{ section_id }}" name="note">{{ cart.note }}</textarea></label>{% endif %}<div class="cart-summary"><p>Total <strong>{{ cart.total_price | money }}</strong></p><p class="cart-drawer__status" data-cart-status role="status" aria-live="polite"></p><div class="cart-summary__actions"><button type="submit" name="update" class="button button--secondary">{{ 'cart.update' | t }}</button><button type="submit" name="checkout" class="button">{{ 'cart.checkout' | t }}</button></div></div></form></div>{% endif %}
+<div class="{{ surface_class }}" data-cart-surface data-cart-item-count="{{ cart.item_count }}" data-cart-empty="{% if cart.item_count == 0 %}true{% else %}false{% endif %}">
+  {% if is_drawer %}
+    <header class="cart-drawer__header"><h2 class="cart-drawer__heading" id="CartDrawerTitle-{{ section_id }}">{{ heading | escape }}</h2><button class="cart-drawer__close" type="button" aria-label="{{ close_label | escape }}" data-cart-close>×</button></header>
+  {% else %}
+    <h1 class="cart-page__heading">{{ heading | escape }}</h1>
+  {% endif %}
+  {% if cart.item_count == 0 %}
+    <div class="cart-empty{% if is_drawer %} cart-drawer__empty{% endif %}"><p>{{ empty_message | escape }}</p><a class="button" href="{{ continue_url | default: routes.all_products_collection_url }}">{{ continue_label | escape }}</a></div>
+  {% else %}
+    <div class="{% if is_drawer %}cart-drawer__body{% endif %}">
+      <form action="{{ routes.cart_url }}" method="post" id="CartForm-{{ section_id }}">
+        <div class="cart-lines">
+          {% for item in cart.items %}
+            <article class="cart-line">
+              <a class="cart-line__media" href="{{ item.url }}" aria-label="{{ item.product.title | escape }}">{% if item.image %}{{ item.image | image_url: width: 240 | image_tag: class: 'cart-line__image', alt: item.image.alt, loading: 'lazy' }}{% endif %}</a>
+              <div class="cart-line__details">
+                <h3 class="cart-line__title"><a href="{{ item.url }}">{{ item.product.title | escape }}</a></h3>
+                {% unless item.product.has_only_default_variant %}<p class="cart-line__variant">{{ item.variant.title | escape }}</p>{% endunless %}
+                {% for property in item.properties %}{% assign property_first_character = property.first | slice: 0 %}{% if property.last != blank and property_first_character != '_' %}<p class="cart-line__property">{{ property.first | escape }}: {{ property.last | escape }}</p>{% endif %}{% endfor %}
+                <label class="cart-line__quantity" for="CartQuantity-{{ section_id }}-{{ item.index }}">{{ quantity_label | escape }}<input id="CartQuantity-{{ section_id }}-{{ item.index }}" type="number" min="0" value="{{ item.quantity }}" data-cart-quantity data-line-key="{{ item.key }}" name="updates[{{ item.key }}]" inputmode="numeric"></label>
+                <a class="cart-line__remove" href="{{ item.url_to_remove }}" data-cart-remove data-line-key="{{ item.key }}">{{ 'cart.remove' | t }}</a>
+              </div>
+              <div class="cart-line__price">{% if item.original_line_price > item.final_line_price %}<s>{{ item.original_line_price | money }}</s>{% endif %}<strong>{{ item.final_line_price | money }}</strong>{% for discount in item.line_level_discount_allocations %}<span>{{ discount.discount_application.title | escape }} (-{{ discount.amount | money }})</span>{% endfor %}</div>
+            </article>
+          {% endfor %}
+        </div>
+        {% if show_note %}<label class="cart-page__note" for="CartNote-{{ section_id }}">{{ note_label | escape }}<textarea id="CartNote-{{ section_id }}" name="note">{{ cart.note }}</textarea></label>{% endif %}
+        <div class="cart-summary">
+          {% if cart.total_discounts > 0 %}<p>{{ savings_label | escape }} <strong>-{{ cart.total_discounts | money }}</strong></p>{% endif %}
+          <p>{{ total_label | escape }} <strong>{{ cart.total_price | money }}</strong></p>
+          {% if cart.taxes_included %}<p class="cart-summary__tax">{{ taxes_included_label | escape }}</p>{% endif %}
+          <p class="cart-drawer__status" data-cart-status data-global-status role="status" aria-live="polite"></p>
+          <div class="cart-summary__actions">
+            {% if is_drawer %}<a class="button btn--secondary" href="{{ routes.cart_url }}">{{ view_cart_label | escape }}</a>{% else %}<button type="submit" name="update" class="button btn--secondary">{{ 'cart.update' | t }}</button>{% endif %}
+            <button type="submit" name="checkout" class="button">{{ 'cart.checkout' | t }}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  {% endif %}
 </div>

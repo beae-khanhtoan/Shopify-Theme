@@ -1,0 +1,10 @@
+<predictive-search class="predictive-search" data-enabled="{{ predictive_enabled }}" data-min-chars="{{ min_chars }}" data-limit="{{ predictive_limit }}" data-debounce="{{ debounce }}" data-products-label="{{ products_label | escape }}" data-collections-label="{{ collections_label | escape }}" data-pages-label="{{ pages_label | escape }}" data-articles-label="{{ articles_label | escape }}" data-state="idle">
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+    <label class="predictive-search__visually-hidden" for="SearchInput-{{ id }}">{{ placeholder | escape }}</label>
+    <input id="SearchInput-{{ id }}" type="search" name="q" value="{{ value | escape }}" placeholder="{{ placeholder | escape }}" autocomplete="off" aria-autocomplete="list" aria-expanded="false" aria-controls="SearchResults-{{ id }}" data-search-input>
+    <input type="hidden" name="options[prefix]" value="last">
+    <button type="submit" class="button">{{ submit_label | escape }}</button>
+  </form>
+  <div class="search-predictive" id="SearchResults-{{ id }}" aria-live="polite" data-search-predictive hidden></div>
+</predictive-search>
+{% stylesheet %}.predictive-search__visually-hidden{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important}{% endstylesheet %}

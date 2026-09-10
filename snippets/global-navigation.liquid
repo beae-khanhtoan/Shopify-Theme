@@ -1,50 +1,29 @@
-{% comment %}
-  Renders a shared navigation tree. The parent surface owns presentation and
-  overlay/focus behavior; this snippet owns link semantics and active state.
-
-  Accepts:
-  - menu: link list object
-  - label: accessible navigation label
-  - id: optional stable id for disclosure controls
-  - presentation: inline, drawer, accordion, or footer
-  - max_depth: 1-3
-{% endcomment %}
+{% comment %}Shared link-list renderer. Parent owns overlay/focus; this snippet owns hierarchy and disclosure.{% endcomment %}
 {% liquid
   assign navigation_label = label | default: 'Navigation'
   assign navigation_depth = max_depth | default: 2 | at_most: 3
+  assign navigation_presentation = presentation | default: 'inline'
 %}
-
 {% if menu != blank %}
-  <nav class="global-navigation global-navigation--{{ presentation | default: 'inline' }}" aria-label="{{ navigation_label | escape }}">
+  <global-navigation data-navigation-root>
+  <nav class="global-navigation global-navigation--{{ navigation_presentation }}" aria-label="{{ navigation_label | escape }}">
     <ul class="global-navigation__list" role="list">
       {% for link in menu.links %}
-        <li class="global-navigation__item{% if link.current %} is-current{% endif %}">
+        {% assign submenu_id = 'Navigation-' | append: id_prefix | append: '-' | append: forloop.index %}
+        <li class="global-navigation__item{% if link.current or link.child_active %} is-current{% endif %}">
           <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
-          {% if link.links != blank and navigation_depth > 1 %}
-            <details class="global-navigation__disclosure">
-              <summary aria-label="{{ 'Expand' | append: ' ' | append: link.title | escape }}">
-                <span aria-hidden="true">⌄</span>
-              </summary>
-              <ul role="list">
-                {% for child_link in link.links %}
-                  <li{% if child_link.current %} class="is-current"{% endif %}>
-                    <a href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a>
-                    {% if child_link.links != blank and navigation_depth > 2 %}
-                      <ul role="list">
-                        {% for grandchild_link in child_link.links %}
-                          <li{% if grandchild_link.current %} class="is-current"{% endif %}>
-                            <a href="{{ grandchild_link.url }}"{% if grandchild_link.current %} aria-current="page"{% endif %}>{{ grandchild_link.title | escape }}</a>
-                          </li>
-                        {% endfor %}
-                      </ul>
-                    {% endif %}
-                  </li>
-                {% endfor %}
-              </ul>
-            </details>
+          {% if link.links != blank and navigation_depth > 1 and navigation_presentation != 'footer' %}
+            <button class="global-navigation__toggle" type="button" aria-expanded="false" aria-controls="{{ submenu_id }}" data-navigation-toggle><span class="global-navigation__visually-hidden">Expand {{ link.title | escape }}</span><span aria-hidden="true">⌄</span></button>
+            <ul class="global-navigation__submenu" id="{{ submenu_id }}" role="list" hidden>
+              {% for child_link in link.links %}
+                <li{% if child_link.current or child_link.child_active %} class="is-current"{% endif %}><a href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a>{% if child_link.links != blank and navigation_depth > 2 %}<ul class="global-navigation__nested" role="list">{% for grandchild_link in child_link.links %}<li{% if grandchild_link.current %} class="is-current"{% endif %}><a href="{{ grandchild_link.url }}"{% if grandchild_link.current %} aria-current="page"{% endif %}>{{ grandchild_link.title | escape }}</a></li>{% endfor %}</ul>{% endif %}</li>
+              {% endfor %}
+            </ul>
           {% endif %}
         </li>
       {% endfor %}
     </ul>
   </nav>
+  </global-navigation>
 {% endif %}
+{% stylesheet %}.global-navigation__visually-hidden{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important}{% endstylesheet %}

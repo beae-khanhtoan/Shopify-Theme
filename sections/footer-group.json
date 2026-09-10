@@ -14,9 +14,14 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "menu": "",
         "show_payment_icons": true
-      }
+      },
+      "blocks": {
+        "footer-menu": { "type": "menu", "settings": { "heading": "Explore", "menu": "footer" } },
+        "footer-text": { "type": "text", "settings": { "heading": "About", "text": "<p>Share store details, values, or contact information.</p>" } },
+        "footer-newsletter": { "type": "newsletter", "settings": {} }
+      },
+      "block_order": ["footer-menu", "footer-text", "footer-newsletter"]
     }
   },
   "order": [
