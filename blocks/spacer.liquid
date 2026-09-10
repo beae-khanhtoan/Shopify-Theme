@@ -1,5 +1,7 @@
 {% doc %}Flow spacer owning only its own block-size without changing adjacent block margins.{% enddoc %}
-<div class="block-spacer" style="--spacer-size: {{ block.settings.size_desktop }}{% if block.settings.unit_desktop == 'percent' %}%{% else %}px{% endif %}; --spacer-size-mobile: {{ block.settings.size_mobile }}{% if block.settings.unit_mobile == 'percent' %}%{% else %}px{% endif %};" data-show-on-mobile="{{ block.settings.show_on_mobile }}" data-custom-spacing="{{ block.settings.custom_spacing }}" {{ block.shopify_attributes }}></div>
+{% assign spacer_size_desktop = block.settings.size_desktop %}{% if block.settings.unit_desktop == 'percent' %}{% assign spacer_size_desktop = block.settings.size_desktop_percent %}{% endif %}
+{% assign spacer_size_mobile = block.settings.size_mobile %}{% if block.settings.unit_mobile == 'percent' %}{% assign spacer_size_mobile = block.settings.size_mobile_percent %}{% endif %}
+<div class="block-spacer" style="--spacer-size: {{ spacer_size_desktop }}{% if block.settings.unit_desktop == 'percent' %}%{% else %}px{% endif %}; --spacer-size-mobile: {{ spacer_size_mobile }}{% if block.settings.unit_mobile == 'percent' %}%{% else %}px{% endif %};" data-show-on-mobile="{{ block.settings.show_on_mobile }}" data-custom-spacing="{{ block.settings.custom_spacing }}" {{ block.shopify_attributes }}></div>
 {% stylesheet %}
   .block-spacer { display: block; width: 100%; block-size: var(--spacer-size); min-height: 0; }
   @media (max-width: 767.98px) { .block-spacer { block-size: var(--spacer-size-mobile); } .block-spacer[data-show-on-mobile='false'] { display: none; } }
@@ -10,11 +12,13 @@
   "settings": [
     { "type": "header", "content": "Desktop" },
     { "type": "select", "id": "unit_desktop", "label": "Unit", "options": [{ "value": "pixel", "label": "Pixel" }, { "value": "percent", "label": "Percent" }], "default": "pixel" },
-    { "type": "range", "id": "size_desktop", "label": "Size", "min": 0, "max": 400, "step": 4, "unit": "px", "default": 100 },
+    { "type": "range", "id": "size_desktop", "label": "Size", "min": 0, "max": 400, "step": 4, "unit": "px", "default": 100, "visible_if": "{{ block.settings.unit_desktop == 'pixel' }}" },
+    { "type": "range", "id": "size_desktop_percent", "label": "Size", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 25, "visible_if": "{{ block.settings.unit_desktop == 'percent' }}" },
     { "type": "header", "content": "Mobile" },
     { "type": "checkbox", "id": "show_on_mobile", "label": "Show on mobile", "default": true },
     { "type": "select", "id": "unit_mobile", "label": "Unit", "options": [{ "value": "pixel", "label": "Pixel" }, { "value": "percent", "label": "Percent" }], "default": "pixel", "visible_if": "{{ block.settings.show_on_mobile }}" },
-    { "type": "range", "id": "size_mobile", "label": "Size", "min": 0, "max": 400, "step": 4, "unit": "px", "default": 52, "visible_if": "{{ block.settings.show_on_mobile }}" },
+    { "type": "range", "id": "size_mobile", "label": "Size", "min": 0, "max": 400, "step": 4, "unit": "px", "default": 52, "visible_if": "{{ block.settings.show_on_mobile and block.settings.unit_mobile == 'pixel' }}" },
+    { "type": "range", "id": "size_mobile_percent", "label": "Size", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 16, "visible_if": "{{ block.settings.show_on_mobile and block.settings.unit_mobile == 'percent' }}" },
     { "type": "header", "content": "Advanced settings" },
     { "type": "checkbox", "id": "custom_spacing", "label": "Custom spacing", "default": false }
   ],
