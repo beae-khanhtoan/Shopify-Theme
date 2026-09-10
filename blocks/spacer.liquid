@@ -1,10 +1,11 @@
 {% doc %}Flow spacer owning only its own block-size without changing adjacent block margins.{% enddoc %}
 {% assign spacer_size_desktop = block.settings.size_desktop %}{% if block.settings.unit_desktop == 'percent' %}{% assign spacer_size_desktop = block.settings.size_desktop_percent %}{% endif %}
 {% assign spacer_size_mobile = block.settings.size_mobile %}{% if block.settings.unit_mobile == 'percent' %}{% assign spacer_size_mobile = block.settings.size_mobile_percent %}{% endif %}
-<div class="block-spacer" style="--spacer-size: {{ spacer_size_desktop }}{% if block.settings.unit_desktop == 'percent' %}%{% else %}px{% endif %}; --spacer-size-mobile: {{ spacer_size_mobile }}{% if block.settings.unit_mobile == 'percent' %}%{% else %}px{% endif %};" data-show-on-mobile="{{ block.settings.show_on_mobile }}" data-custom-spacing="{{ block.settings.custom_spacing }}" {{ block.shopify_attributes }}></div>
+<div class="block-spacer" style="--spacer-size: {{ spacer_size_desktop }}{% if block.settings.unit_desktop == 'percent' %}%{% else %}px{% endif %}; --spacer-size-mobile: {{ spacer_size_mobile }}{% if block.settings.unit_mobile == 'percent' %}%{% else %}px{% endif %};" data-unit-desktop="{{ block.settings.unit_desktop }}" data-unit-mobile="{{ block.settings.unit_mobile }}" data-show-on-mobile="{{ block.settings.show_on_mobile }}" data-custom-spacing="{{ block.settings.custom_spacing }}" {{ block.shopify_attributes }}></div>
 {% stylesheet %}
   .block-spacer { display: block; width: 100%; block-size: var(--spacer-size); min-height: 0; }
-  @media (max-width: 767.98px) { .block-spacer { block-size: var(--spacer-size-mobile); } .block-spacer[data-show-on-mobile='false'] { display: none; } }
+  .block-spacer[data-unit-desktop='percent'] { block-size: 0; padding-block-start: var(--spacer-size); }
+  @media (max-width: 767.98px) { .block-spacer { block-size: var(--spacer-size-mobile); padding-block-start: 0; } .block-spacer[data-unit-mobile='percent'] { block-size: 0; padding-block-start: var(--spacer-size-mobile); } .block-spacer[data-show-on-mobile='false'] { display: none; } }
 {% endstylesheet %}
 {% schema %}
 {
