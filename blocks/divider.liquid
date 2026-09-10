@@ -3,7 +3,7 @@
 {% assign divider_thickness = 1 %}{% if block.settings.thickness == 'medium' %}{% assign divider_thickness = 2 %}{% elsif block.settings.thickness == 'custom' %}{% assign divider_thickness = block.settings.custom_thickness %}{% endif %}
 <div class="block-divider block-divider--{{ block.settings.style }} block-divider--align-{{ block.settings.alignment }}" style="--divider-width: {{ divider_width }}; --divider-color: {% if block.settings.color == 'muted' %}var(--color-muted){% elsif block.settings.color == 'custom' %}{{ block.settings.custom_color }}{% else %}var(--color-border){% endif %}; --divider-thickness: {{ divider_thickness }}px; --divider-top: {{ block.settings.desktop_spacing }}px; --divider-bottom: {{ block.settings.desktop_spacing }}px; --divider-top-mobile: {{ block.settings.mobile_spacing }}px; --divider-bottom-mobile: {{ block.settings.mobile_spacing }}px;" role="separator" {{ block.shopify_attributes }}></div>
 {% stylesheet %}
-  .block-divider { width: var(--divider-width); margin-block: var(--divider-top); border-top: var(--divider-thickness) var(--divider-color); }
+  .block-divider { width: var(--divider-width); margin-block: var(--divider-top) var(--divider-bottom); border-top: var(--divider-thickness) solid var(--divider-color); }
   .block-divider--align-start { margin-inline-end: auto; }
   .block-divider--align-center { margin-inline: auto; }
   .block-divider--align-end { margin-inline-start: auto; }
