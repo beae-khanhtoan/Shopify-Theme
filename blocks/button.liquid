@@ -2,8 +2,8 @@
   Renders a semantic button or link using the global button variant contract.
 {% enddoc %}
 
-{% assign button_width = 'fit-content' %}{% if block.settings.width == 'fill' %}{% assign button_width = '100%' %}{% endif %}
-{% assign button_width_mobile = 'fit-content' %}{% if block.settings.width_mobile == 'fill' %}{% assign button_width_mobile = '100%' %}{% endif %}
+{% assign button_width = 'max-content' %}{% if block.settings.width == 'fill' %}{% assign button_width = '100%' %}{% endif %}
+{% assign button_width_mobile = 'max-content' %}{% if block.settings.width_mobile == 'fill' %}{% assign button_width_mobile = '100%' %}{% endif %}
 {% capture button_style %}--button-width: {{ button_width }}; --button-width-mobile: {{ button_width_mobile }}; --button-padding-top: {{ block.settings.padding_top }}px; --button-padding-right: {{ block.settings.padding_right }}px; --button-padding-bottom: {{ block.settings.padding_bottom }}px; --button-padding-left: {{ block.settings.padding_left }}px; --button-padding-top-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_top_mobile }}{% else %}{{ block.settings.padding_top }}{% endif %}px; --button-padding-right-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_right_mobile }}{% else %}{{ block.settings.padding_right }}{% endif %}px; --button-padding-bottom-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_bottom_mobile }}{% else %}{{ block.settings.padding_bottom }}{% endif %}px; --button-padding-left-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_left_mobile }}{% else %}{{ block.settings.padding_left }}{% endif %}px; --button-icon-size: {% if block.settings.icon_size == 'custom' %}{{ block.settings.icon_size_custom }}px{% else %}1em{% endif %};{% endcapture %}
 
 {% if block.settings.button_link != blank %}
@@ -23,6 +23,7 @@
 {% stylesheet %}
   .button {
     display: inline-flex;
+    justify-self: start;
     align-items: center;
     justify-content: center;
     width: var(--button-width);

@@ -21,9 +21,9 @@
   {% when 'wide' %}{% assign mobile_ratio = '16 / 9' %}
   {% when 'custom' %}{% assign mobile_ratio = block.settings.image_ratio_custom_mobile | append: ' / 1' %}
 {% endcase %}
-{% assign desktop_width = 'fit-content' %}
+{% assign desktop_width = 'max-content' %}
 {% if block.settings.width_desktop == 'fill' %}{% assign desktop_width = '100%' %}{% elsif block.settings.width_desktop == 'custom' %}{% assign desktop_width = block.settings.width_custom_desktop | append: '%' %}{% endif %}
-{% assign mobile_width = 'fit-content' %}
+{% assign mobile_width = 'max-content' %}
 {% if block.settings.width_mobile == 'fill' %}{% assign mobile_width = '100%' %}{% elsif block.settings.width_mobile == 'custom' %}{% assign mobile_width = block.settings.width_custom_mobile | append: '%' %}{% endif %}
 {% assign desktop_max_width = '100%' %}
 {% if block.settings.limit_width_desktop %}{% assign desktop_max_width = block.settings.max_width_desktop | append: 'px' %}{% endif %}
@@ -44,7 +44,7 @@
 {% endif %}
 
 {% stylesheet %}
-  .image { box-sizing: border-box; width: var(--image-width); max-width: var(--image-max-width); aspect-ratio: var(--image-ratio); overflow: hidden; border-radius: var(--image-radius); padding: var(--image-padding-top) var(--image-padding-right) var(--image-padding-bottom) var(--image-padding-left); }
+  .image { box-sizing: border-box; justify-self: start; width: var(--image-width); max-width: var(--image-max-width); aspect-ratio: var(--image-ratio); overflow: hidden; border-radius: var(--image-radius); padding: var(--image-padding-top) var(--image-padding-right) var(--image-padding-bottom) var(--image-padding-left); }
   .image__link, .image picture { display: block; width: 100%; height: 100%; }
   .image img, .image .placeholder-svg { display: block; width: 100%; height: 100%; object-fit: cover; }
   @media (max-width: 767.98px) { .image { width: var(--image-width-mobile); max-width: var(--image-max-width-mobile); aspect-ratio: var(--image-ratio-mobile); padding: var(--image-padding-top-mobile) var(--image-padding-right-mobile) var(--image-padding-bottom-mobile) var(--image-padding-left-mobile); } }

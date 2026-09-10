@@ -2,7 +2,7 @@
   Renders a short accent label. Eyebrows are not intended for long-form content.
 {% enddoc %}
 
-{% assign eyebrow_width = 'fit-content' %}
+{% assign eyebrow_width = 'max-content' %}
 {% if block.settings.width == 'fill' %}{% assign eyebrow_width = '100%' %}{% endif %}
 {% assign eyebrow_width_mobile = eyebrow_width %}
 {% if block.settings.customize_mobile_width and block.settings.width_mobile == 'fill' %}{% assign eyebrow_width_mobile = '100%' %}{% endif %}
@@ -17,7 +17,7 @@
 {% endif %}
 
 {% stylesheet %}
-  .eyebrow-block { display: inline-flex; align-items: center; gap: var(--space-small); width: var(--block-width); max-width: 100%; padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left); color: var(--block-color); text-align: var(--block-align); justify-content: var(--block-align); }
+  .eyebrow-block { display: inline-flex; align-items: center; justify-self: start; gap: var(--space-small); width: var(--block-width); max-width: 100%; padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left); color: var(--block-color); text-align: var(--block-align); justify-content: var(--block-align); }
   .eyebrow-block--align-start { margin-inline-end: auto; }
   .eyebrow-block--align-center { margin-inline: auto; }
   .eyebrow-block--align-end { margin-inline-start: auto; }

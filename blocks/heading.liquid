@@ -11,9 +11,9 @@
   {% when 'display' %}{% assign heading_class = 'heading-display' %}
   {% when 'custom' %}{% assign heading_class = 'heading-custom' %}
 {% endcase %}
-{% assign heading_width = 'fit-content' %}
+{% assign heading_width = 'max-content' %}
 {% if block.settings.width == 'fill' %}{% assign heading_width = '100%' %}{% endif %}
-{% assign heading_width_mobile = 'fit-content' %}
+{% assign heading_width_mobile = 'max-content' %}
 {% if block.settings.customize_mobile_width %}{% assign heading_width_mobile = heading_width %}{% if block.settings.width_mobile == 'fill' %}{% assign heading_width_mobile = '100%' %}{% endif %}{% else %}{% assign heading_width_mobile = heading_width %}{% endif %}
 {% assign heading_alignment_mobile = block.settings.alignment %}
 
@@ -32,7 +32,7 @@
 {% endif %}
 
 {% stylesheet %}
-  .heading-text { width: var(--block-width); margin: 0; padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left); text-align: var(--block-align); color: var(--block-color); }
+  .heading-text { justify-self: start; width: var(--block-width); max-width: 100%; margin: 0; padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left); text-align: var(--block-align); color: var(--block-color); }
   .heading-custom { font-size: var(--heading-custom-size, var(--font-heading-md)); }
   @media (max-width: 767.98px) { .heading-text { width: var(--block-width-mobile); padding: var(--padding-top-mobile) var(--padding-right-mobile) var(--padding-bottom-mobile) var(--padding-left-mobile); text-align: var(--block-align-mobile); } }
 {% endstylesheet %}

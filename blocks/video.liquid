@@ -2,8 +2,8 @@
   Renders an uploaded or external video with responsive sizing and reduced-motion-safe autoplay.
 {% enddoc %}
 
-{% assign video_width_desktop = 'fit-content' %}{% if block.settings.width_desktop == 'fill' %}{% assign video_width_desktop = '100%' %}{% elsif block.settings.width_desktop == 'custom' %}{% assign video_width_desktop = block.settings.width_custom_desktop | append: '%' %}{% endif %}
-{% assign video_width_mobile = 'fit-content' %}{% if block.settings.width_mobile == 'fill' %}{% assign video_width_mobile = '100%' %}{% elsif block.settings.width_mobile == 'custom' %}{% assign video_width_mobile = block.settings.width_custom_mobile | append: '%' %}{% endif %}
+{% assign video_width_desktop = 'max-content' %}{% if block.settings.width_desktop == 'fill' %}{% assign video_width_desktop = '100%' %}{% elsif block.settings.width_desktop == 'custom' %}{% assign video_width_desktop = block.settings.width_custom_desktop | append: '%' %}{% endif %}
+{% assign video_width_mobile = 'max-content' %}{% if block.settings.width_mobile == 'fill' %}{% assign video_width_mobile = '100%' %}{% elsif block.settings.width_mobile == 'custom' %}{% assign video_width_mobile = block.settings.width_custom_mobile | append: '%' %}{% endif %}
 {% assign video_max_width_desktop = '100%' %}{% if block.settings.limit_width_desktop %}{% assign video_max_width_desktop = block.settings.max_width_desktop | append: 'px' %}{% endif %}
 {% assign video_max_width_mobile = '100%' %}{% if block.settings.limit_width_mobile %}{% assign video_max_width_mobile = block.settings.max_width_mobile | append: 'px' %}{% endif %}
 {% assign video_ratio = 'auto' %}{% case block.settings.aspect_ratio %}{% when 'square' %}{% assign video_ratio = '1 / 1' %}{% when 'portrait' %}{% assign video_ratio = '3 / 4' %}{% when 'landscape' %}{% assign video_ratio = '4 / 3' %}{% when 'wide' %}{% assign video_ratio = '16 / 9' %}{% when 'custom' %}{% assign video_ratio = block.settings.custom_aspect_ratio | append: ' / 1' %}{% endcase %}
@@ -38,7 +38,7 @@
 {% endjavascript %}
 
 {% stylesheet %}
-  .video { position: relative; box-sizing: border-box; width: var(--video-width); max-width: var(--video-max-width); aspect-ratio: var(--video-ratio); overflow: hidden; border-radius: var(--video-radius); padding: var(--video-padding-top) var(--video-padding-right) var(--video-padding-bottom) var(--video-padding-left); }
+  .video { position: relative; box-sizing: border-box; justify-self: start; width: var(--video-width); max-width: var(--video-max-width); aspect-ratio: var(--video-ratio); overflow: hidden; border-radius: var(--video-radius); padding: var(--video-padding-top) var(--video-padding-right) var(--video-padding-bottom) var(--video-padding-left); }
   .video video, .video iframe, .video .placeholder-svg { display: block; width: 100%; height: 100%; object-fit: cover; }
   .video__play { position: absolute; inset: 50% auto auto 50%; display: grid; width: var(--play-button-size); height: var(--play-button-size); place-items: center; transform: translate(-50%, -50%); border-radius: 50%; background: var(--play-button-background); color: var(--play-button-icon); pointer-events: none; }
   @media (max-width: 767.98px) { .video { width: var(--video-width-mobile); max-width: var(--video-max-width-mobile); padding: var(--video-padding-top-mobile) var(--video-padding-right-mobile) var(--video-padding-bottom-mobile) var(--video-padding-left-mobile); }.video__play { width: var(--play-button-size-mobile); height: var(--play-button-size-mobile); } }
