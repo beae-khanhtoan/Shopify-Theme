@@ -1,4 +1,6 @@
-{% render 'cart-surface', presentation: 'page', section_id: section.id, heading: section.settings.heading, empty_message: section.settings.empty_message, continue_label: section.settings.continue_label, continue_url: section.settings.continue_url, show_note: section.settings.show_note, close_label: 'Close cart', quantity_label: section.settings.quantity_label, note_label: section.settings.note_label, savings_label: section.settings.savings_label, total_label: section.settings.total_label, taxes_included_label: section.settings.taxes_included_label, view_cart_label: 'View cart' %}
+<main id="Cart-{{ section.id }}" class="cart-page" data-section-id="{{ section.id }}">
+  {% render 'cart-surface', presentation: 'page', section_id: section.id, heading: section.settings.heading, empty_message: section.settings.empty_message, continue_label: section.settings.continue_label, continue_url: section.settings.continue_url, show_note: section.settings.show_note, close_label: 'Close cart', quantity_label: section.settings.quantity_label, note_label: section.settings.note_label, savings_label: section.settings.savings_label, total_label: section.settings.total_label, taxes_included_label: section.settings.taxes_included_label, view_cart_label: 'View cart' %}
+</main>
 
 {% stylesheet %}
   .cart-page { max-width: var(--page-width); margin: 3rem auto; padding: 0 var(--page-margin); }
