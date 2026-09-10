@@ -7,13 +7,13 @@
 {% capture button_style %}--button-width: {{ button_width }}; --button-width-mobile: {{ button_width_mobile }}; --button-padding-top: {{ block.settings.padding_top }}px; --button-padding-right: {{ block.settings.padding_right }}px; --button-padding-bottom: {{ block.settings.padding_bottom }}px; --button-padding-left: {{ block.settings.padding_left }}px; --button-padding-top-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_top_mobile }}{% else %}{{ block.settings.padding_top }}{% endif %}px; --button-padding-right-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_right_mobile }}{% else %}{{ block.settings.padding_right }}{% endif %}px; --button-padding-bottom-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_bottom_mobile }}{% else %}{{ block.settings.padding_bottom }}{% endif %}px; --button-padding-left-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_left_mobile }}{% else %}{{ block.settings.padding_left }}{% endif %}px; --button-icon-size: {% if block.settings.icon_size == 'custom' %}{{ block.settings.icon_size_custom }}px{% else %}1em{% endif %};{% endcapture %}
 
 {% if block.settings.button_link != blank %}
-  <a class="button button--{{ block.settings.button_style }}" style="{{ button_style }}" href="{{ block.settings.button_link }}"{% if block.settings.button_open_in_new_tab %} target="_blank" rel="noopener noreferrer"{% endif %} {{ block.shopify_attributes }}>
+  <a class="button button--{{ block.settings.button_style }} button--justify-{{ block.settings.alignment }}" style="{{ button_style }}" href="{{ block.settings.button_link }}"{% if block.settings.button_open_in_new_tab %} target="_blank" rel="noopener noreferrer"{% endif %} {{ block.shopify_attributes }}>
     {% if block.settings.show_icon and block.settings.icon_position == 'left' %}<span class="button__icon" aria-hidden="true">{% if block.settings.icon == 'account' %}{{ 'icon-account.svg' | inline_asset_content }}{% else %}{{ 'icon-cart.svg' | inline_asset_content }}{% endif %}</span>{% endif %}
     <span>{{ block.settings.button_label | escape }}</span>
     {% if block.settings.show_icon and block.settings.icon_position == 'right' %}<span class="button__icon" aria-hidden="true">{% if block.settings.icon == 'account' %}{{ 'icon-account.svg' | inline_asset_content }}{% else %}{{ 'icon-cart.svg' | inline_asset_content }}{% endif %}</span>{% endif %}
   </a>
 {% else %}
-  <button class="button button--{{ block.settings.button_style }}" style="{{ button_style }}" type="button" {{ block.shopify_attributes }}>
+  <button class="button button--{{ block.settings.button_style }} button--justify-{{ block.settings.alignment }}" style="{{ button_style }}" type="button" {{ block.shopify_attributes }}>
     {% if block.settings.show_icon and block.settings.icon_position == 'left' %}<span class="button__icon" aria-hidden="true">{% if block.settings.icon == 'account' %}{{ 'icon-account.svg' | inline_asset_content }}{% else %}{{ 'icon-cart.svg' | inline_asset_content }}{% endif %}</span>{% endif %}
     <span>{{ block.settings.button_label | escape }}</span>
     {% if block.settings.show_icon and block.settings.icon_position == 'right' %}<span class="button__icon" aria-hidden="true">{% if block.settings.icon == 'account' %}{{ 'icon-account.svg' | inline_asset_content }}{% else %}{{ 'icon-cart.svg' | inline_asset_content }}{% endif %}</span>{% endif %}
@@ -34,6 +34,9 @@
     cursor: pointer;
   }
   .button__icon { display: inline-flex; width: var(--button-icon-size); height: var(--button-icon-size); }
+  .button--justify-start { justify-content: flex-start; }
+  .button--justify-center { justify-content: center; }
+  .button--justify-end { justify-content: flex-end; }
   .button__icon svg { width: 100%; height: 100%; stroke-width: var(--icon-stroke-width); }
   .button--primary { background: var(--color-primary-button); color: var(--color-on-primary-button); }
   .button--secondary { background: var(--color-secondary-button); color: var(--color-on-secondary-button); }
