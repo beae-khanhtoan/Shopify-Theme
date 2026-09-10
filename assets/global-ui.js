@@ -65,6 +65,7 @@ class GlobalNavigation extends HTMLElement {
         if (submenu) submenu.hidden = expanded;
       }, { signal: this.abortController.signal });
     });
+<<<<<<< HEAD
     this.addEventListener('keydown', (event) => {
       if (event.key !== 'Escape') return;
       const expanded = this.querySelector('[data-navigation-toggle][aria-expanded="true"]');
@@ -75,6 +76,8 @@ class GlobalNavigation extends HTMLElement {
       expanded.focus();
       event.stopPropagation();
     }, { signal: this.abortController.signal });
+=======
+>>>>>>> 4cb7b22 (fix: isolate header navigation lifecycle)
   }
 
   disconnectedCallback() {
