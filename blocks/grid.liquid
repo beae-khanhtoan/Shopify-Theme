@@ -1,17 +1,19 @@
 {% doc %}Responsive grid composition owning columns, gaps, item alignment and collapse behavior.{% enddoc %}
 {% assign grid_collapse_class = 'block-grid--collapse-' | append: block.settings.collapse_breakpoint %}
+{% assign grid_mobile_columns = block.settings.columns_mobile | plus: 0 %}
+{% if grid_mobile_columns > 3 %}{% assign grid_mobile_columns = 3 %}{% endif %}
 {% if block.settings.stacking_behavior == 'stack' %}
   {% assign grid_stack_class = ' block-grid--stack' %}
 {% else %}
   {% assign grid_stack_class = '' %}
 {% endif %}
-<div class="block-grid {{ grid_collapse_class }}{{ grid_stack_class }}{% if block.settings.item_height == 'equal' %} block-grid--equal-height{% endif %}" style="--grid-columns: {{ block.settings.columns_desktop }}; --grid-columns-tablet: {{ block.settings.columns_tablet }}; --grid-columns-mobile: {{ block.settings.columns_mobile }}; --grid-gap: {{ block.settings.gap }}px; --grid-mobile-gap: {{ block.settings.mobile_gap }}px; --grid-align: {{ block.settings.item_alignment }}; --grid-padding-top: {{ block.settings.padding_top }}px; --grid-padding-right: {{ block.settings.padding_right }}px; --grid-padding-bottom: {{ block.settings.padding_bottom }}px; --grid-padding-left: {{ block.settings.padding_left }}px;" {{ block.shopify_attributes }}>{% content_for 'blocks' %}</div>
+<div class="block-grid {{ grid_collapse_class }}{{ grid_stack_class }}{% if block.settings.item_height == 'equal' %} block-grid--equal-height{% endif %}" style="--grid-columns: {{ block.settings.columns_desktop }}; --grid-columns-tablet: {{ block.settings.columns_tablet }}; --grid-columns-mobile: {{ grid_mobile_columns }}; --grid-gap: {{ block.settings.gap }}px; --grid-mobile-gap: {{ block.settings.mobile_gap }}px; --grid-align: {{ block.settings.item_alignment }}; --grid-padding-top: {{ block.settings.padding_top }}px; --grid-padding-right: {{ block.settings.padding_right }}px; --grid-padding-bottom: {{ block.settings.padding_bottom }}px; --grid-padding-left: {{ block.settings.padding_left }}px;" {{ block.shopify_attributes }}>{% content_for 'blocks' %}</div>
 {% stylesheet %}
   .block-grid { box-sizing: border-box; display: grid; grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr)); gap: var(--grid-gap); align-items: var(--grid-align); width: 100%; min-width: 0; overflow: clip; padding: var(--grid-padding-top) var(--grid-padding-right) var(--grid-padding-bottom) var(--grid-padding-left); }
   .block-grid > * { min-width: 0; max-width: 100%; }
   .block-grid--equal-height > * { height: 100%; }
   @media (max-width: 1149.98px) { .block-grid { grid-template-columns: repeat(var(--grid-columns-tablet), minmax(0, 1fr)); } .block-grid--collapse-tablet.block-grid--stack { grid-template-columns: minmax(0, 1fr); } }
-  @media (max-width: 767.98px) { .block-grid { grid-template-columns: repeat(var(--grid-columns-mobile), minmax(0, 1fr)); gap: var(--grid-mobile-gap); } .block-grid--collapse-mobile.block-grid--stack { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 767.98px) { .block-grid { grid-template-columns: repeat(var(--grid-columns-mobile), minmax(0, 1fr)); gap: var(--grid-mobile-gap); } .block-grid--collapse-tablet.block-grid--stack { grid-template-columns: repeat(var(--grid-columns-mobile), minmax(0, 1fr)); } .block-grid--collapse-mobile.block-grid--stack { grid-template-columns: minmax(0, 1fr); } }
 {% endstylesheet %}
 {% schema %}
 {
@@ -24,7 +26,7 @@
     { "type": "header", "content": "Columns" },
     { "type": "select", "id": "columns_desktop", "label": "t:blocks.layout.columns_desktop", "options": [{ "value": "1", "label": "1" }, { "value": "2", "label": "2" }, { "value": "3", "label": "3" }, { "value": "4", "label": "4" }, { "value": "5", "label": "5" }, { "value": "6", "label": "6" }], "default": "4" },
     { "type": "select", "id": "columns_tablet", "label": "t:blocks.layout.columns_tablet", "options": [{ "value": "1", "label": "1" }, { "value": "2", "label": "2" }, { "value": "3", "label": "3" }, { "value": "4", "label": "4" }, { "value": "5", "label": "5" }, { "value": "6", "label": "6" }], "default": "3" },
-    { "type": "select", "id": "columns_mobile", "label": "t:blocks.layout.columns_mobile", "options": [{ "value": "1", "label": "1" }, { "value": "2", "label": "2" }, { "value": "3", "label": "3" }, { "value": "4", "label": "4" }, { "value": "5", "label": "5" }, { "value": "6", "label": "6" }], "default": "1" },
+    { "type": "select", "id": "columns_mobile", "label": "t:blocks.layout.columns_mobile", "options": [{ "value": "1", "label": "1" }, { "value": "2", "label": "2" }, { "value": "3", "label": "3" }], "default": "1" },
     { "type": "header", "content": "Gap" },
     { "type": "range", "id": "gap", "label": "Column and row gap", "min": 0, "max": 64, "step": 4, "unit": "px", "default": 24 },
     { "type": "range", "id": "mobile_gap", "label": "t:blocks.layout.mobile_gap", "min": 0, "max": 64, "step": 4, "unit": "px", "default": 16 },
