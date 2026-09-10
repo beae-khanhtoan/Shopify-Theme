@@ -1,11 +1,11 @@
 {% doc %}Flow spacer owning only its own block-size without changing adjacent block margins.{% enddoc %}
 {% assign spacer_size_desktop = block.settings.size_desktop %}{% if block.settings.unit_desktop == 'percent' %}{% assign spacer_size_desktop = block.settings.size_desktop_percent %}{% endif %}
 {% assign spacer_size_mobile = block.settings.size_mobile %}{% if block.settings.unit_mobile == 'percent' %}{% assign spacer_size_mobile = block.settings.size_mobile_percent %}{% endif %}
-<div class="block-spacer" style="--spacer-size: {{ spacer_size_desktop }}{% if block.settings.unit_desktop == 'percent' %}%{% else %}px{% endif %}; --spacer-size-mobile: {{ spacer_size_mobile }}{% if block.settings.unit_mobile == 'percent' %}%{% else %}px{% endif %};" data-unit-desktop="{{ block.settings.unit_desktop }}" data-unit-mobile="{{ block.settings.unit_mobile }}" data-show-on-mobile="{{ block.settings.show_on_mobile }}" data-custom-spacing="{{ block.settings.custom_spacing }}" {{ block.shopify_attributes }}></div>
+<div class="block-spacer" style="--spacer-size: {{ spacer_size_desktop }}{% if block.settings.unit_desktop == 'percent' %}%{% else %}px{% endif %}; --spacer-size-mobile: {{ spacer_size_mobile }}{% if block.settings.unit_mobile == 'percent' %}%{% else %}px{% endif %}; --spacer-padding-top: {% if block.settings.custom_spacing %}{{ block.settings.custom_padding_top }}{% else %}0{% endif %}px; --spacer-padding-right: {% if block.settings.custom_spacing %}{{ block.settings.custom_padding_right }}{% else %}0{% endif %}px; --spacer-padding-bottom: {% if block.settings.custom_spacing %}{{ block.settings.custom_padding_bottom }}{% else %}0{% endif %}px; --spacer-padding-left: {% if block.settings.custom_spacing %}{{ block.settings.custom_padding_left }}{% else %}0{% endif %}px;" data-unit-desktop="{{ block.settings.unit_desktop }}" data-unit-mobile="{{ block.settings.unit_mobile }}" data-show-on-mobile="{{ block.settings.show_on_mobile }}" data-custom-spacing="{{ block.settings.custom_spacing }}" {{ block.shopify_attributes }}></div>
 {% stylesheet %}
-  .block-spacer { display: block; width: 100%; block-size: var(--spacer-size); min-height: 0; }
-  .block-spacer[data-unit-desktop='percent'] { block-size: 0; padding-block-start: var(--spacer-size); }
-  @media (max-width: 767.98px) { .block-spacer { block-size: var(--spacer-size-mobile); padding-block-start: 0; } .block-spacer[data-unit-mobile='percent'] { block-size: 0; padding-block-start: var(--spacer-size-mobile); } .block-spacer[data-show-on-mobile='false'] { display: none; } }
+  .block-spacer { display: block; box-sizing: border-box; width: 100%; block-size: calc(var(--spacer-size) + var(--spacer-padding-top) + var(--spacer-padding-bottom)); min-height: 0; padding-inline: var(--spacer-padding-left) var(--spacer-padding-right); }
+  .block-spacer[data-unit-desktop='percent'] { block-size: 0; padding-block: calc(var(--spacer-size) + var(--spacer-padding-top)) var(--spacer-padding-bottom); }
+  @media (max-width: 767.98px) { .block-spacer { block-size: calc(var(--spacer-size-mobile) + var(--spacer-padding-top) + var(--spacer-padding-bottom)); padding-block: var(--spacer-padding-top) var(--spacer-padding-bottom); } .block-spacer[data-unit-mobile='percent'] { block-size: 0; padding-block-start: calc(var(--spacer-size-mobile) + var(--spacer-padding-top)); } .block-spacer[data-show-on-mobile='false'] { display: none; } }
 {% endstylesheet %}
 {% schema %}
 {
@@ -21,7 +21,11 @@
     { "type": "range", "id": "size_mobile", "label": "Size", "min": 0, "max": 400, "step": 4, "unit": "px", "default": 52, "visible_if": "{{ block.settings.show_on_mobile and block.settings.unit_mobile == 'pixel' }}" },
     { "type": "range", "id": "size_mobile_percent", "label": "Size", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 16, "visible_if": "{{ block.settings.show_on_mobile and block.settings.unit_mobile == 'percent' }}" },
     { "type": "header", "content": "Advanced settings" },
-    { "type": "checkbox", "id": "custom_spacing", "label": "Custom spacing", "default": false }
+    { "type": "checkbox", "id": "custom_spacing", "label": "Custom spacing", "default": false },
+    { "type": "range", "id": "custom_padding_top", "label": "Top padding", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.custom_spacing }}" },
+    { "type": "range", "id": "custom_padding_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.custom_spacing }}" },
+    { "type": "range", "id": "custom_padding_left", "label": "Left padding", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.custom_spacing }}" },
+    { "type": "range", "id": "custom_padding_right", "label": "Right padding", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0, "visible_if": "{{ block.settings.custom_spacing }}" }
   ],
   "presets": [{ "category": "Block Layout", "name": "t:blocks.spacer.name" }]
 }
