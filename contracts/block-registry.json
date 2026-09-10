@@ -2732,10 +2732,16 @@
         "layout",
         "spacing"
       ],
-      "block_specific_settings": [],
+      "block_specific_settings": [
+        { "id": "heading_size", "type": "select", "values": ["display", "xl", "lg", "md", "sm", "xs", "custom"], "default": "md", "value_mapping": "typography.heading_scale", "constraints": { "owner": "typography" } },
+        { "id": "custom_size", "type": "range", "default": 32, "value_mapping": "typography.custom_heading_size", "constraints": { "owner": "typography", "visible_when": "heading_size == custom" } },
+        { "id": "text_color", "type": "color", "default": "", "value_mapping": "appearance.text_color", "constraints": { "owner": "appearance" } }
+      ],
       "schema_contract": {
         "settings": {
-          "size": "typography.heading_scale",
+          "heading_size": "typography.heading_scale",
+          "custom_size": "typography.custom_heading_size",
+          "text_color": "appearance.text_color",
           "html_tag": "block-specific.html_tag",
           "text_case": "typography.text_case",
           "padding_top": "spacing.padding_top",
