@@ -10,7 +10,7 @@
 {% if block.settings.customize_mobile_width and block.settings.customize_mobile_alignment and block.settings.width_mobile == 'fill' %}{% assign eyebrow_alignment_mobile = block.settings.alignment_mobile %}{% endif %}
 
 {% if block.settings.text != blank %}
-  <div class="eyebrow-block eyebrow-block--align-{{ block.settings.alignment }} eyebrow-block--mobile-align-{{ block.settings.alignment_mobile }} eyebrow-scheme-{{ block.settings.color_scheme }}{% if block.settings.show_background %} eyebrow-block--background{% endif %}{% if block.settings.show_icon %} eyebrow-block--icon{% endif %}" style="--block-width: {{ eyebrow_width }}; --block-width-mobile: {{ eyebrow_width_mobile }}; --block-align: {{ block.settings.alignment }}; --block-align-mobile: {{ eyebrow_alignment_mobile }}; --block-color: {{ block.settings.color | default: 'var(--accent-color)' }}; --border-thickness: {{ block.settings.border_thickness }}px; --corner-radius: {{ block.settings.corner_radius }}px; --padding-top: {{ block.settings.padding_top }}px; --padding-bottom: {{ block.settings.padding_bottom }}px; --padding-left: {{ block.settings.padding_left }}px; --padding-right: {{ block.settings.padding_right }}px; --padding-top-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_top_mobile }}{% else %}{{ block.settings.padding_top }}{% endif %}px; --padding-bottom-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_bottom_mobile }}{% else %}{{ block.settings.padding_bottom }}{% endif %}px; --padding-left-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_left_mobile }}{% else %}{{ block.settings.padding_left }}{% endif %}px; --padding-right-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_right_mobile }}{% else %}{{ block.settings.padding_right }}{% endif %}px;" {{ block.shopify_attributes }}>
+  <div class="eyebrow-block eyebrow-block--align-{{ block.settings.alignment }} eyebrow-block--mobile-align-{{ block.settings.alignment_mobile }} eyebrow-scheme-{{ block.settings.color_scheme }}{% if block.settings.show_background %} eyebrow-block--background{% endif %}{% if block.settings.show_icon %} eyebrow-block--icon{% endif %}" style="--block-width: {{ eyebrow_width }}; --block-width-mobile: {{ eyebrow_width_mobile }}; --block-align: {{ block.settings.alignment }}; --block-align-mobile: {{ eyebrow_alignment_mobile }}; --block-color: {{ block.settings.color | default: 'var(--accent-color)' }}; --eyebrow-background: {{ block.settings.background_color | default: 'var(--color-background)' }}; --border-thickness: {{ block.settings.border_thickness }}px; --corner-radius: {{ block.settings.corner_radius }}px; --padding-top: {{ block.settings.padding_top }}px; --padding-bottom: {{ block.settings.padding_bottom }}px; --padding-left: {{ block.settings.padding_left }}px; --padding-right: {{ block.settings.padding_right }}px; --padding-top-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_top_mobile }}{% else %}{{ block.settings.padding_top }}{% endif %}px; --padding-bottom-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_bottom_mobile }}{% else %}{{ block.settings.padding_bottom }}{% endif %}px; --padding-left-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_left_mobile }}{% else %}{{ block.settings.padding_left }}{% endif %}px; --padding-right-mobile: {% if block.settings.customize_mobile_padding %}{{ block.settings.padding_right_mobile }}{% else %}{{ block.settings.padding_right }}{% endif %}px;" {{ block.shopify_attributes }}>
     {% if block.settings.show_icon %}<span class="eyebrow-block__icon" aria-hidden="true">{{ 'icon-cart.svg' | inline_asset_content }}</span>{% endif %}
     <span class="eyebrow-text">{{ block.settings.text }}</span>
   </div>
@@ -23,7 +23,7 @@
   .eyebrow-block--align-end { margin-inline-start: auto; }
   .eyebrow-block[style*="--block-width: max-content"] { width: max-content !important; justify-self: start; }
   .eyebrow-block[style*="--block-width: 100%"] { width: 100% !important; justify-self: stretch; }
-  .eyebrow-block--background { background: var(--color-background); }
+  .eyebrow-block--background { background: var(--eyebrow-background); }
   .eyebrow-block { border: var(--border-thickness) solid currentColor; border-radius: var(--corner-radius); }
   .eyebrow-block__icon { display: inline-flex; width: 1em; height: 1em; }
   .eyebrow-block__icon svg { width: 100%; height: 100%; stroke-width: var(--icon-stroke-width); }
@@ -54,6 +54,12 @@
       "id": "show_background",
       "label": "t:blocks.eyebrow.show_background",
       "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "visible_if": "{{ block.settings.show_background }}"
     },
     {
       "type": "checkbox",
