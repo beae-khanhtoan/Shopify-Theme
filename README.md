@@ -13,7 +13,7 @@ This repository is the theme base for the development store `layouthub-khanhnguy
 
 | Git branch | Shopify theme | Role |
 | --- | --- | --- |
-| `dev` | `theme/dev` (`165655281906`) | Development, Theme Editor, preview |
+| `dev` | `theme/dev` (`165661769970`) | Development, Theme Editor, preview |
 | `main` | `theme/main` (`164351607026`) | Stable integration, unpublished |
 
 The live theme is not part of the development workflow. Work only on `dev`, and never publish a theme without explicit release approval.
@@ -25,7 +25,7 @@ git switch dev
 git branch --show-current
 git status
 shopify theme check
-shopify theme dev --store layouthub-khanhnguyen.myshopify.com --theme 165655281906 --theme-editor-sync
+shopify theme dev --store layouthub-khanhnguyen.myshopify.com --theme 165661769970 --theme-editor-sync
 ```
 
 Use the local preview, Theme Editor preview, and shareable preview link before committing. After review:
@@ -34,7 +34,7 @@ Use the local preview, Theme Editor preview, and shareable preview link before c
 git add .
 git commit -m "type: describe the change"
 git push origin dev
-shopify theme push --store layouthub-khanhnguyen.myshopify.com --theme 165655281906 --strict
+shopify theme push --store layouthub-khanhnguyen.myshopify.com --theme 165661769970 --strict
 ```
 
 ### Promote dev to main
